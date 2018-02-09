@@ -1,0 +1,6 @@
+115 1/24/18
+
+Recursion:
+	- Base Case: P(n_0): true
+	- Inductive Hypothesis: P(n): true
+	- Inductive Step: P(n) true -> P(n + 1) true forall n > n_0

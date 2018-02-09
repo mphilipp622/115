@@ -1,0 +1,52 @@
+Sequential Binary Search
+
+while(low <= high && !found)
+{
+	middle = (low + high) / 2;
+	if(search == myArray[middle]) found = true;
+	else
+	{
+		if (search < myArray[middle])
+			high = middle - 1;
+		else
+			low = middle + 1;
+	}
+}
+
+Master Theorem: T(n) = aT(n / b) + f(n)
+n = size of an input problem
+creation of a sub-problem
+each sub problem is 1/b the size of original main problem
+f(n) = divide and combine operations
+a must be >= 1, b > 1, f(n) must exist
+
+C_crit = log_b(a) = log(#subproblems) / log(relative subproblem size)
+
+if f(n) = O(n^c) where c < C_crit then T(n) = BigTheta(n^C_crit)
+
+ex: if b = a^2 and f(x) = O(n ^ 1/2-e)
+then T(n) = bigtheta(n^1/2 * log n)
+
+case 1: f(n) == O(n^c) where c < c_crit. Result: T(n) = Bigtheta(n^c_crit)
+case 2: f(n) = BigTheta(n^c_crit log^k(n)) forall k >= 0. Result: T(n) = BigTheta(n^c_crit log^k+1 * n)
+
+T(n) = 4n^3 + 1000n^2
+n^3 will dominate the time between n^2 and n^3. Therefore complexity will be O(n ^ 3)
+
+T(n) = 8T(n/2) + 1000n^2
+	- a = 8
+	- b = 2
+	- f(n) = 1000n^2
+	- C_rit = log_2(8) = 3
+	- this satisfies case 1 because f(n) big O is n^2. c = 2 because n^2. c < c_crit. Therefore, T(n) = BigTheta(n^3)
+T(n) = 2T(n / 2) + 10n
+	- a = 2
+	- b = 2
+	- f(n) = 10n
+	- C_crit = log_2(2) = 1
+	- 
+T(n) = 2T(n/2) + n^2
+	- a = 2
+	- b = 2
+	- f(n) = n^2
+	- C_crit = log_2(2) = 1
