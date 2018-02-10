@@ -33,4 +33,13 @@ namespace Sorter
 	// Creates a random array of the specified size
 	int* RandomArray(int length);
 
+	// Creates an array containing reverse sorted elements.
+	int* ReverseArray(int length);
+
+	// Creates a normal, ordered array
+	int* OrderedArray(int length);
+
+	// Creates an ordered array that is 10% random
+	int* ShuffleTen(int length);
+
 }

@@ -171,11 +171,54 @@ namespace Sorter
 
 	int* RandomArray(int length)
 	{
-		srand(time(NULL));
+		//srand(time(NULL));
 		int *arr = new int[length];
 
 		for (int i = 0; i < length; i++)
-			arr[i] = rand() % 100;
+			arr[i] = rand() % (length * 5);
+
+		return arr;
+	}
+
+	int* ReverseArray(int length)
+	{
+		int* arr = new int[length];
+
+		for (int i = 0, j = length; i < length; i++, j--)
+			arr[i] = j; // created sorted array
+
+		return arr;
+	}
+
+	int* OrderedArray(int length)
+	{
+		int* arr = new int[length];
+
+		for (int i = 0; i < length; i++)
+			arr[i] = i; // created sorted array
+
+
+		return arr;
+	}
+
+	int* ShuffleTen(int length)
+	{
+		//srand(time(NULL));
+
+		int* arr = new int[length];
+
+		int cap = length * 0.1; // 10% of the length
+
+		for (int i = 0; i < length; i++)
+			// Initialize an ordered array first.
+			arr[i] = i;
+
+		for (int i = 0; i < cap; i++)
+		{
+			// shuffle 10% of the array
+			int randIndex = rand() % length;
+			Swap(arr, i, randIndex);
+		}
 
 		return arr;
 	}

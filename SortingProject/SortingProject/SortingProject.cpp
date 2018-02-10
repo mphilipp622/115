@@ -10,29 +10,40 @@ using namespace Benchmarker;
 
 int main()
 {
-	while (!cin.eof())
-	{
-		int method, size = 0;
-		cout << "Select Sorting Method: 1. Bubble Sort, 2. Insertion Sort, 3. Selection Sort, 4. Quick Sort, 5. Merge Sort:";
-		cin >> method;
+	// Bubble Sort Benchmarks
+	BenchmarkBubbleSort(10);
+	BenchmarkBubbleSort(1000);
+	BenchmarkBubbleSort(10000);
+	BenchmarkBubbleSort(100000);
+	BenchmarkBubbleSort(1000000);
 
-		cout << endl << "Select Size To Test:";
-		cin >> size;
-		cout << endl;
+	// Selection Sort Benchmarks
+	BenchmarkSelectionSort(10);
+	BenchmarkSelectionSort(1000);
+	BenchmarkSelectionSort(10000);
+	BenchmarkSelectionSort(100000);
+	BenchmarkSelectionSort(1000000);
 
-		if (method == 1)
-			BenchmarkBubbleSort(size);
-		else if (method == 2)
-			BenchmarkInsertionSort(size);
-		else if (method == 3)
-			BenchmarkSelectionSort(size);
-		else if (method == 4)
-			BenchmarkQuickSort(size);
-		else if (method == 5)
-			BenchmarkMergeSort(size);
+	// insertion sort benchmarks
+	BenchmarkInsertionSort(10);
+	BenchmarkInsertionSort(1000);
+	BenchmarkInsertionSort(10000);
+	BenchmarkInsertionSort(100000);
+	BenchmarkInsertionSort(1000000);
 
-		cout << endl;
-	}
+	// Merge Sort Benchmarks
+	BenchmarkMergeSort(10);
+	BenchmarkMergeSort(1000);
+	BenchmarkMergeSort(10000);
+	BenchmarkMergeSort(100000);
+	BenchmarkMergeSort(1000000);
+
+	// Quick Sort Benchmarks
+	BenchmarkQuickSort(10);
+	BenchmarkQuickSort(1000);
+	BenchmarkQuickSort(10000);
+	BenchmarkQuickSort(100000);
+	BenchmarkQuickSort(1000000);
 
 	return 0;
 }
