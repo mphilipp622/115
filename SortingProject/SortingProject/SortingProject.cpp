@@ -1,8 +1,4 @@
-// Lab3.cpp : Defines the entry point for the console application.
-//
-
 #include "stdafx.h"
-#include <iostream>
 #include "Benchmarker.h"
 
 using namespace std;
@@ -10,6 +6,7 @@ using namespace Benchmarker;
 
 int main()
 {
+
 	// Bubble Sort Benchmarks
 	BenchmarkBubbleSort(10);
 	BenchmarkBubbleSort(1000);

@@ -13,11 +13,10 @@
 using namespace std;
 using namespace Sorter;
 
-// macros for string parsing
-
 
 namespace Benchmarker
 {
+	// Will use ofstream to output data to a CSV file. Columns are separated by commas and rows are separated by \n
 
 	void BenchmarkBubbleSort(int size)
 	{
@@ -29,11 +28,15 @@ namespace Benchmarker
 
 		srand(time(NULL)); // set new seed. Can't call in loop or else we get the same seeds
 
-		output.open("Data/BubbleSortRandom" + to_string(size) + ".csv");
+		output.open("Data/BubbleSort" + to_string(size) + ".csv");
+		int* arrOriginal = RandomArray(size); // get new random array
+		int* arr = new int[size];
+
+		output << "Random" << endl; // set column name
 
 		for (int i = 0; i < 100; i++)
 		{
-			int* arr = RandomArray(size); // get new random array
+			memcpy(arr, arrOriginal, size * sizeof(int)); // copy data so we maintain the exact same data per iteration
 
 			auto start = chrono::system_clock::now(); // start timer
 			BubbleSort(arr, size);
@@ -41,21 +44,23 @@ namespace Benchmarker
 
 			chrono::duration<double> elapsed = end - start;
 
+			
 			output << std::fixed << std::setprecision(10);
 			output << elapsed.count() << endl;
 		}
-
-		output.close();
 
 		///////////////////
 		// ordered array //
 		///////////////////
 
-		output.open("Data/BubbleSortOrdered" + to_string(size) + ".csv");
+		//output.open("Data/BubbleSortOrdered" + to_string(size) + ".csv");
+		arrOriginal = OrderedArray(size);
+		memcpy(arr, arrOriginal, size * sizeof(int));
+		output << ",Ordered" << endl;
 
 		for (int i = 0; i < 100; i++)
 		{
-			int* arr = OrderedArray(size);
+			// don't need to copy data for an ordered array. It's always gonna be the same every time.
 
 			auto start = chrono::system_clock::now(); // start timer
 			BubbleSort(arr, size);
@@ -63,21 +68,20 @@ namespace Benchmarker
 
 			chrono::duration<double> elapsed = end - start;
 
-			output << std::fixed << std::setprecision(10);
-			output << elapsed.count() << endl;
+			//output << std::fixed << std::setprecision(10);
+			output << "," << elapsed.count() << endl;
 		}
-
-		output.close();
 
 		///////////////////
 		// reverse array //
 		///////////////////
 
-		output.open("Data/BubbleSortReversed" + to_string(size) + ".csv");
+		arrOriginal = ReverseArray(size); // reverse the array
+		output << ",,Reverse" << endl;
 
 		for (int i = 0; i < 100; i++)
 		{
-			int* arr = ReverseArray(size);
+			memcpy(arr, arrOriginal, size * sizeof(int));
 
 			auto start = chrono::system_clock::now(); // start timer
 			BubbleSort(arr, size);
@@ -86,20 +90,19 @@ namespace Benchmarker
 			chrono::duration<double> elapsed = end - start;
 
 			output << std::fixed << std::setprecision(10);
-			output << elapsed.count() << endl;
+			output << ",," << elapsed.count() << endl;
 		}
-
-		output.close();
 
 		///////////////////
 		// shuffle array //
 		///////////////////
 
-		output.open("Data/BubbleSortShuffle" + to_string(size) + ".csv");
+		arrOriginal = ShuffleTen(size); // reverse the array
+		output << ",,,Shuffle" << endl;
 
 		for (int i = 0; i < 100; i++)
 		{
-			int* arr = ShuffleTen(size);
+			memcpy(arr, arrOriginal, size * sizeof(int));
 
 			auto start = chrono::system_clock::now(); // start timer
 			BubbleSort(arr, size);
@@ -108,11 +111,10 @@ namespace Benchmarker
 			chrono::duration<double> elapsed = end - start;
 
 			output << std::fixed << std::setprecision(10);
-			output << elapsed.count() << endl;
+			output << ",,," << elapsed.count() << endl;
 		}
 
 		output.close();
-
 
 	}
 
@@ -126,11 +128,14 @@ namespace Benchmarker
 
 		srand(time(NULL)); // set new seed. Can't call in loop or else we get the same seeds
 
-		output.open("Data/SelectionSortRandom" + to_string(size) + ".csv");
+		output.open("Data/SelectionSort" + to_string(size) + ".csv");
+		int* arrOriginal = RandomArray(size); // get new random array
+		int* arr = new int[size];
+		output << "Random" << endl;
 
 		for (int i = 0; i < 100; i++)
 		{
-			int* arr = RandomArray(size); // get new random array
+			memcpy(arr, arrOriginal, size * sizeof(int));
 
 			auto start = chrono::system_clock::now(); // start timer
 			SelectionSort(arr, size);
@@ -142,17 +147,17 @@ namespace Benchmarker
 			output << elapsed.count() << endl;
 		}
 
-		output.close();
 
 		///////////////////
 		// ordered array //
 		///////////////////
 
-		output.open("Data/SelectionSortOrdered" + to_string(size) + ".csv");
+		arrOriginal = OrderedArray(size);
+		memcpy(arr, arrOriginal, size * sizeof(int));
+		output << ",Ordered" << endl;
 
 		for (int i = 0; i < 100; i++)
 		{
-			int* arr = OrderedArray(size);
 
 			auto start = chrono::system_clock::now(); // start timer
 			SelectionSort(arr, size);
@@ -161,20 +166,20 @@ namespace Benchmarker
 			chrono::duration<double> elapsed = end - start;
 
 			output << std::fixed << std::setprecision(10);
-			output << elapsed.count() << endl;
+			output << "," << elapsed.count() << endl;
 		}
 
-		output.close();
 		
 		///////////////////
 		// reverse array //
 		///////////////////
 
-		output.open("Data/SelectionSortReversed" + to_string(size) + ".csv");
+		arrOriginal = ReverseArray(size);
+		output << ",,Reversed" << endl;
 
 		for (int i = 0; i < 100; i++)
 		{
-			int* arr = ReverseArray(size);
+			memcpy(arr, arrOriginal, size * sizeof(int));
 
 			auto start = chrono::system_clock::now(); // start timer
 			SelectionSort(arr, size);
@@ -183,20 +188,19 @@ namespace Benchmarker
 			chrono::duration<double> elapsed = end - start;
 
 			output << std::fixed << std::setprecision(10);
-			output << elapsed.count() << endl;
+			output << ",," << elapsed.count() << endl;
 		}
-
-		output.close();
 		
 		///////////////////
 		// shuffle array //
 		///////////////////
 
-		output.open("Data/SelectionSortShuffle" + to_string(size) + ".csv");
+		arrOriginal = ShuffleTen(size);
+		output << ",,,Shuffled" << endl;
 
 		for (int i = 0; i < 100; i++)
 		{
-			int* arr = ShuffleTen(size);
+			memcpy(arr, arrOriginal, size * sizeof(int));
 
 			auto start = chrono::system_clock::now(); // start timer
 			SelectionSort(arr, size);
@@ -205,7 +209,7 @@ namespace Benchmarker
 			chrono::duration<double> elapsed = end - start;
 
 			output << std::fixed << std::setprecision(10);
-			output << elapsed.count() << endl;
+			output << ",,," << elapsed.count() << endl;
 		}
 
 		output.close();
@@ -222,11 +226,15 @@ namespace Benchmarker
 
 		srand(time(NULL)); // set new seed. Can't call in loop or else we get the same seeds
 
-		output.open("Data/InsertionSortRandom" + to_string(size) + ".csv");
+		output.open("Data/InsertionSort" + to_string(size) + ".csv");
+		output << "Random" << endl;
+
+		int* arrOriginal = RandomArray(size);
+		int* arr = new int[size];
 
 		for (int i = 0; i < 100; i++)
 		{
-			int* arr = RandomArray(size); // get new random array
+			memcpy(arr, arrOriginal, size * sizeof(int));
 
 			auto start = chrono::system_clock::now(); // start timer
 			InsertionSort(arr, size);
@@ -238,17 +246,17 @@ namespace Benchmarker
 			output << elapsed.count() << endl;
 		}
 
-		output.close();
 
 		///////////////////
 		// ordered array //
 		///////////////////
+		arrOriginal = OrderedArray(size);
+		memcpy(arr, arrOriginal, size * sizeof(int));
 
-		output.open("Data/InsertionSortOrdered" + to_string(size) + ".csv");
+		output << ",Ordered" << endl;
 
 		for (int i = 0; i < 100; i++)
 		{
-			int* arr = OrderedArray(size);
 
 			auto start = chrono::system_clock::now(); // start timer
 			InsertionSort(arr, size);
@@ -257,20 +265,19 @@ namespace Benchmarker
 			chrono::duration<double> elapsed = end - start;
 
 			output << std::fixed << std::setprecision(10);
-			output << elapsed.count() << endl;
+			output << "," << elapsed.count() << endl;
 		}
-
-		output.close();
 
 		///////////////////
 		// reverse array //
 		///////////////////
 
-		output.open("Data/InsertionSortReversed" + to_string(size) + ".csv");
+		arrOriginal = ReverseArray(size);
+		output << ",,Reversed" << endl;
 
 		for (int i = 0; i < 100; i++)
 		{
-			int* arr = ReverseArray(size);
+			memcpy(arr, arrOriginal, size * sizeof(int));
 
 			auto start = chrono::system_clock::now(); // start timer
 			InsertionSort(arr, size);
@@ -279,20 +286,19 @@ namespace Benchmarker
 			chrono::duration<double> elapsed = end - start;
 
 			output << std::fixed << std::setprecision(10);
-			output << elapsed.count() << endl;
+			output << ",," << elapsed.count() << endl;
 		}
-
-		output.close();
 
 		///////////////////
 		// shuffle array //
 		///////////////////
 
-		output.open("Data/InsertionSortShuffle" + to_string(size) + ".csv");
+		arrOriginal = ShuffleTen(size);
+		output << ",,,Shuffled" << endl;
 
 		for (int i = 0; i < 100; i++)
 		{
-			int* arr = ShuffleTen(size);
+			memcpy(arr, arrOriginal, size * sizeof(int));
 
 			auto start = chrono::system_clock::now(); // start timer
 			InsertionSort(arr, size);
@@ -301,7 +307,7 @@ namespace Benchmarker
 			chrono::duration<double> elapsed = end - start;
 
 			output << std::fixed << std::setprecision(10);
-			output << elapsed.count() << endl;
+			output << ",,," << elapsed.count() << endl;
 		}
 
 		output.close();
@@ -317,11 +323,14 @@ namespace Benchmarker
 
 		srand(time(NULL)); // set new seed. Can't call in loop or else we get the same seeds
 
-		output.open("Data/MergeSortRandom" + to_string(size) + ".csv");
+		output.open("Data/MergeSort" + to_string(size) + ".csv");
+		output << "Random" << endl;
+		int* arrOriginal = RandomArray(size);
+		int* arr = new int[size];
 
 		for (int i = 0; i < 100; i++)
 		{
-			int* arr = RandomArray(size); // get new random array
+			memcpy(arr, arrOriginal, size * sizeof(int));
 
 			auto start = chrono::system_clock::now(); // start timer
 			MergeSort(arr, 0, size - 1);
@@ -332,18 +341,18 @@ namespace Benchmarker
 			output << std::fixed << std::setprecision(10);
 			output << elapsed.count() << endl;
 		}
-
-		output.close();
 
 		///////////////////
 		// ordered array //
 		///////////////////
 
-		output.open("Data/MergeSortOrdered" + to_string(size) + ".csv");
+		output << ",Ordered" << endl;
+
+		arrOriginal = OrderedArray(size);
+		memcpy(arr, arrOriginal, size * sizeof(int));
 
 		for (int i = 0; i < 100; i++)
 		{
-			int* arr = OrderedArray(size);
 
 			auto start = chrono::system_clock::now(); // start timer
 			MergeSort(arr, 0, size - 1);
@@ -352,20 +361,19 @@ namespace Benchmarker
 			chrono::duration<double> elapsed = end - start;
 
 			output << std::fixed << std::setprecision(10);
-			output << elapsed.count() << endl;
+			output << "," << elapsed.count() << endl;
 		}
-
-		output.close();
 
 		///////////////////
 		// reverse array //
 		///////////////////
 
-		output.open("Data/MergeSortReversed" + to_string(size) + ".csv");
+		arrOriginal = ReverseArray(size);
+		output << ",,Reversed" << endl;
 
 		for (int i = 0; i < 100; i++)
 		{
-			int* arr = ReverseArray(size);
+			memcpy(arr, arrOriginal, size * sizeof(int));
 
 			auto start = chrono::system_clock::now(); // start timer
 			MergeSort(arr, 0, size - 1);
@@ -374,20 +382,19 @@ namespace Benchmarker
 			chrono::duration<double> elapsed = end - start;
 
 			output << std::fixed << std::setprecision(10);
-			output << elapsed.count() << endl;
+			output << ",," << elapsed.count() << endl;
 		}
-
-		output.close();
 
 		///////////////////
 		// shuffle array //
 		///////////////////
 
-		output.open("Data/MergeSortShuffle" + to_string(size) + ".csv");
+		arrOriginal = ShuffleTen(size);
+		output << ",,,Shuffled" << endl;
 
 		for (int i = 0; i < 100; i++)
 		{
-			int* arr = ShuffleTen(size);
+			memcpy(arr, arrOriginal, size * sizeof(int));
 
 			auto start = chrono::system_clock::now(); // start timer
 			MergeSort(arr, 0, size - 1);
@@ -396,7 +403,7 @@ namespace Benchmarker
 			chrono::duration<double> elapsed = end - start;
 
 			output << std::fixed << std::setprecision(10);
-			output << elapsed.count() << endl;
+			output << ",,," << elapsed.count() << endl;
 		}
 
 		output.close();
@@ -412,11 +419,15 @@ namespace Benchmarker
 
 		srand(time(NULL)); // set new seed. Can't call in loop or else we get the same seeds
 
-		output.open("Data/QuickSortRandom" + to_string(size) + ".csv");
+		output.open("Data/QuickSort" + to_string(size) + ".csv");
+		output << "Random" << endl;
+
+		int* arrOriginal = RandomArray(size);
+		int* arr = new int[size];
 
 		for (int i = 0; i < 100; i++)
 		{
-			int* arr = RandomArray(size); // get new random array
+			memcpy(arr, arrOriginal, size * sizeof(int));
 
 			auto start = chrono::system_clock::now(); // start timer
 			QuickSort(arr, 0, size - 1);
@@ -427,19 +438,18 @@ namespace Benchmarker
 			output << std::fixed << std::setprecision(10);
 			output << elapsed.count() << endl;
 		}
-
-		output.close();
 
 		///////////////////
 		// ordered array //
 		///////////////////
 
-		output.open("Data/QuickSortOrdered" + to_string(size) + ".csv");
+		arrOriginal = OrderedArray(size);
+		memcpy(arr, arrOriginal, size * sizeof(int));
+
+		output << ",Ordered" << endl;
 
 		for (int i = 0; i < 100; i++)
 		{
-			int* arr = OrderedArray(size);
-
 			auto start = chrono::system_clock::now(); // start timer
 			QuickSort(arr, 0, size - 1);
 			auto end = chrono::system_clock::now();
@@ -447,20 +457,19 @@ namespace Benchmarker
 			chrono::duration<double> elapsed = end - start;
 
 			output << std::fixed << std::setprecision(10);
-			output << elapsed.count() << endl;
+			output << "," << elapsed.count() << endl;
 		}
-
-		output.close();
 
 		///////////////////
 		// reverse array //
 		///////////////////
 
-		output.open("Data/QuickSortReversed" + to_string(size) + ".csv");
+		output << ",,Reversed" << endl;
+		arrOriginal = ReverseArray(size);
 
 		for (int i = 0; i < 100; i++)
 		{
-			int* arr = ReverseArray(size);
+			memcpy(arr, arrOriginal, size * sizeof(int));
 
 			auto start = chrono::system_clock::now(); // start timer
 			QuickSort(arr, 0, size - 1);
@@ -469,20 +478,19 @@ namespace Benchmarker
 			chrono::duration<double> elapsed = end - start;
 
 			output << std::fixed << std::setprecision(10);
-			output << elapsed.count() << endl;
+			output << ",," << elapsed.count() << endl;
 		}
-
-		output.close();
 
 		///////////////////
 		// shuffle array //
 		///////////////////
 
-		output.open("Data/QuickSortShuffle" + to_string(size) + ".csv");
+		arrOriginal = ShuffleTen(size);
+		output << ",,,Shuffled" << endl;
 
 		for (int i = 0; i < 100; i++)
 		{
-			int* arr = ShuffleTen(size);
+			memcpy(arr, arrOriginal, size * sizeof(int));
 
 			auto start = chrono::system_clock::now(); // start timer
 			QuickSort(arr, 0, size - 1);
@@ -491,7 +499,7 @@ namespace Benchmarker
 			chrono::duration<double> elapsed = end - start;
 
 			output << std::fixed << std::setprecision(10);
-			output << elapsed.count() << endl;
+			output << ",,," << elapsed.count() << endl;
 		}
 
 		output.close();
