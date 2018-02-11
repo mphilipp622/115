@@ -142,21 +142,18 @@ namespace Sorter
 
 	int Partition(int* arr, int first, int last)
 	{
-		int pivot = arr[last];
-
-		int i = first - 1;
-
-		for (int j = first; j < last; j++)
+		int pivot = arr[first + (last - first) / 2]; // get middle pivot
+		int leftI = first - 1; // set left and right indexes
+		int rightI = last + 1;
+		while (leftI <= rightI)
 		{
-			if (arr[j] <= pivot)
-			{
-				i++;
-				Swap(arr, i, j);
-			}
+			while (arr[++leftI] < pivot); // loop until we find a value greater than pivot on the left
+			while (arr[--rightI] > pivot); // loop until we find a value less than pivot on the right
+			if (leftI >= rightI)break; // if the indexes have crossed, then we want to terminate
+			Swap(arr, leftI, rightI); // swap the indexes
 		}
 
-		Swap(arr, i + 1, last);
-		return (i + 1);
+		return rightI; // return the right index
 	}
 
 	void QuickSort(int* arr, int first, int last)
@@ -164,7 +161,7 @@ namespace Sorter
 		if (first < last)
 		{
 			int pivot = Partition(arr, first, last); // return q and update A
-			QuickSort(arr, first, pivot - 1); // apply on the first part of A (all the elements<A[q])
+			QuickSort(arr, first, pivot); // apply on the first part of A (all the elements<A[q])
 			QuickSort(arr, pivot + 1, last); // apply on the second part of A (all the elements>A[q])
 		}
 	}

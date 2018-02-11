@@ -8,7 +8,7 @@
 #include <ctime>
 #include "Sorter.h"
 #include <fstream>
-#include <string>
+#include <string>a
 
 using namespace std;
 using namespace Sorter;
@@ -25,7 +25,7 @@ namespace Benchmarker
 		//////////////////
 		// random array //
 		//////////////////
-
+		
 		srand(time(NULL)); // set new seed. Can't call in loop or else we get the same seeds
 
 		output.open("Data/BubbleSort" + to_string(size) + ".csv");
