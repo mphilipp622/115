@@ -3,6 +3,8 @@
 #include <iostream>
 #include <time.h>
 #include <cstdlib>
+#include <chrono>
+#include <ctime>
 
 using namespace std;
 
@@ -12,6 +14,19 @@ namespace Sorter
 	{
 		for (int i = 0; i < length; i++)
 			cout << arr[i] << endl;
+	}
+
+	bool HasExceededTimeThreshold(chrono::time_point<chrono::system_clock> start)
+	{
+		// time threshold will be set at 90 minutes total.
+		// If any algorithm runs longer than 90 minutes, than we will quit execution.
+		auto end = chrono::system_clock::now();
+		chrono::duration<double> elapsed = start - end;
+
+		if (elapsed.count() >= 5400)
+			return true;
+
+		return false;
 	}
 
 	void Swap(int* arr, int i, int j)
@@ -24,12 +39,14 @@ namespace Sorter
 
 	void SelectionSort(int* arr, int length)
 	{
-		for (int i = 0; i < length - 1; i++)
+		auto startTime = chrono::system_clock::now();
+
+		for (int i = 0; i < length - 1 && !HasExceededTimeThreshold(startTime); i++)
 		{
 			int min = arr[i]; // min value always starts at element stored in current index
 			int minIndex = i; // set minimum index
 
-			for (int j = i; j < length; j++)
+			for (int j = i; j < length && !HasExceededTimeThreshold(startTime); j++)
 			{
 				if (arr[j] < min)
 				{
@@ -42,17 +59,22 @@ namespace Sorter
 			if (min < arr[i]) // if min value is < the current index of the array, swap
 				Swap(arr, minIndex, i);
 		}
+
+		if (HasExceededTimeThreshold(startTime))
+			cout << "SelectionSort" << length << " Has exceeded 90 minutes" << endl;
 	}
 
 	void BubbleSort(int* arr, int length)
 	{
 		bool swap = false; // flag for exit condition
+		auto startTime = chrono::system_clock::now();
+		chrono::duration<double> elapsedTotal; // will keep track of time.
 
 		do
 		{
 			swap = false; // set flag to false every time
 
-			for (int i = 0; i < length - 1; i++)
+			for (int i = 0; i < length - 1 && !HasExceededTimeThreshold(startTime); i++)
 			{
 				// iterate through the list as many times as it takes to sort. 
 				if (arr[i + 1] < arr[i])
@@ -62,22 +84,30 @@ namespace Sorter
 					swap = true;
 				}
 			}
-		} while (swap); // exit condition
+		} while (swap && !HasExceededTimeThreshold(startTime)); // exit condition
+		
+		if(HasExceededTimeThreshold(startTime))
+			cout << "BubbleSort" << length << " Has exceeded 90 minutes" << endl;
 	}
 
 	void InsertionSort(int* arr, int length)
 	{
-		for (int i = 0; i < length; i++)
+		auto startTime = chrono::system_clock::now();
+
+		for (int i = 0; i < length && !HasExceededTimeThreshold(startTime); i++)
 		{
 			int index = i;
 
-			while (arr[index - 1] > arr[index])
+			while (arr[index - 1] > arr[index] && !HasExceededTimeThreshold(startTime))
 			{
 				Swap(arr, index - 1, index);
 				index = index - 1;
 			}
 
 		}
+
+		if(HasExceededTimeThreshold(startTime))
+			cout << "InsertionSort" << length << " Has exceeded 90 minutes" << endl;
 	}
 
 	void Merge(int* arr, int left, int mid, int right)

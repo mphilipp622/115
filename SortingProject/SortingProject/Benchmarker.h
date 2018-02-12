@@ -1,9 +1,12 @@
 #pragma once
+#include <string>
 
 // Namespace for benchmarking sorting functions. Pass sizes to the functions and they'll call on
 // Sorter.h to execute sorting and output times to a console window.
 namespace Benchmarker
 {
+
+	void Benchmark(std::string method, int size);
 	// Returns the time it takes to run Bubble Sort on array arr. Runs 100 times.
 	void BenchmarkBubbleSort(int size);
 
