@@ -18,12 +18,12 @@ namespace Sorter
 
 	bool HasExceededTimeThreshold(chrono::time_point<chrono::system_clock> start)
 	{
-		// time threshold will be set at 90 minutes total.
-		// If any algorithm runs longer than 90 minutes, than we will quit execution.
+		// time threshold will be set at 5 minutes total.
+		// If any algorithm runs longer than 5 minutes, than we will quit execution.
 		auto end = chrono::system_clock::now();
-		chrono::duration<double> elapsed = start - end;
+		chrono::duration<double> elapsed = end - start;
 
-		if (elapsed.count() >= 5400)
+		if (elapsed.count() >= 300)
 			return true;
 
 		return false;
@@ -61,7 +61,7 @@ namespace Sorter
 		}
 
 		if (HasExceededTimeThreshold(startTime))
-			cout << "SelectionSort" << length << " Has exceeded 90 minutes" << endl;
+			cout << "SelectionSort" << length << " Has exceeded 5 minutes" << endl;
 	}
 
 	void BubbleSort(int* arr, int length)
@@ -87,7 +87,7 @@ namespace Sorter
 		} while (swap && !HasExceededTimeThreshold(startTime)); // exit condition
 		
 		if(HasExceededTimeThreshold(startTime))
-			cout << "BubbleSort" << length << " Has exceeded 90 minutes" << endl;
+			cout << "BubbleSort" << length << " Has exceeded 5 minutes" << endl;
 	}
 
 	void InsertionSort(int* arr, int length)
@@ -107,7 +107,7 @@ namespace Sorter
 		}
 
 		if(HasExceededTimeThreshold(startTime))
-			cout << "InsertionSort" << length << " Has exceeded 90 minutes" << endl;
+			cout << "InsertionSort" << length << " Has exceeded 5 minutes" << endl;
 	}
 
 	void Merge(int* arr, int left, int mid, int right)
@@ -152,11 +152,13 @@ namespace Sorter
 		}
 
 
-		// Assign sorted data stored in temp[] to a[].
+		// Assign sorted data stored in temp[] to arr[].
 		for (i = left; i <= right; i++)
 		{
 			arr[i] = temp[i - left];
 		}
+
+		delete temp; // free memory to avoid overflows
 	}
 
 	void MergeSort(int* arr, int left, int right)
