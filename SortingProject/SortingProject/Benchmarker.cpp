@@ -51,6 +51,7 @@ namespace Benchmarker
 
 		for (int i = 0; i < 100 && !HasExceededTimeThreshold(checkThreshold); i++)
 		{
+			cout << method << " Random COUNT " << i << endl;
 			memcpy(arr, arrOriginal, size * sizeof(int)); // copy data so we maintain the exact same data per iteration
 
 			auto start = chrono::system_clock::now(); // start timer
@@ -88,7 +89,7 @@ namespace Benchmarker
 		for (int i = 0; i < 100 && !HasExceededTimeThreshold(checkThreshold); i++)
 		{
 			// don't need to copy data for an ordered array. It's always gonna be the same every time.
-
+			cout << method << " Ordered COUNT " << i << endl;
 			auto start = chrono::system_clock::now(); // start timer
 
 			if (method == "BubbleSort")
@@ -121,6 +122,7 @@ namespace Benchmarker
 
 		for (int i = 0; i < 100 && !HasExceededTimeThreshold(checkThreshold); i++)
 		{
+			cout << method << " Reverse COUNT " << i << endl;
 			memcpy(arr, arrOriginal, size * sizeof(int));
 
 			auto start = chrono::system_clock::now(); // start timer
@@ -154,6 +156,7 @@ namespace Benchmarker
 
 		for (int i = 0; i < 100 && !HasExceededTimeThreshold(checkThreshold); i++)
 		{
+			cout << method << " Shuffle COUNT " << i << endl;
 			memcpy(arr, arrOriginal, size * sizeof(int));
 
 			auto start = chrono::system_clock::now(); // start timer
@@ -181,8 +184,8 @@ namespace Benchmarker
 		auto endTotal = chrono::system_clock::now();
 		chrono::duration<double> elapsedTotal = endTotal - startTotal;
 
-		delete arr;
-		delete arrOriginal;
+		/*delete arr;
+		delete arrOriginal;*/
 
 		if (HasExceededTimeThreshold(checkThreshold))
 			std::cout << method << size << " Exceeded 120 minutes of execution. Aborting" << endl;
