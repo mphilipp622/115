@@ -30,6 +30,9 @@
     <ClInclude Include="Benchmarker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ArrayMaker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

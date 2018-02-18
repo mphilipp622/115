@@ -146,6 +146,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ArrayMaker.h" />
     <ClInclude Include="Benchmarker.h" />
     <ClInclude Include="Sorter.h" />
     <ClInclude Include="stdafx.h" />

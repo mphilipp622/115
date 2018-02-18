@@ -9,26 +9,28 @@
 #include "Sorter.h"
 #include <fstream>
 #include <string>
+#include "ArrayMaker.h"
 
 using namespace std;
 using namespace Sorter;
+using namespace ArrayMaker;
 
+bool HasExceededTimeThreshold(chrono::time_point<chrono::system_clock> start, int time)
+{
+	// time threshold will be set at 120 minutes total.
+	// If any algorithm runs longer than 120 minutes, than we will quit execution.
+	auto end = chrono::system_clock::now();
+	chrono::duration<double> elapsed = end - start;
+
+	if (elapsed.count() >= time)
+		return true;
+
+	return false;
+}
 
 namespace Benchmarker
 {
-	// Will use ofstream to output data to a CSV file. Columns are separated by commas and rows are separated by \n
-	bool HasExceededTimeThreshold(chrono::time_point<chrono::system_clock> start)
-	{
-		// time threshold will be set at 120 minutes total.
-		// If any algorithm runs longer than 120 minutes, than we will quit execution.
-		auto end = chrono::system_clock::now();
-		chrono::duration<double> elapsed = end - start;
-
-		if (elapsed.count() >= 7200)
-			return true;
-
-		return false;
-	}
+	// Will use ofstream to output data to a CSV file. Columns are separated by commas and rows are separated by \n	
 
 	void Benchmark(string method, int size)
 	{
@@ -41,7 +43,7 @@ namespace Benchmarker
 		srand(time(NULL)); // set new seed. Can't call in loop or else we get the same seeds
 
 		output.open("Data/" + method + to_string(size) + ".csv");
-		int* arrOriginal = RandomArray(size); // get new random array
+		int* arrOriginal = RandomArray<int>(size); // get new random array
 		int* arr = new int[size];
 
 		output << "Random" << endl; // set column name
@@ -49,7 +51,7 @@ namespace Benchmarker
 		auto startTotal = chrono::system_clock::now();
 		auto checkThreshold = chrono::system_clock::now();
 
-		for (int i = 0; i < 100 && !HasExceededTimeThreshold(checkThreshold); i++)
+		for (int i = 0; i < 100 && !HasExceededTimeThreshold(checkThreshold, 7200); i++)
 		{
 			cout << method << " Random COUNT " << i << endl;
 			memcpy(arr, arrOriginal, size * sizeof(int)); // copy data so we maintain the exact same data per iteration
@@ -80,13 +82,13 @@ namespace Benchmarker
 		///////////////////
 
 		//output.open("Data/BubbleSortOrdered" + to_string(size) + ".csv");
-		arrOriginal = OrderedArray(size);
+		arrOriginal = OrderedArray<int>(size);
 		//memcpy(arr, arrOriginal, size * sizeof(int));
 		output << ",Ordered" << endl;
 
 		checkThreshold = chrono::system_clock::now();
 
-		for (int i = 0; i < 100 && !HasExceededTimeThreshold(checkThreshold); i++)
+		for (int i = 0; i < 100 && !HasExceededTimeThreshold(checkThreshold, 7200); i++)
 		{
 			// don't need to copy data for an ordered array. It's always gonna be the same every time.
 			cout << method << " Ordered COUNT " << i << endl;
@@ -116,11 +118,11 @@ namespace Benchmarker
 		// reverse array //
 		///////////////////
 
-		arrOriginal = ReverseArray(size); // reverse the array
+		arrOriginal = ReverseArray<int>(size); // reverse the array
 		output << ",,Reverse" << endl;
 		checkThreshold = chrono::system_clock::now();
 
-		for (int i = 0; i < 100 && !HasExceededTimeThreshold(checkThreshold); i++)
+		for (int i = 0; i < 100 && !HasExceededTimeThreshold(checkThreshold, 7200); i++)
 		{
 			cout << method << " Reverse COUNT " << i << endl;
 			memcpy(arr, arrOriginal, size * sizeof(int));
@@ -150,11 +152,11 @@ namespace Benchmarker
 		// shuffle array //
 		///////////////////
 
-		arrOriginal = ShuffleTen(size); // reverse the array
+		arrOriginal = ShuffleArray<int>(size); // reverse the array
 		output << ",,,Shuffle" << endl;
 		checkThreshold = chrono::system_clock::now();
 
-		for (int i = 0; i < 100 && !HasExceededTimeThreshold(checkThreshold); i++)
+		for (int i = 0; i < 100 && !HasExceededTimeThreshold(checkThreshold, 7200); i++)
 		{
 			cout << method << " Shuffle COUNT " << i << endl;
 			memcpy(arr, arrOriginal, size * sizeof(int));
@@ -187,7 +189,7 @@ namespace Benchmarker
 		/*delete arr;
 		delete arrOriginal;*/
 
-		if (HasExceededTimeThreshold(checkThreshold))
+		if (HasExceededTimeThreshold(checkThreshold, 7200))
 			std::cout << method << size << " Exceeded 120 minutes of execution. Aborting" << endl;
 		else
 			std::cout << method << size << " Finished in " << elapsedTotal.count() << "s" << endl;
