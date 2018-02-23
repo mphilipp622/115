@@ -9,64 +9,75 @@
 
 using namespace std;
 
-/*
-This class will create Random arrays. Inherits from Array prototype class
-*/
-template<typename T>
-class ShuffledArray : public Array
+namespace ArrayTemplate
 {
-public:
-	Array* Clone()
+	/*
+	This class will create Random arrays. Inherits from Array prototype class
+	*/
+	template<typename T>
+	class ShuffledArray : public Array
 	{
-		return new ShuffledArray<T>;
-	}
-
-	ShuffledArray(int newSize)
-	{
-		this->size = newSize;
-		arr = (T*)malloc(sizeof(T) * size);
-
-		srand(time(NULL)); // set new seed
-
-		int cap = length * 0.1; // 10% of the length
-		T value = 0.0;
-
-		for (int i = 0; i < length; i++, value++)
-			// Initialize an ordered array first.
-			arr[i] = value;
-
-		for (int i = 0; i < cap; i++)
+	public:
+		Array* Clone()
 		{
-			// shuffle 10% of the array
-			int randIndex = rand() % length;
-			Swap(i, randIndex);
+			return new ShuffledArray<T>(size);
 		}
-	}
 
-	~ShuffledArray()
-	{
-		delete arr;
-	}
+		ShuffledArray(int newSize)
+		{
+			this->size = newSize;
+			arr = (T*)malloc(sizeof(T) * size);
 
-	void DisplayArray()
-	{
-		for (int i = 0; i < this->size; i++)
-			cout << arr[i] << endl;
-	}
+			srand(time(NULL)); // set new seed
 
-	T operator[](int index)
-	{
-		return arr[index];
-	}
+			int cap = newSize * 0.1; // 10% of the length
+			T value = 0.0;
 
-private:
-	T* arr;
-	void Swap(int i, int j)
-	{
-		T temp;
-		temp = arr[i];
-		arr[i] = arr[j];
-		arr[j] = temp;
-	}
-};
+			if (_Is_character<T>::value)
+				value = (T)65; // ASCII value for 'A'
 
+			for (int i = 0; i < newSize; i++, value++)
+				// Initialize an ordered array first.
+				arr[i] = value;
+
+			for (int i = 0; i < cap; i++)
+			{
+				// shuffle 10% of the array
+				int randIndex = rand() % newSize;
+				Swap(i, randIndex);
+			}
+		}
+
+		~ShuffledArray()
+		{
+			delete arr;
+		}
+
+		void DisplayArray()
+		{
+			if (is_floating_point<T>::value)
+				// if the type is floating point, show decimals
+				cout << fixed;
+
+			for (int i = 0; i < size; i++)
+				std::cout << arr[i] << std::endl;
+		}
+
+		T operator[](int index)
+		{
+			return arr[index];
+		}
+
+	private:
+		T* arr;
+
+		void Swap(int i, int j)
+		{
+			T temp;
+			temp = arr[i];
+			arr[i] = arr[j];
+			arr[j] = temp;
+		}
+	};
+
+}

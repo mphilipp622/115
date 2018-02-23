@@ -65,10 +65,10 @@
     <ClCompile Include="Benchmarker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Array.cpp">
+    <ClCompile Include="ArrayFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ArrayFactory.cpp">
+    <ClCompile Include="Array.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

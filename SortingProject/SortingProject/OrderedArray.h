@@ -2,47 +2,60 @@
 #include "stdafx.h"
 #include "Array.h"
 #include <iostream>
+#include <type_traits>
 
 using namespace std;
 
-/*
-This class will create ordered arrays. Inherits from Array prototype class.
-*/
-template<typename T>
-class OrderedArray : public Array
+namespace ArrayTemplate
 {
-public:
-	Array* Clone()
+	/*
+	This class will create ordered arrays. Inherits from Array prototype class.
+	*/
+	template<typename T>
+	class OrderedArray : public Array
 	{
-		return new OrderedArray<T>;
-	}
+	public:
+		Array* Clone()
+		{
+			return new OrderedArray<T>(size);
+		}
 
-	OrderedArray(int newSize)
-	{
-		this->size = newSize;
-		arr = (T*)malloc(sizeof(T) * size);
-		T value = 0.0;
+		OrderedArray(int newSize)
+		{
 
-		for (int i = 0; i < this->size; i++, value++)
-			arr[i] = value; // populate ordered array
-	}
+			this->size = newSize;
+			arr = (T*)malloc(sizeof(T) * size);
 
-	~OrderedArray()
-	{
-		delete arr;
-	}
+			T value = (T)1.0;
 
-	void DisplayArray()
-	{
-		for (int i = 0; i < this->size; i++)
-			cout << arr[i] << endl;
-	}
+			if (_Is_character<T>::value)
+				value = (T)65; // ASCII value for 'A'
 
-	T operator[](int index)
-	{
-		return arr[index];
-	}
+			for (int i = 0; i < this->size; i++, value += 1.0)
+				arr[i] = value; // populate ordered array
+		}
 
-private:
-	T* arr;
-};
+		~OrderedArray()
+		{
+			delete arr;
+		}
+
+		void DisplayArray()
+		{
+			if (is_floating_point<T>::value)
+				// if the type is floating point, show decimals
+				cout << fixed;
+
+			for (int i = 0; i < size; i++)
+				std::cout << arr[i] << std::endl;
+		}
+
+		T operator[](int index)
+		{
+			return arr[index];
+		}
+
+	private:
+		T* arr;
+	};
+}

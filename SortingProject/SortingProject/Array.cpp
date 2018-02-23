@@ -9,7 +9,6 @@ Array::~Array()
 {
 }
 
-int Array::GetSize()
+void Array::DisplayArray()
 {
-	return this->size;
 }

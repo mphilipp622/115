@@ -3,16 +3,37 @@
 #include <iostream>
 #include "Sorter.h"
 #include "ArrayMaker.h"
+#include "ArrayFactory.h"
 
 using namespace std;
 using namespace Benchmarker;
 using namespace Sorter;
 using namespace ArrayMaker;
 
+//ArrayFactory* myFactory = new ArrayFactory();
+
 int main()
 {
-	auto* arr = ReverseArray<double>(10);
-	DisplayArray(arr, 10);
+	// Syntax for parameters is (Ordering of Array, data type of array, size of array)
+	auto* arr = ArrayFactory::MakeClone<char>(1, 4, 10);
+	arr->DisplayArray();
+	cout << endl;
+
+	arr = ArrayFactory::MakeClone<char>(2, 4, 10);
+	arr->DisplayArray();
+	cout << endl;
+
+	arr = ArrayFactory::MakeClone<char>(3, 4, 10);
+	arr->DisplayArray();
+	cout << endl;
+
+	arr = ArrayFactory::MakeClone<char>(4, 4, 10);
+	arr->DisplayArray();
+	cout << endl;
+	//auto* arr = ArrayFactory::CreateArray<int>(1, 10);
+	//arr->DisplayArray();
+	/*auto* arr = ReverseArray<double>(10);
+	DisplayArray(arr, 10);*/
 	//int* arr = RandomArray<int>(10);
 	//DisplayArray(arr, 10);
 	/*MergeSort(arr, 0, 9);
