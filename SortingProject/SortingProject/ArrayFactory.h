@@ -28,35 +28,27 @@ public:
 	{
 		int tempKey = (choice + type + size) * choice;
 
-		auto finder = arrays.find(tempKey);
-
-		if (finder == arrays.end())
-		{
-			// If the item does not exist in our map, then we will create it.
-			if (choice == 1)
-				arrays[tempKey] = new ArrayTemplate::OrderedArray<T>(size);
-			else if (choice == 2)
-				arrays[tempKey] = new ArrayTemplate::ReverseArray<T>(size);
-			else if (choice == 3)
-				arrays[tempKey] = new ArrayTemplate::RandomArray<T>(size);
-			else if (choice == 4)
-				arrays[tempKey] = new ArrayTemplate::ShuffledArray<T>(size);
-		}
-
+		// If the item does not exist in our map, then we will create it.
+		if (choice == 1)
+			arrays<T>[tempKey] = new ArrayTemplate::OrderedArray<T>(size, choice, type);
+		else if (choice == 2)
+			arrays<T>[tempKey] = new ArrayTemplate::ReverseArray<T>(size, choice, type);
+		else if (choice == 3)
+			arrays<T>[tempKey] = new ArrayTemplate::RandomArray<T>(size, choice, type);
+		else if (choice == 4)
+			arrays<T>[tempKey] = new ArrayTemplate::ShuffledArray<T>(size, choice, type);
 	}
 
 	template<typename T>
-	static Array* MakeClone(int choice, int type, int size)
+	static Array<T>* MakeClone(int choice, int type, int size)
 	{
 		int tempKey = (choice + type + size) * choice;
 
-		auto finder = arrays.find(tempKey);
-
-		if (finder == arrays.end())
+		if (!arrays<T>[tempKey])
 			// if the item doesn't exist yet, create it.
 			CreateArray<T>(choice, type, size);
 
-		return arrays[tempKey]->Clone();
+		return arrays<T>[tempKey]->Clone();
 	}
 private:
 	// the map contains lookups for the different arrays that have been created.
@@ -72,7 +64,9 @@ private:
 	// 2 = Reverse Array
 	// 3 = Random Array
 	// 4 = Shuffled Array
-	static unordered_map<int, Array*> arrays;
+	template<typename T>
+	static unordered_map<int, Array<T>*> arrays;
 };
 
-unordered_map<int, Array*> ArrayFactory::arrays = {};
+template<typename T>
+unordered_map<int, Array<T>*> ArrayFactory::arrays = {};

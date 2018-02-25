@@ -1,27 +1,17 @@
+#pragma once
+#include "stdafx.h"
 #include <iostream>
 #include <time.h>
 #include <cstdlib>
 #include <chrono>
 #include <ctime>
-#include "ArrayMaker.h"
+#include "Array.h"
+#include "Timer.h"
 
 using namespace std;
-using namespace ArrayMaker;
+using namespace Timer;
 
-//bool HasExceededTimeThreshold(chrono::time_point<chrono::system_clock> start, int time)
-//{
-//	/* time threshold will be set at 5 minutes total.
-//	 If any algorithm runs longer than 5 minutes, than we will quit execution.*/
-//	auto end = chrono::system_clock::now();
-//	chrono::duration<double> elapsed = end - start;
-//
-//	if (elapsed.count() >= time)
-//		return true;
-//
-//	return false;
-//}
-
-namespace Sorter
+namespace Sort
 {
 
 	template<typename T>
@@ -45,7 +35,7 @@ namespace Sorter
 			}
 
 			if (min < arr[i]) // if min value is < the current index of the array, swap
-				Swap(arr, minIndex, i);
+				Swap<T>(arr, minIndex, i);
 		}
 
 		if (HasExceededTimeThreshold(startTime, 300))
@@ -56,8 +46,8 @@ namespace Sorter
 	void BubbleSort(T* arr, int length)
 	{
 		bool swap = false; // flag for exit condition
+
 		auto startTime = chrono::system_clock::now();
-		chrono::duration<double> elapsedTotal; // will keep track of time.
 
 		do
 		{
@@ -69,12 +59,13 @@ namespace Sorter
 				if (arr[i + 1] < arr[i])
 				{
 					// perform a swap
-					Swap(arr, i, i + 1);
+					Swap<T>(arr, i, i + 1);
 					swap = true;
 				}
 			}
 		} while (swap && !HasExceededTimeThreshold(startTime, 300)); // exit condition
 
+		
 		if (HasExceededTimeThreshold(startTime, 300))
 			cout << "BubbleSort" << length << " Has exceeded 5 minutes" << endl;
 	}
@@ -90,7 +81,7 @@ namespace Sorter
 
 			while (arr[index - 1] > arr[index] && !HasExceededTimeThreshold(startTime, 300))
 			{
-				Swap(arr, index - 1, index);
+				Swap<T>(arr, index - 1, index);
 				index = index - 1;
 			}
 
@@ -158,9 +149,9 @@ namespace Sorter
 		if (left < right)
 		{
 			int mid = (left + right) / 2;
-			MergeSort(arr, left, mid);
-			MergeSort(arr, mid + 1, right);
-			Merge(arr, left, mid, right);
+			MergeSort<T>(arr, left, mid);
+			MergeSort<T>(arr, mid + 1, right);
+			Merge<T>(arr, left, mid, right);
 		}
 	}
 
@@ -175,7 +166,7 @@ namespace Sorter
 			while (arr[++leftI] < pivot); // loop until we find a value greater than pivot on the left
 			while (arr[--rightI] > pivot); // loop until we find a value less than pivot on the right
 			if (leftI >= rightI)break; // if the indexes have crossed, then we want to terminate
-			Swap(arr, leftI, rightI); // swap the indexes
+			Swap<T>(arr, leftI, rightI); // swap the indexes
 		}
 
 		return rightI; // return the right index
@@ -187,8 +178,17 @@ namespace Sorter
 		if (first < last)
 		{
 			int pivot = Partition(arr, first, last); // return q and update A
-			QuickSort(arr, first, pivot); // apply on the first part of A (all the elements<A[q])
-			QuickSort(arr, pivot + 1, last); // apply on the second part of A (all the elements>A[q])
+			QuickSort<T>(arr, first, pivot); // apply on the first part of A (all the elements<A[q])
+			QuickSort<T>(arr, pivot + 1, last); // apply on the second part of A (all the elements>A[q])
 		}
 	}
-}
+
+	template<typename T>
+	void Swap(T* arr, int i, int j)
+	{
+		T temp;
+		temp = arr[i];
+		arr[i] = arr[j];
+		arr[j] = temp;
+	}
+};
