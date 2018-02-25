@@ -1,8 +1,16 @@
+/*
+Mark Philipp
+CSCI 115
+ID: 109941708
+*/
+
 #pragma once
 #include <chrono>
 
+// Namespace for benchmark timer
 namespace Timer
 {
+	// Returns true if the current running time has exceeded int time
 	bool HasExceededTimeThreshold(std::chrono::time_point<std::chrono::system_clock> start, int time);
 }
 

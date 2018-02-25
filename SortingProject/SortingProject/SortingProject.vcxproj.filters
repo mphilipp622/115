@@ -56,9 +56,6 @@
     <ClCompile Include="SortingProject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Array.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Timer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
