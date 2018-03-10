@@ -1,8 +1,12 @@
 Mark Philipp
-CSCI 115
 ID: 109941708
 
-Updated: 2/25/18
+Isaac Fielding
+
+CSCI 115 Sorting Project
+---------------------
+
+Updated: 3/5/18
 
 To run the program, run the "SortingProject.exe" file found in the root folder "SortingProject".
 
@@ -19,3 +23,7 @@ All the sorting functions can be found in Sort.h
 The timer function can be found in Timer.h and implemented in Timer.cpp
 
 Array.h serves as the base abstract class for the prototype design pattern.
+
+---------------------
+
+Benchmarks will stop running if total running time exceeds 2 hours for a given size. Additionally, each iteration of the benchmark will cancel if runtime exceeds 5 minutes.

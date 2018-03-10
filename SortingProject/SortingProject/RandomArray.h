@@ -18,8 +18,8 @@ ID: 109941708
 
 
 using namespace std;
-using namespace Timer;
-using namespace Sort;
+using namespace Timer; // Use custom timer namespace for timing benchmarks
+using namespace Sort; // use custom Sort namespace for sorting algorithms
 
 // Created a namespace for the different types of arrays. This isn't necessary but helps me with organization
 namespace ArrayTemplate

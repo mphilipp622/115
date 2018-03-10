@@ -89,7 +89,7 @@ namespace Sort
 		{
 			int index = i; // get current index
 
-			while (arr[index - 1] > arr[index] && !HasExceededTimeThreshold(startTime, 300))
+			while (index > 0 && arr[index - 1] > arr[index] && !HasExceededTimeThreshold(startTime, 300))
 			{
 				// check the outer loop's index - 1 and compare it to out loop's current index. Swap if current is < previous
 				Swap<T>(arr, index - 1, index);
