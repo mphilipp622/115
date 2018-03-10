@@ -85,7 +85,7 @@ namespace Sort
 	{
 		auto startTime = chrono::system_clock::now(); // Timer will check if we've exceeded max time threshold
 
-		for (int i = 1; i < length && !HasExceededTimeThreshold(startTime, 300); i++)
+		for (int i = 0; i < length && !HasExceededTimeThreshold(startTime, 300); i++)
 		{
 			int index = i; // get current index
 
