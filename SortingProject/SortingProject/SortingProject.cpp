@@ -55,124 +55,163 @@ void ExecuteUserCommands(Array<T>* arr, int sortSel, int benchOrSort)
 
 int main()
 {
+	auto* arrOrdered10 = ArrayFactory::MakeClone<int>(1, 1, 10);
+	auto* arrOrdered1000 = ArrayFactory::MakeClone<int>(1, 1, 1000);
+	auto* arrOrdered10000 = ArrayFactory::MakeClone<int>(1, 1, 10000);
+	auto* arrOrdered100000 = ArrayFactory::MakeClone<int>(1, 1, 100000);
+
+	auto* arrRev10 = ArrayFactory::MakeClone<int>(2, 1, 10);
+	auto* arrRev1000 = ArrayFactory::MakeClone<int>(2, 1, 1000);
+	auto* arrRev10000 = ArrayFactory::MakeClone<int>(2, 1, 10000);
+	auto* arrRev100000 = ArrayFactory::MakeClone<int>(2, 1, 100000);
+
+	auto* arrRand10 = ArrayFactory::MakeClone<int>(3, 1, 10);
+	auto* arrRand1000 = ArrayFactory::MakeClone<int>(3, 1, 1000);
+	auto* arrRand10000 = ArrayFactory::MakeClone<int>(3, 1, 10000);
+	auto* arrRand100000 = ArrayFactory::MakeClone<int>(3, 1, 100000);
+
+	auto* arrShuffle10 = ArrayFactory::MakeClone<int>(4, 1, 10);
+	auto* arrShuffle1000 = ArrayFactory::MakeClone<int>(4, 1, 1000);
+	auto* arrShuffle10000 = ArrayFactory::MakeClone<int>(4, 1, 10000);
+	auto* arrShuffle100000 = ArrayFactory::MakeClone<int>(4, 1, 100000);
+
+	arrOrdered10->Benchmark("SelectionSort");
+	arrRev10->Benchmark("SelectionSort");
+	arrRand10->Benchmark("SelectionSort");
+	arrShuffle10->Benchmark("SelectionSort");
+
+	arrOrdered1000->Benchmark("SelectionSort");
+	arrRev1000->Benchmark("SelectionSort");
+	arrRand1000->Benchmark("SelectionSort");
+	arrShuffle1000->Benchmark("SelectionSort");
+
+	arrOrdered10000->Benchmark("SelectionSort");
+	arrRev10000->Benchmark("SelectionSort");
+	arrRand10000->Benchmark("SelectionSort");
+	arrShuffle10000->Benchmark("SelectionSort");
+
+	arrOrdered100000->Benchmark("SelectionSort");
+	arrRev100000->Benchmark("SelectionSort");
+	arrRand100000->Benchmark("SelectionSort");
+	arrShuffle100000->Benchmark("SelectionSort");
 	// choiceSel = the initial sorting order of the array. Ordered, Reverse, Shuffled, Random
 	// typeSel = the data type of the array: int, float, double, char
 	// sizeSel = size of array. sizeSel > 0 && sizeSel <= 1000000
 	// sortSel = sorting method to use: Bubble, Selection, Insertion, Quick, Merge
 	// benchOrSort = Sort data or benchmark the data.
-	int choiceSel = 0 , typeSel = 0, sizeSel = 0, sortSel = 0, benchOrSort = 0;
+	//int choiceSel = 0 , typeSel = 0, sizeSel = 0, sortSel = 0, benchOrSort = 0;
 
-	while (!cin.eof())
-	{
-		while (true)
-		{
-			// user selects the sorting algorithm to use
+	//while (!cin.eof())
+	//{
+	//	while (true)
+	//	{
+	//		// user selects the sorting algorithm to use
 
-			cout << "Select a sorting algorithm" << endl;
-			cout << "1. Bubble Sort\n2. Selection Sort\n3. Insertion Sort\n4. Merge Sort\n5. Quick Sort\n0. Exit" << endl;
-			cin >> sortSel;
-			cout << endl;
+	//		cout << "Select a sorting algorithm" << endl;
+	//		cout << "1. Bubble Sort\n2. Selection Sort\n3. Insertion Sort\n4. Merge Sort\n5. Quick Sort\n0. Exit" << endl;
+	//		cin >> sortSel;
+	//		cout << endl;
 
-			if (sortSel == 0)
-				return 0;
+	//		if (sortSel == 0)
+	//			return 0;
 
-			if (sortSel < 0 || sortSel > 5)
-				cout << "ERROR: input must be 1, 2, 3, 4, 5, or 0" << endl; // invalid input check
-			else
-				break;
-		}
+	//		if (sortSel < 0 || sortSel > 5)
+	//			cout << "ERROR: input must be 1, 2, 3, 4, 5, or 0" << endl; // invalid input check
+	//		else
+	//			break;
+	//	}
 
-		while (true)
-		{
-			// user selects data type for array
+	//	while (true)
+	//	{
+	//		// user selects data type for array
 
-			cout << "Select a data type" << endl;
-			cout << "1. int\n2. float\n3. double\n4. char\n0. Exit" << endl;
-			cin >> typeSel;
-			cout << endl;
+	//		cout << "Select a data type" << endl;
+	//		cout << "1. int\n2. float\n3. double\n4. char\n0. Exit" << endl;
+	//		cin >> typeSel;
+	//		cout << endl;
 
-			if (typeSel == 0)
-				return 0;
+	//		if (typeSel == 0)
+	//			return 0;
 
-			if (typeSel < 0 || typeSel > 4)
-				cout << "ERROR: input must be 1, 2, 3 or 4" << endl; // invalid input check
-			else
-				break;
-			
-			cout << endl;
-		}
+	//		if (typeSel < 0 || typeSel > 4)
+	//			cout << "ERROR: input must be 1, 2, 3 or 4" << endl; // invalid input check
+	//		else
+	//			break;
+	//		
+	//		cout << endl;
+	//	}
 
-		while (true)
-		{
-			// user inputs array size
+	//	while (true)
+	//	{
+	//		// user inputs array size
 
-			cout << "Enter an array size (0 to exit. Size must be positive and less than or equal to 1000000)" << endl;
-			cin >> sizeSel;
-			cout << endl;
+	//		cout << "Enter an array size (0 to exit. Size must be positive and less than or equal to 1000000)" << endl;
+	//		cin >> sizeSel;
+	//		cout << endl;
 
-			if (sizeSel == 0)
-				return 0;
+	//		if (sizeSel == 0)
+	//			return 0;
 
-			if (sizeSel < 0 || sizeSel > 1000000)
-				cout << "Error: Size must be a positive value and less than 1000000" << endl; // check for invalid input
-			else
-				break;
+	//		if (sizeSel < 0 || sizeSel > 1000000)
+	//			cout << "Error: Size must be a positive value and less than 1000000" << endl; // check for invalid input
+	//		else
+	//			break;
 
-			cout << endl;
-		}
+	//		cout << endl;
+	//	}
 
-		while (true)
-		{
-			// user selects the initial sorting of the array
+	//	while (true)
+	//	{
+	//		// user selects the initial sorting of the array
 
-			cout << "Choose the Initial Sorting" << endl;
-			cout << "1. Ordered Array\n2. ReverseArray\n3. Random Array\n4. Shuffled Array (10%)\n0. Exit" << endl;
-			cin >> choiceSel;
-			cout << endl;
+	//		cout << "Choose the Initial Sorting" << endl;
+	//		cout << "1. Ordered Array\n2. ReverseArray\n3. Random Array\n4. Shuffled Array (10%)\n0. Exit" << endl;
+	//		cin >> choiceSel;
+	//		cout << endl;
 
-			if (choiceSel == 0)
-				return 0;
+	//		if (choiceSel == 0)
+	//			return 0;
 
-			if (choiceSel < 0 || choiceSel > 4)
-				cout << "ERROR: Input must be 1, 2, 3, 4 or 0" << endl; // invalid input check
-			else
-				break;
-			
-			cout << endl;
-		}
+	//		if (choiceSel < 0 || choiceSel > 4)
+	//			cout << "ERROR: Input must be 1, 2, 3, 4 or 0" << endl; // invalid input check
+	//		else
+	//			break;
+	//		
+	//		cout << endl;
+	//	}
 
-		while (true)
-		{
-			// user selects if they want to simply sort or perform a benchmark
+	//	while (true)
+	//	{
+	//		// user selects if they want to simply sort or perform a benchmark
 
-			cout << "Choose What Action to Perform" << endl;
-			cout << "1. Sort and Display Results\n2. Benchmark and Display Time\n0. Exit" << endl;
-			cin >> benchOrSort;
-			cout << endl;
+	//		cout << "Choose What Action to Perform" << endl;
+	//		cout << "1. Sort and Display Results\n2. Benchmark and Display Time\n0. Exit" << endl;
+	//		cin >> benchOrSort;
+	//		cout << endl;
 
-			if (benchOrSort == 0)
-				return 0;
+	//		if (benchOrSort == 0)
+	//			return 0;
 
-			if (benchOrSort < 0 || benchOrSort > 2)
-				cout << "ERROR: Selection must be 1, 2, or 0" << endl; // invalid input check
-			else
-				break;
-			
-			cout << endl;
-		}
+	//		if (benchOrSort < 0 || benchOrSort > 2)
+	//			cout << "ERROR: Selection must be 1, 2, or 0" << endl; // invalid input check
+	//		else
+	//			break;
+	//		
+	//		cout << endl;
+	//	}
 
-		// Execute user selections. Have to pass different types for MakeClone based on selection
-		if (typeSel == 1)
-			ExecuteUserCommands(ArrayFactory::MakeClone<int>(choiceSel, typeSel, sizeSel), sortSel, benchOrSort);
-		else if (typeSel == 2)
-			ExecuteUserCommands(ArrayFactory::MakeClone<float>(choiceSel, typeSel, sizeSel), sortSel, benchOrSort);
-		else if (typeSel == 3)
-			ExecuteUserCommands(ArrayFactory::MakeClone<double>(choiceSel, typeSel, sizeSel), sortSel, benchOrSort);
-		else if (typeSel == 4)
-			ExecuteUserCommands(ArrayFactory::MakeClone<char>(choiceSel, typeSel, sizeSel), sortSel, benchOrSort);
+	//	// Execute user selections. Have to pass different types for MakeClone based on selection
+	//	if (typeSel == 1)
+	//		ExecuteUserCommands(ArrayFactory::MakeClone<int>(choiceSel, typeSel, sizeSel), sortSel, benchOrSort);
+	//	else if (typeSel == 2)
+	//		ExecuteUserCommands(ArrayFactory::MakeClone<float>(choiceSel, typeSel, sizeSel), sortSel, benchOrSort);
+	//	else if (typeSel == 3)
+	//		ExecuteUserCommands(ArrayFactory::MakeClone<double>(choiceSel, typeSel, sizeSel), sortSel, benchOrSort);
+	//	else if (typeSel == 4)
+	//		ExecuteUserCommands(ArrayFactory::MakeClone<char>(choiceSel, typeSel, sizeSel), sortSel, benchOrSort);
 
-		cout << endl;
-	}
+	//	cout << endl;
+	//}
 
 	return 0;
 }

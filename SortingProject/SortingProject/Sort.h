@@ -32,7 +32,7 @@ namespace Sort
 			T min = arr[i]; // min value always starts at element stored in current index
 			int minIndex = i; // set minimum index
 
-			for (int j = i; j < length && !HasExceededTimeThreshold(startTime, 300); j++)
+			for (int j = i; j < length + 1 && !HasExceededTimeThreshold(startTime, 300); j++)
 			{
 				if (arr[j] < min)
 				{

@@ -88,7 +88,7 @@ namespace ArrayTemplate
 			// CSV files are preferred because they put data into cells that can be read in Excel.
 			output.open("Data/Ordered" + method + to_string(size) + ".csv");
 
-			output << "Random" << endl; // set column name in csv file
+			output << "Ordered" << endl; // set column name in csv file
 			cout << "Starting " << method << size << endl; // print console message to indicate benchmark is starting
 
 			auto startTotal = chrono::system_clock::now(); // timer will keep track of total running time
