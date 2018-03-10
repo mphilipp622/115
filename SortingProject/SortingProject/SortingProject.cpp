@@ -126,7 +126,7 @@ int main()
 			// user selects the initial sorting of the array
 
 			cout << "Choose the Initial Sorting" << endl;
-			cout << "1. Ordered Array\n2. Reverse Array\n3. Random Array\n4. Shuffled Array (10%)\n0. Exit" << endl;
+			cout << "1. Ordered Array\n2. ReverseArray\n3. Random Array\n4. Shuffled Array (10%)\n0. Exit" << endl;
 			cin >> choiceSel;
 			cout << endl;
 

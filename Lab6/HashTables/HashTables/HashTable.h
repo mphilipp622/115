@@ -3,15 +3,11 @@
 #include <string>
 #include <typeinfo>
 
-using namespace std;
-
 template<typename key, typename value>
 class HashTable
 {
 public:
-	HashTable()
-	{
-	}
+	HashTable();
 
 	HashTable(int newSize)
 	{
@@ -20,10 +16,7 @@ public:
 		dictionary = new Lookup[size];
 	}
 
-	~HashTable() 
-	{
-		delete[] dictionary;
-	}
+	~HashTable();
 
 	int GetSize()
 	{
@@ -48,10 +41,9 @@ public:
 		int newIndex = CreateIndex(newKey);
 
 		if (newIndex == -1)
-			cout << "Cannot Add New Data. Table is Full" << endl;
+			cout << "Cannot Add New Data. Table is Fulle" << endl;
 
-		temp.isHashed = true;
-		dictionary[newIndex].SetData(newKey, newValue);
+		dictionary[newIndex] = temp;
 		numberOfRecords++;
 	}
 
@@ -88,42 +80,22 @@ public:
 		else
 			return false;
 	}
-	/*void Remove(key) {};
-	void Clear()
-	{};*/
+	void Remove(key);
+	void Clear();
 
 
 private:
-	typedef struct Lookup
+	struct Lookup
 	{
 		public:
-			Lookup()
-			{
-				isHashed = false;
-				/*if (typeid(key) == typeid(string) || typeid(key) == typeid(char*))
-					thisKey = "";
-				else
-					thisKey = (key)0;
-
-				thisValue = 0;*/
-			}
-
+			Lookup();
 			Lookup(key newKey, value newValue)
 			{
 				thisKey = newKey;
 				thisValue = newValue;
-				isHashed = false;
-			}
-
-			void SetData(key newKey, value newValue)
-			{
-				thisKey = newKey;
-				thisValue = newValue;
-				isHashed = true;
 			}
 			key thisKey;
 			value thisValue;
-			bool isHashed;
 	};
 
 	int size;
@@ -134,17 +106,18 @@ private:
 	int CreateIndex(key newKey)
 	{
 		int index = 0;
-		if (typeid(key) == typeid(string)) 
+
+		if (typeid(newKey).name() == "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >") 
 		{
 			// if our key type is string, we need different behavior.
-			//string temp = newKey;
+			string temp = newKey;
 
-			for (int i = 0; i < newKey.length(); i++)
-				index += newKey.at(i);
+			for (int i = 0; i < temp.length(); i++)
+				index += temp.at(i);
 
 			index %= size;
 		}
-		else if (typeid(key) == typeid(char*))
+		else if (typeid(newKey).name() == "char const * __cdecl(void)")
 		{
 			// if key type is char*, use different behavior
 			for (int i = 0; i < sizeof(newKey) / sizeof(newKey[0]); i++)
@@ -153,19 +126,19 @@ private:
 			index %= size;
 
 		}
-		//else
-		//{
-		//	// otherwise, if key type is a decimal value or a char, use default behavior
-		//	newKey % size;
-		//}
+		else
+		{
+			// otherwise, if key type is a decimal value or a char, use default behavior
+			newKey % size;
+		}
 
 		// check collision
-		if (dictionary[index].isHashed)
+		if (dictionary[index])
 		{
 			for (int i = index; i < size; i++)
 			{
 				// iterate forward, looking for empty space
-				if (!dictionary[i].isHashed)
+				if (!dictionary[i])
 				{
 					// found empty spot
 					index = i;
@@ -175,7 +148,7 @@ private:
 			for (int i = index; i > -1; i--)
 			{
 				// iterate backwards, looking for empty space
-				if (!dictionary[i].isHashed)
+				if (!dictionary[i])
 				{
 					// found empty spot
 					index = i;
@@ -191,7 +164,17 @@ private:
 	{
 		int index = 0;
 
-		if (typeid(key) == typeid(char*))
+		if (typeid(keyToFind).name() == "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >")
+		{
+			// if our key type is string, we need different behavior.
+			string temp = keyToFind;
+
+			for (int i = 0; i < temp.length(); i++)
+				index += temp.at(i);
+
+			index %= size;
+		}
+		else if (typeid(keyToFind).name() == "char const * __cdecl(void)")
 		{
 			// if key type is char*, use different behavior
 			for (int i = 0; i < sizeof(keyToFind) / sizeof(keyToFind[0]); i++)
@@ -200,18 +183,11 @@ private:
 			index %= size;
 
 		}
-		else if (typeid(key) == typeid(string))
+		else
 		{
-			string temp = keyToFind;
-
-			for (int i = 0; i < temp.length(); i++)
-				index += temp.at(i);
-
-			index %= size;
+			// otherwise, if key type is a decimal value or a char, use default behavior
+			keyToFind % size;
 		}
-		//else
-		//	// otherwise, if key type is a decimal value or a char, use default behavior
-		//	keyToFind % size;
 
 		// if we find the key immediately, return the index
 		if (dictionary[index].thisKey == keyToFind)
@@ -221,7 +197,7 @@ private:
 		for (int i = index; i < size; i++)
 		{
 			// iterate forward, looking for key
-			if (dictionary[i].isHashed)
+			if (dictionary[i])
 			{
 				if (dictionary[i].thisKey == keyToFind)
 				{
@@ -233,7 +209,7 @@ private:
 		for (int i = index; i > -1; i--)
 		{
 			// iterate backwards, looking for key
-			if (dictionary[i].isHashed)
+			if (dictionary[i])
 			{
 				if (dictionary[i].thisKey == keyToFind)
 				{
