@@ -19,7 +19,7 @@ Model::~Model()
     //dtor
 }
 
-Model::Model(int newX, int newY, int newWidth, int newHeight, string newTag)
+Model::Model(float newX, float newY, float newWidth, float newHeight, string newTag)
 {
     width = newWidth;
     height = newHeight;
@@ -93,38 +93,38 @@ void Model::InitModel(string fileName, bool transparent)
     texture->BindTexture(fileName);
 }
 
-int Model::GetX()
+float Model::GetX()
 {
     return xPos;
 }
 
-int Model::GetY()
+float Model::GetY()
 {
     return yPos;
 }
 
-int Model::GetWidth()
+float Model::GetWidth()
 {
     return width;
 }
 
-int Model::GetHeight()
+float Model::GetHeight()
 {
     return height;
 }
 
-void Model::SetPosition(int newX, int newY)
+void Model::SetPosition(float newX, float newY)
 {
     xPos = newX;
     yPos = newY;
 }
 
-void Model::SetWidth(int newWidth)
+void Model::SetWidth(float newWidth)
 {
     width = newWidth;
 }
 
-void Model::SetHeight(int newHeight)
+void Model::SetHeight(float newHeight)
 {
     height = newHeight;
 }

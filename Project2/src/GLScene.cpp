@@ -11,6 +11,7 @@
 
 //Model *modelTeapot = new Model();
 Inputs *keyboardAndMouse = new Inputs();
+Model *ground = new Model(0, 0, 1, 1, "ground");
 //Model *ground = new Model(6.0, 0.2, 0, -1.0, "ground");
 //Model *block = new Model(2.0, 0.2, 3.0, 0, "block");
 //Model *block2 = new Model(2.0, 0.2, -0.5, 1.0, "block2");
@@ -50,6 +51,7 @@ GLint GLScene::initGL()
 //
 //    block->InitModel("Images/Block.png", true);
 //    ground->InitModel("Images/Block.png", true);
+    ground->InitModel("Images/StoneGround.jpg", false);
     dTime ->UpdateDeltaTime();
 
 //    sky->LoadTextures();
@@ -87,8 +89,11 @@ GLint GLScene::drawGLScene()
 //    glPushMatrix();
 //    ground->DrawModel();
 //    glPopMatrix();
+    glPushMatrix();
+    ground->DrawModel();
+    glPopMatrix();
 
-    testPlayer->Update();
+//    testPlayer->Update();
 
 
 //    glTranslatef(testPlayer->GetX(), testPlayer->GetY(), 0);

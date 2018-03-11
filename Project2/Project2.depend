@@ -20,7 +20,7 @@
 	<GL/gl.h>
 	<GL/glu.h>
 
-1520791466 c:\users\seapanda\documents\college\115\project2\include\model.h
+1520813821 c:\users\seapanda\documents\college\115\project2\include\model.h
 	<windows.h>
 	<glut.h>
 	<string>
@@ -71,7 +71,7 @@
 
 1518657083 c:\users\seapanda\documents\college\115\project2\common\include\soil.h
 
-1520791851 source:c:\users\seapanda\documents\college\115\project2\src\model.cpp
+1520813859 source:c:\users\seapanda\documents\college\115\project2\src\model.cpp
 	<Model.h>
 	<TextureLoader.h>
 	<DeltaTime.h>
@@ -79,7 +79,7 @@
 	<Player.h>
 	<string>
 
-1520793851 source:c:\users\seapanda\documents\college\115\project2\src\glscene.cpp
+1520813183 source:c:\users\seapanda\documents\college\115\project2\src\glscene.cpp
 	<GLScene.h>
 	<GLLight.h>
 	<Inputs.h>
@@ -97,4 +97,12 @@
 
 1520793882 c:\users\seapanda\documents\college\115\project2\include\timer.h
 	<time.h>
+
+1520793972 source:c:\users\seapanda\documents\college\115\project2\src\player.cpp
+	<Player.h>
+	<Timer.h>
+	<TextureLoader.h>
+	<string>
+	<GLScene.h>
+	<cmath>
 

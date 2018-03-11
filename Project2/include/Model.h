@@ -16,7 +16,7 @@ class Model
 {
     public:
         Model();
-        Model(int newX, int newY, int newWidth, int newHeight, string newTag);
+        Model(float newX, float newY, float newWidth, float newHeight, string newTag);
         virtual ~Model();
         void DrawModel();
         void InitModel(string fileName, bool transparent);
@@ -27,18 +27,18 @@ class Model
         vec vertices[4];
 
         // collision getters
-        int GetX();
-        int GetY();
-        int GetWidth();
-        int GetHeight();
-        void SetPosition(int newX, int newY);
-        void SetWidth(int newWidth);
-        void SetHeight(int newHeight);
+        float GetX();
+        float GetY();
+        float GetWidth();
+        float GetHeight();
+        void SetPosition(float newX, float newY);
+        void SetWidth(float newWidth);
+        void SetHeight(float newHeight);
 
         string GetTag();
     protected:
-        int width, height;
-        int xPos, yPos;
+        float width, height;
+        float xPos, yPos;
         string tag;
 
         // returns an integer representing a type of tile
