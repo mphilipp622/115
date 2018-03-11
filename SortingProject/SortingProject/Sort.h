@@ -29,20 +29,16 @@ namespace Sort
 
 		for (int i = 0; i < length - 1 && !HasExceededTimeThreshold(startTime, 300); i++)
 		{
-			T min = arr[i]; // min value always starts at element stored in current index
 			int minIndex = i; // set minimum index
 
-			for (int j = i; j < length + 1 && !HasExceededTimeThreshold(startTime, 300); j++)
+			for (int j = i + 1; j < length; j++)
 			{
-				if (arr[j] < min)
-				{
-					// if current element is less than previously minimum element, change min and set minindex
-					min = arr[j];
+				if (arr[j] < arr[minIndex])
+					// if current element is less than previously minimum element, set minimum element's index
 					minIndex = j;
-				}
 			}
 
-			if (min < arr[i]) // if min value is < the current index of the array, swap
+			if (minIndex != i) // if min value is < the current index of the array, swap
 				Swap<T>(arr, minIndex, i);
 		}
 
@@ -72,7 +68,7 @@ namespace Sort
 					swap = true;
 				}
 			}
-		} while (swap && !HasExceededTimeThreshold(startTime, 300)); // exit condition
+		} while (swap); // exit condition
 
 		
 		if (HasExceededTimeThreshold(startTime, 300))
@@ -85,7 +81,7 @@ namespace Sort
 	{
 		auto startTime = chrono::system_clock::now(); // Timer will check if we've exceeded max time threshold
 
-		for (int i = 1; i < length && !HasExceededTimeThreshold(startTime, 300); i++)
+		for (int i = 1; i < length; i++)
 		{
 			int index = i; // get current index
 
