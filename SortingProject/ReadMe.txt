@@ -19,3 +19,5 @@ All the sorting functions can be found in Sort.h
 The timer function can be found in Timer.h and implemented in Timer.cpp
 
 Array.h serves as the base abstract class for the prototype design pattern.
+
+If you wish to compile the project, you will need to open the SortingProject.sln file in Visual Studio and build the project and run it.
