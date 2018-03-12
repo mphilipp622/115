@@ -1,7 +1,7 @@
 /*
 Mark Philipp
+Isaac Fielding
 CSCI 115
-ID: 109941708
 */
 
 #pragma once
@@ -17,7 +17,7 @@ using namespace std;
 using namespace Timer;
 using namespace Sort;
 
-// Created a namespace for the different types of arrays. This isn't necessary but helps me with organization
+// Created a namespace for the different types of arrays. This isn't necessary but helps with organization
 namespace ArrayTemplate
 {
 

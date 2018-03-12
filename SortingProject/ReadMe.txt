@@ -2,7 +2,9 @@ Mark Philipp
 Isaac Fielding
 CSCI 115
 
-Updated: 2/25/18
+------------------------
+
+Updated: 3/12/18
 
 To run the program, run the "SortingProject.exe" file found in the root folder "SortingProject".
 
