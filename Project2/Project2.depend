@@ -1,0 +1,108 @@
+# depslib dependency file v1.0
+1520788834 source:c:\users\seapanda\documents\college\115\project2\main.cpp
+	<windows.h>
+	<windows.h>
+	<GLScene.h>
+	<stdlib.h>
+	<iostream>
+	<string>
+
+1520789181 c:\users\seapanda\documents\college\115\project2\include\glscene.h
+	<windows.h>
+	<glut.h>
+	<iostream>
+	<vector>
+	<Model.h>
+
+1517274930 c:\users\seapanda\documents\college\115\project2\common\include\gl\glut.h
+	<windows.h>
+	<stdlib.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1520813821 c:\users\seapanda\documents\college\115\project2\include\model.h
+	<windows.h>
+	<glut.h>
+	<string>
+
+1520791905 source:c:\users\seapanda\documents\college\115\project2\src\deltatime.cpp
+	<DeltaTime.h>
+	<windows.h>
+	<glut.h>
+	<iostream>
+
+1520793825 c:\users\seapanda\documents\college\115\project2\include\deltatime.h
+
+1520792173 source:c:\users\seapanda\documents\college\115\project2\src\enemy.cpp
+	"Enemy.h"
+
+1520792173 c:\users\seapanda\documents\college\115\project2\include\enemy.h
+
+1520789535 source:c:\users\seapanda\documents\college\115\project2\src\gllight.cpp
+	<GLLight.h>
+
+1520789527 c:\users\seapanda\documents\college\115\project2\include\gllight.h
+	<GLScene.h>
+
+1520793808 source:c:\users\seapanda\documents\college\115\project2\src\inputs.cpp
+	<Inputs.h>
+	<iostream>
+	<DeltaTime.h>
+	<string>
+
+1520793686 c:\users\seapanda\documents\college\115\project2\include\inputs.h
+	<windows.h>
+	<iostream>
+	<Model.h>
+	<string>
+	<Player.h>
+
+1520793958 c:\users\seapanda\documents\college\115\project2\include\player.h
+	<GL\GL.h>
+	<Model.h>
+	<TextureLoader.h>
+	<DeltaTime.h>
+
+1520792037 c:\users\seapanda\documents\college\115\project2\include\textureloader.h
+	<SOIL.h>
+	<GL\GL.h>
+	<iostream>
+	<string>
+
+1518657083 c:\users\seapanda\documents\college\115\project2\common\include\soil.h
+
+1520813859 source:c:\users\seapanda\documents\college\115\project2\src\model.cpp
+	<Model.h>
+	<TextureLoader.h>
+	<DeltaTime.h>
+	<iostream>
+	<Player.h>
+	<string>
+
+1520813183 source:c:\users\seapanda\documents\college\115\project2\src\glscene.cpp
+	<GLScene.h>
+	<GLLight.h>
+	<Inputs.h>
+	<DeltaTime.h>
+	<Player.h>
+
+1520792071 source:c:\users\seapanda\documents\college\115\project2\src\textureloader.cpp
+	<TextureLoader.h>
+	<SOIL.h>
+	<GL\GL.h>
+	<iostream>
+
+1520793880 source:c:\users\seapanda\documents\college\115\project2\src\timer.cpp
+	<Timer.h>
+
+1520793882 c:\users\seapanda\documents\college\115\project2\include\timer.h
+	<time.h>
+
+1520793972 source:c:\users\seapanda\documents\college\115\project2\src\player.cpp
+	<Player.h>
+	<Timer.h>
+	<TextureLoader.h>
+	<string>
+	<GLScene.h>
+	<cmath>
+
