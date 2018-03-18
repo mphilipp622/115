@@ -68,7 +68,9 @@ namespace ArrayTemplate
 			{
 				// shuffle 10% of the array
 				int randIndex = rand() % newSize;
-				Swap(i, randIndex);
+				int randIndex2 = rand() % newSize;
+				cout << randIndex << "    " << randIndex2 << endl;
+				Swap(randIndex, randIndex2);
 			}
 		}
 
