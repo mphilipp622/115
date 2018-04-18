@@ -6,6 +6,19 @@ Tile::Tile(int newX, int newY, Type newType)
 	xPos = newX;
 	yPos = newY;
 	tileType = newType;
+
+	string filepath;
+
+	if(newType == Type::traversable)
+        filepath = "Images/Tiles/StoneTile.png";
+    else if(newType == Type::wall)
+        filepath = "Images/Tiles/Wall.png";
+    else if(newType == Type::arrows)
+        filepath = "Images/Tiles/ArrowTile.png";
+    else if(newType == Type::treasure)
+        filepath = "Images/Tiles/TreasureTile.png";
+
+    InitModel(filepath, true);
 }
 
 
@@ -57,3 +70,4 @@ bool Tile::IsEnemy()
 {
 	return tileType == enemy;
 }
+

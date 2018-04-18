@@ -1,8 +1,9 @@
 #ifndef TILE_H
 #define TILE_H
 #include "Type.h"
+#include <Model.h>
 
-class Tile
+class Tile : public Model
 {
 public:
 	Tile(int newX, int newY, Type newType);

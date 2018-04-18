@@ -14,6 +14,8 @@
 #include <AudioEngine.h>
 #include <DeltaTime.h>
 #include <Player.h>
+#include <Grid.h>
+#include <fstream>
 
 using namespace std;
 
@@ -34,10 +36,8 @@ class GLScene
         static vector<Model*> movableObjects; // only moving objects will check for collision
         static vector<Model*> staticObjects; // environmental, non-moving objects don't need to check for collision
         static vector<Model*> enemies;
-        static Inputs *keyboardAndMouse;
 
-        // Sets level state to loaded, which will set GLScene loaded boolean.
-        void SetLoaded(bool newState);
+        static Inputs *keyboardAndMouse;
 
     protected:
         unordered_map<string, AudioSource*> audioSources;
@@ -48,7 +48,17 @@ class GLScene
 
 
     private:
+
+        void GenerateGrid();
+
         DeltaTime* dTime;
+
+        int gridSizeX, gridSizeY;
+        string mapFilePath;
+
+        Grid* grid;
+
+        vector<vector<int>> gridMap;
 //        Enemy* testEnemy;
 };
 

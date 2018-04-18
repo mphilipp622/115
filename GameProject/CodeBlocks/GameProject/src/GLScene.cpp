@@ -5,17 +5,22 @@
 #include <DeltaTime.h>
 #include <Timer.h>
 
-Model *ground = new Model(6.0, 0.3, 0, -1.0, "ground", "Environment");
-Model *block = new Model(2.0, 0.2, 3.0, 0, "block", "Environment");
-Model *block2 = new Model(2.0, 0.2, -0.5, 1.0, "block2", "Environment");
+//Model *ground = new Model(6.0, 0.3, 0, -1.0, "ground", "Environment");
+//Model *block = new Model(2.0, 0.2, 3.0, 0, "block", "Environment");
+//Model *block2 = new Model(2.0, 0.2, -0.5, 1.0, "block2", "Environment");
 
 Timer *sceneTimer = new Timer();
 
 GLScene::GLScene()
 {
-    isLoaded = false;
     screenHeight = GetSystemMetrics(SM_CYSCREEN); // get x size of screen
     screenWidth = GetSystemMetrics(SM_CXSCREEN); // get y size of screen
+
+    gridSizeX = 0;
+    gridSizeY = 0;
+    mapFilePath = "Maps/TestMap.txt";
+
+    GenerateGrid();
 
 //    testEnemy = new MeleeEnemy(0.7, 0.7, 2, 0.5, "TestEnemy");
 }
@@ -158,7 +163,31 @@ int GLScene::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	return 1;
 }
 
-void GLScene::SetLoaded(bool newState)
+void GLScene::GenerateGrid()
 {
-    isLoaded = newState;
+    ifstream in(mapFilePath);
+
+    string line;
+
+	for (int i = 0; !in.eof(); i++)
+	{
+		getline(in, line); // read first row of data
+		gridMap.push_back(vector<int>());
+		gridSizeY = line.size();
+
+		for (int j = 0; j < gridSizeY; j++)
+			gridMap[i].push_back(line.at(j) - '0'); // convert from ascii to int
+
+		gridSizeX = i + 1;
+	}
+
+	grid = new Grid(gridSizeX, gridSizeY, gridMap);
+
+//	for (int i = 0; i < gridSizeX; i++)
+//	{
+//		for (int j = 0; j < gridSizeY; j++)
+//			cout << grid->GetTile(i, j)->GetType();
+//		cout << endl;
+//	}
 }
+

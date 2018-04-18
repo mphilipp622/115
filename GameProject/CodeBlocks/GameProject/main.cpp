@@ -235,7 +235,6 @@ BOOL CreateGLWindow(char* title, int width, int height, int bits, bool fullscree
 		return FALSE;								// Return FALSE
 	}
 
-	Scene->SetLoaded(true);
 	return TRUE;									// Success
 }
 
