@@ -33,7 +33,7 @@ Player *P;
 
 vector<vector<int>> gridMap;
 
-wall W[1000];
+wall W[100];
 Enemies E[100];
 Timer *T0 = new Timer();
 
@@ -127,6 +127,7 @@ void init()
                 P->initPlayer(M->getGridSize(),"images/p.png");
                 P->loadArrowImage("images/arr.png");
                 P->placePlayer(j + 1, gridSizeY - i);
+                cout << P->getPlayerLoc().x << "    " << P->getPlayerLoc().y << endl;
             }
             else if(gridMap[i][j] == 4)
             {

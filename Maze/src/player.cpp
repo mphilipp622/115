@@ -169,6 +169,8 @@ void Player::initPlayer(int gSize,char *FileName)
     t= unitWidth/stepsPerMove;
 
     plyTex = TextureLoader(FileName);
+
+    cout << converter(1,0).x << endl;
 }
 
 
@@ -176,86 +178,95 @@ void Player::placePlayer(int x, int y)
 {
     plyLoc.x =  converter(x,y).x;
     plyLoc.y =  converter(x,y).y;
+
+    cout << plyLoc.x << "    " << plyLoc.y << endl;
 }
 
 void Player::movePlayer(char* dir, int frames)
 {
       if(strcmp(dir, "left")==0)
    {     playerDir = "left";
-        if(T->GetTicks()>10)
-        {
-            if(plyLoc.x>-1+unitWidth/2)
-                plyLoc.x -= t;
-            if(xmax>=1){
-                xmax =1/(float)frames;
-                xmin =0;
-            }
-            xmin += 1/(float)frames;
-            xmax += 1/(float)frames;
-            ymin =0.75;
-            ymax =1.0;
-            T->Reset();
-        }
-        plyLoc.x -= 1.0;
+//        if(T->GetTicks()>10)
+//        {
+//            if(plyLoc.x>-1+unitWidth/2)
+//                plyLoc.x -= t;
+//            if(xmax>=1){
+//                xmax =1/(float)frames;
+//                xmin =0;
+//            }
+//            xmin += 1/(float)frames;
+//            xmax += 1/(float)frames;
+//            ymin =0.75;
+//            ymax =1.0;
+//            T->Reset();
+//        }
+        plyLoc.x -= unitWidth;
+//        cout << getPlayerLoc().x << endl;
    }
 
    else if(strcmp(dir, "right")==0)
    {
         playerDir = "right";
-        if(T->GetTicks()>1)
-        {
-            if(plyLoc.x<1-unitWidth/2)
-            plyLoc.x += t;
-
-            if(xmax>=1){
-                xmax =1/(float)frames;
-                xmin =0;
-            }
-            xmin +=1/(float)frames;
-            xmax +=1/(float)frames;
-            ymin =0.5;
-            ymax =0.75;
-            T->Reset();
-        }
+//        if(T->GetTicks()>1)
+//        {
+//            if(plyLoc.x<1-unitWidth/2)
+//            plyLoc.x += t;
+//
+//            if(xmax>=1){
+//                xmax =1/(float)frames;
+//                xmin =0;
+//            }
+//            xmin +=1/(float)frames;
+//            xmax +=1/(float)frames;
+//            ymin =0.5;
+//            ymax =0.75;
+//            T->Reset();
+//        }
+        plyLoc.x += unitWidth;
+//        cout << getPlayerLoc().x << endl;
    }
 
    else if(strcmp(dir, "up")==0)
    {
         playerDir = "up";
-        if(T->GetTicks()>1)
-        { if(plyLoc.y< 1-unitWidth/2)
-            plyLoc.y += t;
-            if(xmax>=1){
-                xmax =1/(float)frames;
-                xmin =0;
-            }
-            xmin +=1/(float)frames;
-            xmax +=1/(float)frames;
-
-            ymin =0.25;
-            ymax =0.50;
-
-            T->Reset();
-        }
+//        if(T->GetTicks()>1)
+//        { if(plyLoc.y< 1-unitWidth/2)
+//            plyLoc.y += t;
+//            if(xmax>=1){
+//                xmax =1/(float)frames;
+//                xmin =0;
+//            }
+//            xmin +=1/(float)frames;
+//            xmax +=1/(float)frames;
+//
+//            ymin =0.25;
+//            ymax =0.50;
+//
+//            T->Reset();
+//        }
+//        SetPosition(plyLoc.x, converter(plyLoc.x, plyLoc.y + 1).y);
+        plyLoc.y += unitWidth;
    }
 
    else if(strcmp(dir, "down")==0)
    {
          playerDir = "down";
-        if(T->GetTicks()>1)
-        {
-            if(plyLoc.y > -1+unitWidth/2)
-                plyLoc.y -= t;
-            if(xmax>=1){
-                xmax =1/(float)frames;
-                xmin =0;
-            }
-            xmin +=1/(float)frames;
-            xmax +=1/(float)frames;
-            ymin =0.0;
-            ymax =0.25;
-            T->Reset();
-        }
+//        if(T->GetTicks()>1)
+//        {
+//            if(plyLoc.y > -1+unitWidth/2)
+//                plyLoc.y -= t;
+//            if(xmax>=1){
+//                xmax =1/(float)frames;
+//                xmin =0;
+//            }
+//            xmin +=1/(float)frames;
+//            xmax +=1/(float)frames;
+//            ymin =0.0;
+//            ymax =0.25;
+//            T->Reset();
+//        }
+//        SetPosition(plyLoc.x, converter(plyLoc.x, plyLoc.y - 1).y);
+        plyLoc.y -= unitWidth;
    }
 }
 
