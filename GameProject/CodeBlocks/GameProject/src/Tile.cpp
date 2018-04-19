@@ -1,11 +1,40 @@
 #include "Tile.h"
+#include <iostream>
 
-
-Tile::Tile(int newX, int newY, Type newType)
+Tile::Tile(int newX, int newY, double newWidth, double newHeight, Type newType)
 {
 	xPos = newX;
 	yPos = newY;
 	tileType = newType;
+
+	width = newWidth;
+    height = newHeight;
+
+    rotateX = 0;
+    rotateY = 0;
+    rotateZ = 0;
+
+    // translations
+    zoom = 0;
+
+    // Initialize Quad
+    vertices[0].x = -width / 2;
+    vertices[0].y = -height / 2;
+    vertices[0].z = zoom;
+
+    vertices[1].x = width / 2;
+    vertices[1].y = -height / 2;
+    vertices[1].z = zoom;
+
+    vertices[2].x = width / 2;
+    vertices[2].y = height / 2;
+    vertices[2].z = zoom;
+
+    vertices[3].x = -width / 2;
+    vertices[3].y = height / 2;
+    vertices[3].z = zoom;
+
+    texture = new TextureLoader();
 
 	string filepath;
 
@@ -17,6 +46,10 @@ Tile::Tile(int newX, int newY, Type newType)
         filepath = "Images/Tiles/ArrowTile.png";
     else if(newType == Type::treasure)
         filepath = "Images/Tiles/TreasureTile.png";
+    else if(newType == Type::player)
+        filepath = "Images/Player/play.png";
+    else if(newType == Type::enemy)
+        filepath = "Images/Enemy/EnemyLeft.png";
 
     InitModel(filepath, true);
 }

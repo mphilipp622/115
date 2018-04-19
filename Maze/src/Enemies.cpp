@@ -76,6 +76,9 @@ void Enemies::placeEnemy(int x, int y)
 
     enmLoc.x =  -1-unitWidth/2+(unitWidth)*x;
     enmLoc.y =  -1-unitWidth/2+(unitWidth)*y;
+
+    gridX = x;
+    gridY = y;
 }
 
 void Enemies::moveEnemy(string dir)
@@ -180,3 +183,12 @@ GridLoc Enemies::getEnemyLoc()
 
 }
 
+int Enemies::GetGridX()
+{
+    return gridX;
+}
+
+int Enemies::GetGridY()
+{
+    return gridY;
+}

@@ -165,7 +165,7 @@
 	<wall.h>
 	<iostream>
 
-1524046490 source:e:\college\115\maze\src\enemies.cpp
+1524153348 source:e:\college\115\maze\src\enemies.cpp
 	<Enemies.h>
 	<iostream>
 
@@ -221,7 +221,7 @@
 	<iostream>
 	<Timer.h>
 
-1524111828 source:e:\college\115\maze\main.cpp
+1524153535 source:e:\college\115\maze\main.cpp
 	<string.h>
 	<CommonThings.h>
 	<Maze.h>
@@ -236,6 +236,7 @@
 	<math.h>
 	<fstream>
 	<vector>
+	<CollisionTracker.h>
 
 1524069448 e:\college\115\maze\include\player.h
 	<CommonThings.h>
@@ -246,6 +247,9 @@
 	<iostream>
 	<Timer.h>
 
-1524111450 source:e:\college\115\maze\src\player.cpp
+1524153411 source:e:\college\115\maze\src\player.cpp
 	<Player.h>
+
+1524153911 e:\college\115\maze\include\collisiontracker.h
+	<vector>
 

@@ -13,7 +13,11 @@ public:
 	Grid(int newXSize, int newYSize, vector<vector<int>> map);
 	~Grid();
 
+	// Gets a single tile. Useful for detecting collisions and pathfinding
 	Tile* GetTile(int xPos, int yPos);
+
+	// returns the vector of tiles. Used by GLScene to draw tile models
+	vector<vector<Tile*>> &GetTiles();
 
 private:
 	int sizeX, sizeY;

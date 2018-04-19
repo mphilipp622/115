@@ -23,6 +23,7 @@
 #include <math.h>
 #include <fstream>
 #include <vector>
+#include <CollisionTracker.h>
 
 /* GLUT callback Handlers */
 
@@ -36,6 +37,8 @@ vector<vector<int>> gridMap;
 wall W[100];
 Enemies E[100];
 Timer *T0 = new Timer();
+
+CollisionTracker* collision;
 
 string mapFilePath = "Maps/TestMap.txt";
 
@@ -105,6 +108,7 @@ void init()
 
     M = new Maze(gridSizeX);
     P = new Player();
+    collision = new CollisionTracker(gridMap);
 
     for(int i = 0; i < gridSizeY; i++)
     {
@@ -121,13 +125,15 @@ void init()
                 E[enemyCount].initEnm(M->getGridSize(),4,"images/e.png");
                 E[enemyCount].placeEnemy(j + 1, gridSizeY - i);
                 enemyCount++;
+//                cout << E[enemyCount].getEnemyLoc().x << "    " << E[enemyCount].getEnemyLoc().y << endl;
             }
             else if(gridMap[i][j] == 3)
             {
                 P->initPlayer(M->getGridSize(),"images/p.png");
                 P->loadArrowImage("images/arr.png");
                 P->placePlayer(j + 1, gridSizeY - i);
-                cout << P->getPlayerLoc().x << "    " << P->getPlayerLoc().y << endl;
+                collision->UpdatePlayerPosition(i, j);
+//                cout << P->getPlayerLoc().x << "    " << P->getPlayerLoc().y << endl;
             }
             else if(gridMap[i][j] == 4)
             {

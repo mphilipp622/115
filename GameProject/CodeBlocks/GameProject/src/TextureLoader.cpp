@@ -25,6 +25,7 @@ void TextureLoader::BindTexture(string fileName)
 
     image = SOIL_load_image(fileName.c_str(), &width, &height, 0, SOIL_LOAD_RGBA);
 
+
     if(!image)
         cout << "NO IMAGE LOADED" << endl;
     else

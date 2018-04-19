@@ -30,6 +30,9 @@ class Enemies
         float unitWidth;                // Unit width of the grid
         int stepsPerMove;
 
+        int GetGridX();
+        int GetGridY();
+
     protected:
 
     private:
@@ -41,6 +44,8 @@ class Enemies
          bool up,down,left,right;
          float moveDis=0;
          loc enmLoc;
+
+         int gridX, gridY;
 };
 
 #endif // ENEMIES_H

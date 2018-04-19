@@ -6,7 +6,7 @@
 class Tile : public Model
 {
 public:
-	Tile(int newX, int newY, Type newType);
+	Tile(int newX, int newY, double newWidth, double newHeight, Type newType);
 	~Tile();
 
 	// Returns x position of this tile
