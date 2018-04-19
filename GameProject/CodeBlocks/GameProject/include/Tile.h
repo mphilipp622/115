@@ -10,10 +10,10 @@ public:
 	~Tile();
 
 	// Returns x position of this tile
-	int GetX();
+//	int GetX();
 
 	// Returns y position of this tile
-	int GetY();
+//	int GetY();
 
 	// Returns type of this tile
 	int GetType();
@@ -37,7 +37,7 @@ public:
 	bool IsArrows();
 
 private:
-	int xPos, yPos;
+//	int xPos, yPos;
 	// Model* model;
 	Type tileType;
 

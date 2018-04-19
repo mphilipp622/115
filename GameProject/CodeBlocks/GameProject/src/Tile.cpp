@@ -46,10 +46,12 @@ Tile::Tile(int newX, int newY, double newWidth, double newHeight, Type newType)
         filepath = "Images/Tiles/ArrowTile.png";
     else if(newType == Type::treasure)
         filepath = "Images/Tiles/TreasureTile.png";
-    else if(newType == Type::player)
-        filepath = "Images/Player/play.png";
-    else if(newType == Type::enemy)
-        filepath = "Images/Enemy/EnemyLeft.png";
+    else
+        filepath = "Images/Tiles/StoneTile.png"; // default tile for players and enemies. Players and enemies will be layered on top of these tiles
+//    else if(newType == Type::player)
+//        filepath = "Images/Player/play.png";
+//    else if(newType == Type::enemy)
+//        filepath = "Images/Enemy/EnemyLeft.png";
 
     InitModel(filepath, true);
 }
@@ -57,16 +59,6 @@ Tile::Tile(int newX, int newY, double newWidth, double newHeight, Type newType)
 
 Tile::~Tile()
 {
-}
-
-int Tile::GetX()
-{
-	return xPos;
-}
-
-int Tile::GetY()
-{
-	return yPos;
 }
 
 int Tile::GetType()

@@ -27,7 +27,7 @@ void TextureLoader::BindTexture(string fileName)
 
 
     if(!image)
-        cout << "NO IMAGE LOADED" << endl;
+        cout << fileName << " FAILED TO LOAD" << endl;
     else
         cout << "Loading Asset: " << fileName << endl << endl;
 

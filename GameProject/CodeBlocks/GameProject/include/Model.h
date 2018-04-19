@@ -35,7 +35,6 @@ class Model
         // collision getters
         double GetX();
         double GetY();
-        double GetRadius();
         float GetWidth();
         float GetHeight();
         void SetPosition(double, double);
@@ -43,11 +42,7 @@ class Model
 
         virtual void Update();
 
-        AudioSource* GetAudioSource();
-
         bool Collision(Model*);
-        bool CollisionCircle(Model*);
-        bool CollisionCircleSquare(Model*);
 
         string GetName();
         string GetTag();
@@ -66,8 +61,6 @@ class Model
 
         // This model will check circle-to-square collision. Useful for player and enemy models checking collision with platforms
         virtual bool CheckCircleSquareCollision();
-
-        AudioSource* audioSource;
 
     private:
         bool Overlapping(double min0, double max0, double min1, double max1);

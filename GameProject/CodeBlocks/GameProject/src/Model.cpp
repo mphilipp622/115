@@ -100,8 +100,6 @@ Model::Model(float newWidth, float newHeight, double newX, double newY, string n
     vertices[3].z = zoom;
 
     texture = new TextureLoader();
-
-    audioSource = newSource;
 }
 
 
@@ -142,13 +140,12 @@ void Model::DrawModel()
 
 void Model::InitModel(string fileName, bool transparent)
 {
-    if(transparent)
-    {
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // blends object to background color instead. Change it to mess with cool effects
-    }
-    texture->Binder();
-    texture->BindTexture(fileName);
+
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // blends object to background color instead. Change it to mess with cool effects
+
+//    texture->Binder();
+    this->texture->BindTexture(fileName);
 
 }
 
@@ -160,11 +157,6 @@ double Model::GetX()
 double Model::GetY()
 {
     return yPos;
-}
-
-double Model::GetRadius()
-{
-    return radius;
 }
 
 float Model::GetWidth()
@@ -202,18 +194,11 @@ void Model::Update()
 {
     if(name != "Player")
         DrawModel();
-    if(GetAudioSource())
-        GetAudioSource()->SetPosition(xPos, yPos);
 }
 
 bool Model::CheckCollision()
 {
     return false;
-}
-
-AudioSource* Model::GetAudioSource()
-{
-    return audioSource;
 }
 
 ///////////////////////
@@ -233,16 +218,6 @@ bool Model::Collision(Model* collider)
                        collider->GetX() + collider->GetWidth() / 2) &&
            Overlapping(yPos - heightOffset, yPos + heightOffset, collider->GetY() - collider->GetHeight() / 2,
                        collider->GetY() + collider->GetHeight() / 2);
-}
-
-bool Model::CollisionCircle(Model* collider)
-{
-    return OverlappingCircles(xPos, yPos, collider->GetX(), collider->GetY(), radius, collider->GetRadius());
-}
-
-bool Model::CollisionCircleSquare(Model* collider)
-{
-    return false;
 }
 
 bool Model::CheckCircleCollision()

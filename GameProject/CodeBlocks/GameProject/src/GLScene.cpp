@@ -8,11 +8,8 @@
 //Model *ground = new Model(6.0, 0.3, 0, -1.0, "ground", "Environment");
 //Model *block = new Model(2.0, 0.2, 3.0, 0, "block", "Environment");
 //Model *block2 = new Model(2.0, 0.2, -0.5, 1.0, "block2", "Environment");
-Model* temp1 = new Model(0.5, 0.5, 0, 0, "test", "type");
 Timer *sceneTimer = new Timer();
-Model* temp2 = new Model(0.5, 0.5, 4, 4,"test2", "type");
-
-
+//Model* temp2 = new Model(1, 1, 0, 1,"test2", "type");
 
 GLScene::GLScene()
 {
@@ -58,12 +55,9 @@ GLint GLScene::initGL()
     glEnable(GL_COLOR_MATERIAL); // allows texture to have color
     GLLight Light(GL_LIGHT0);
 
-    GenerateGrid();
-
-    temp1->InitModel("Images/wall.png", true);
-    temp2->InitModel("Images/Block.png", true);
     // Initialize Models Here
-//    cout << "Parallax Initializing" << endl;
+
+     GenerateGrid();
 
 //    block->InitModel("Images/Block.png", true);
 //    block2->InitModel("Images/Block2.png", true);
@@ -94,30 +88,17 @@ GLint GLScene::drawGLScene()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
-    gluLookAt(0, 0, 6,
-            0, 0, 0,
+    gluLookAt(gridSizeX / 2, gridSizeY / 2, gridSizeX + 3.33 + 1,
+            gridSizeX / 2, gridSizeY / 2, 0,
             0.0f, 1.0f, 0.0f);
-//    glPushMatrix();
-////    glScaled(3.33, 3.33, 1);
-//    sky->DrawBox();
-//    glPopMatrix();
-//    glPushMatrix();
-//    glScaled(12, 12, 1);
-//    glPopMatrix();
-//    glPushMatrix();
-//    glScaled(12, 12, 1);
-//    glPopMatrix();
 
-    temp1->DrawModel();
-    temp2->DrawModel();
+    for(auto& tile : grid->GetTiles())
+    {
+        for(auto& tile2 : tile)
+            tile2->DrawModel();
+    }
 
-//    for(auto& tile : grid->GetTiles())
-//    {
-//        for(auto& tile2 : tile)
-//            tile2->DrawModel();
-//
-//    }
-
+    grid->GetPlayer()->DrawModel();
 //    for(auto& model : staticObjects)
 //        model->DrawModel();
 //

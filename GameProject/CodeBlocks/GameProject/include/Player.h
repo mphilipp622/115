@@ -11,8 +11,6 @@ class Player : public Model
         Player(double newX, double newY);
         virtual ~Player();
 
-        void InitPlayer();
-
         void Move(double dirX, double dirY);
 
         static Player* player;
