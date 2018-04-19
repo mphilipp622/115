@@ -53,6 +53,38 @@ Player::~Player()
 
 void Player::Move(double dirX, double dirY)
 {
-    xPos += dirX;
-    yPos += dirY;
+//    if(xPos + dirX > GLScene::grid->GetSizeX() || xPos + dirX < 0)
+//        return; // bounds checking on the grid.
+//    if(yPos + dirY > GLScene::grid->GetSizeY() || yPos + dirY < 0)
+//        return;
+//
+//    if(GLScene::grid->GetTile(xPos +dirX, yPos + dirY)->IsTraversable())
+//    {
+//        xPos += dirX;
+//        yPos += dirY;
+//    }
+}
+
+bool Player::CheckCollision(int x, int y)
+{
+
+}
+
+
+void Player::ShootProjectile(double x, double y)
+{
+    double dirX = 0;
+    double dirY = 0;
+
+    if(x > xPos) // shoot right
+        dirX = 1.0;
+    else if(x < xPos) // shoot left
+        dirX = -1.0;
+    if(y < yPos) // shoot down
+        dirY = -1.0;
+    else if(y > yPos) // shoot up
+        dirY = 1.0;
+//    Projectile *newProjectile = new Projectile(xPos, yPos, 0.5, 0.5, 1, 4.0, "PlayerProjectile", x + xPos, y + yPos); // sends relative mouse pointer location
+//    newProjectile->InitModel("Images/Note.png", true);
+//    GLScene::movableObjects.push_back(newProjectile);
 }

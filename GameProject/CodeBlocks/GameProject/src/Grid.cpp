@@ -44,3 +44,13 @@ Player* Grid::GetPlayer()
 {
     return player;
 }
+
+int Grid::GetSizeX()
+{
+    return sizeX;
+}
+
+int Grid::GetSizeY()
+{
+    return sizeY;
+}

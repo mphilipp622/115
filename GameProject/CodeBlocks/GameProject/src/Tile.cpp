@@ -59,6 +59,7 @@ Tile::Tile(int newX, int newY, double newWidth, double newHeight, Type newType)
 
 Tile::~Tile()
 {
+
 }
 
 int Tile::GetType()

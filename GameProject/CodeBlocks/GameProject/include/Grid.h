@@ -22,6 +22,9 @@ public:
 	// returns the vector of tiles. Used by GLScene to draw tile models
 	vector<vector<Tile*>> &GetTiles();
 
+	int GetSizeX();
+	int GetSizeY();
+
 private:
 	int sizeX, sizeY;
 

@@ -37,6 +37,8 @@ class GLScene
         static vector<Model*> staticObjects; // environmental, non-moving objects don't need to check for collision
         static vector<Model*> enemies;
 
+        static Grid* grid;
+
         static Inputs *keyboardAndMouse;
 
     protected:
@@ -56,7 +58,7 @@ class GLScene
         int gridSizeX, gridSizeY;
         string mapFilePath;
 
-        Grid* grid;
+
 
         vector<vector<int>> gridMap;
 //        Enemy* testEnemy;

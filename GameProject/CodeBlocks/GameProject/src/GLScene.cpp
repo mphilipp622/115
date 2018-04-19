@@ -32,6 +32,8 @@ vector<Model*> GLScene::movableObjects;
 vector<Model*> GLScene::staticObjects;
 vector<Model*> GLScene::enemies;
 
+Grid* GLScene::grid;
+
 // static input for player to use as well
 Inputs* GLScene::keyboardAndMouse;
 
@@ -135,27 +137,27 @@ int GLScene::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 //        testAudio->Play();
 //        PlaySound("Audio/Music/ab9.wav", NULL, SND_ASYNC);
         keyboardAndMouse->wParamKeys = wParam;
-        keyboardAndMouse->KeyPressed(player);
+        keyboardAndMouse->KeyPressed(grid->GetPlayer(), grid);
     }
-    if(uMsg == WM_KEYUP)
-    {
-        keyboardAndMouse->wParamKeys = wParam;
-        keyboardAndMouse->KeyUp(player);
-    }
-    if(uMsg == WM_MOUSEMOVE)
-    // should constantly update mouse pointer x and y positions
-        keyboardAndMouse->SetMousePointer(LOWORD(lParam), HIWORD(lParam));
+//    if(uMsg == WM_KEYUP)
+//    {
+//        keyboardAndMouse->wParamKeys = wParam;
+//        keyboardAndMouse->KeyUp(player);
+//    }
+//    if(uMsg == WM_MOUSEMOVE)
+//    // should constantly update mouse pointer x and y positions
+//        keyboardAndMouse->SetMousePointer(LOWORD(lParam), HIWORD(lParam));
     if(uMsg == WM_LBUTTONDOWN)
     {
         // left-click functionality
         keyboardAndMouse->wParamMouse = wParam;
         keyboardAndMouse->MouseDown(player, lParam);
     }
-    if(uMsg == WM_RBUTTONDOWN)
-    {
-        keyboardAndMouse->wParamMouse = wParam;
-        keyboardAndMouse->MouseDown(player, lParam);
-    }
+//    if(uMsg == WM_RBUTTONDOWN)
+//    {
+//        keyboardAndMouse->wParamMouse = wParam;
+//        keyboardAndMouse->MouseDown(player, lParam);
+//    }
 //    if(uMsg == WM_MOUSEWHEEL)
 //        keyboardAndMouse->WheelMove(player, GET_WHEEL_DELTA_WPARAM(wParam));
 

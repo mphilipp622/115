@@ -12,7 +12,7 @@ class Player : public Model
         virtual ~Player();
 
         void Move(double dirX, double dirY);
-
+        void ShootProjectile(double x, double y);
         static Player* player;
 
     protected:
@@ -21,6 +21,8 @@ class Player : public Model
         int runFrame, idleFrame;
         TextureLoader run[4];
         TextureLoader idle[1];
+
+        bool CheckCollision(int x, int y);
 };
 
 #endif // PLAYER_H

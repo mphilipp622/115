@@ -7,6 +7,7 @@
 #include <unordered_map>
 #include <string>
 #include <Player.h>
+#include <Grid.h>
 
 class Inputs
 {
@@ -14,7 +15,7 @@ class Inputs
         Inputs();
         virtual ~Inputs();
 
-        void KeyPressed(Player*);
+        void KeyPressed(Player*, Grid*);
         void KeyUp(Player* model);
 //
         void MouseDown(Player*, LPARAM lParam);
