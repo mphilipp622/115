@@ -1,12 +1,14 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 
-#include <Player.h>
-#include <Grid.h>
 #include <Pathfinder.h>
-#include <TurnManager.h>
+#include <Grid.h>
+#include <Player.h>
+
 
 using namespace std;
+
+class Pathfinder;
 
 class Enemy : public Model
 {

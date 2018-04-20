@@ -74,18 +74,43 @@ void Player::Move(double dirX, double dirY)
 
 void Player::ShootProjectile(double x, double y)
 {
-    double dirX = 0;
-    double dirY = 0;
+    Projectile *newProjectile = new Projectile(xPos, yPos, 0.5, 0.5, 1, 4.0, "Arrow", x + xPos, y + yPos);
 
-    if(x > xPos) // shoot right
-        dirX = 1.0;
-    else if(x < xPos) // shoot left
-        dirX = -1.0;
-    if(y < yPos) // shoot down
-        dirY = -1.0;
-    else if(y > yPos) // shoot up
-        dirY = 1.0;
-//    Projectile *newProjectile = new Projectile(xPos, yPos, 0.5, 0.5, 1, 4.0, "PlayerProjectile", x + xPos, y + yPos); // sends relative mouse pointer location
-//    newProjectile->InitModel("Images/Note.png", true);
-//    GLScene::movableObjects.push_back(newProjectile);
+    cout << "Hello" << endl;
+
+    if(x == 1.0)
+        newProjectile->InitModel("Images/ArrowRight.png", true);
+    else if(x == -1.0)
+        newProjectile->InitModel("Images/ArrowLeft.png", true);
+
+    if(y == 1.0)
+        newProjectile->InitModel("Images/ArrowUp.png", true);
+    else if(y == -1.0)
+        newProjectile->InitModel("Images/ArrowDown.png", true);
+
+    GLScene::movableObjects.push_back(newProjectile);
+}
+
+void Player::SetInput(WPARAM newParam)
+{
+    wParam = newParam;
+
+    const int aKey = 0x41, dKey = 0x44, sKey = 0x53, wKey = 0x57;
+    // Use the unordered map of booleans to keep track of which keys are pressed. This allows multiple keys being pressed at once
+    if(wParam == aKey) // includes boundary checking
+        Move(-1.0, 0);
+    if(wParam == dKey)
+        Move(1.0, 0); // move player
+    if(wParam == sKey)
+        Move(0, -1.0); // move player
+    if(wParam == wKey)
+        Move(0, 1.0); // move player
+    if(wParam == VK_LEFT)
+        ShootProjectile(-1.0, 0); // shoot left
+    if(wParam == VK_RIGHT)
+        ShootProjectile(1.0, 0); // shoot right
+    if(wParam == VK_DOWN)
+        ShootProjectile(0, -1.0); // shoot down
+    if(wParam == VK_UP)
+        ShootProjectile(0, 1.0); // shoot up
 }

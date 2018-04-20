@@ -259,3 +259,8 @@ bool Model::OverlappingCircles(double x0, double y0, double x1, double y1, doubl
     return (distance <= sumRadius); // is the distance between both center points less than the sum of both radius's? If so, then we're overlapping with another circle.
 
 }
+
+void Model::Move()
+{
+    return; // virtual move function used for polymorphism in Player and Enemy classes
+}

@@ -20,54 +20,21 @@ void Inputs::KeyPressed(Player* model)
     const int aKey = 0x41, dKey = 0x44, sKey = 0x53, wKey = 0x57;
     // Use the unordered map of booleans to keep track of which keys are pressed. This allows multiple keys being pressed at once
     if(wParamKeys == aKey) // includes boundary checking
-    {
         model->Move(-1.0, 0);
-//        int newX = Player::player->GetX() - 1.0;
-//
-//        if(grid->GetTile(newX, Player::player->GetY())->IsTraversable())
-//        {
-//            grid->GetTile(Player::player->GetX(), Player::player->GetY())->SetType(Type::traversable); // set tile to traversable
-//            model->Move(-1.0, 0); // move player
-//        }
-    }
-
     if(wParamKeys == dKey)
-    {
         model->Move(1.0, 0); // move player
-
-//        int newX = Player::player->GetX() + 1.0;
-//
-////        cout << grid->GetTile(newX, Player::player->GetY())->GetY() << "    " << grid->GetTile(newX, Player::player->GetY())->GetY() << endl;
-//        if(grid->GetTile(newX, Player::player->GetY())->IsTraversable())
-//        {
-//            grid->GetTile(Player::player->GetX(), Player::player->GetY())->SetType(Type::traversable); // set tile to traversable
-//            model->Move(1.0, 0); // move player
-//        }
-
-    }
     if(wParamKeys == sKey)
-    {
         model->Move(0, -1.0); // move player
-
-//        int newY = Player::player->GetY() - 1.0;
-//
-//        if(grid->GetTile(Player::player->GetX(), newY)->IsTraversable())
-//        {
-//            grid->GetTile(Player::player->GetX(), Player::player->GetY())->SetType(Type::traversable); // set tile to traversable
-//            model->Move(0, -1.0); // move player
-//        }
-    }
     if(wParamKeys == wKey)
-    {
         model->Move(0, 1.0); // move player
-//        int newY = Player::player->GetY() + 1.0;
-//
-//        if(grid->GetTile(Player::player->GetX(), newY)->IsTraversable())
-//        {
-//            grid->GetTile(Player::player->GetX(), Player::player->GetY())->SetType(Type::traversable); // set tile to traversable
-//            model->Move(0, 1.0); // move player
-//        }
-    }
+    if(wParamKeys == VK_LEFT)
+        model->ShootProjectile(-1.0, 0); // shoot left
+    if(wParamKeys == VK_RIGHT)
+        model->ShootProjectile(1.0, 0); // shoot right
+    if(wParamKeys == VK_DOWN)
+        model->ShootProjectile(0, -1.0); // shoot down
+    if(wParamKeys == VK_UP)
+        model->ShootProjectile(0, 1.0); // shoot up
 
 }
 

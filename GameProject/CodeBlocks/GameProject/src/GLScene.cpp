@@ -29,10 +29,7 @@ GLScene::~GLScene()
 // Static Variables for use in player class to check collision
 vector<Model*> GLScene::movableObjects;
 vector<Model*> GLScene::staticObjects;
-vector<Enemy*> GLScene::enemies;
-
-// static input for player to use as well
-Inputs* GLScene::keyboardAndMouse;
+vector<Model*> GLScene::enemies;
 
 // initialize our graphic settings for our scene
 GLint GLScene::initGL()
@@ -42,7 +39,6 @@ GLint GLScene::initGL()
 //    player = new Player(0.0, 0);
 //    testEnemy = new MeleeEnemy(0.7, 3, 0.8, 0.8, "Enemy");
 
-    keyboardAndMouse = new Inputs();
     sceneTimer->Start();
 
     glShadeModel(GL_SMOOTH); // Shading mode
@@ -97,6 +93,9 @@ GLint GLScene::drawGLScene()
             tile2->DrawModel();
     }
 
+    for(auto& arrow : movableObjects)
+        arrow->Update();
+
     for(auto& enemy : enemies)
     {
         if(TurnManager::turnManager->IsEnemyTurn())
@@ -142,13 +141,14 @@ int GLScene::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
     if(uMsg == WM_KEYDOWN)
     {
+        Player::player->SetInput(wParam);
 //        testAudio->UpdatePosition();
 
 //        testAudio->Update();
 //        testAudio->Play();
 //        PlaySound("Audio/Music/ab9.wav", NULL, SND_ASYNC);
-        keyboardAndMouse->wParamKeys = wParam;
-        keyboardAndMouse->KeyPressed(Player::player);
+//        keyboardAndMouse->wParamKeys = wParam;
+//        keyboardAndMouse->KeyPressed(Player::player);
     }
 //    if(uMsg == WM_KEYUP)
 //    {
@@ -158,12 +158,12 @@ int GLScene::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 //    if(uMsg == WM_MOUSEMOVE)
 //    // should constantly update mouse pointer x and y positions
 //        keyboardAndMouse->SetMousePointer(LOWORD(lParam), HIWORD(lParam));
-    if(uMsg == WM_LBUTTONDOWN)
-    {
-        // left-click functionality
-        keyboardAndMouse->wParamMouse = wParam;
-        keyboardAndMouse->MouseDown(Player::player, lParam);
-    }
+//    if(uMsg == WM_LBUTTONDOWN)
+//    {
+//        // left-click functionality
+//        keyboardAndMouse->wParamMouse = wParam;
+//        keyboardAndMouse->MouseDown(Player::player, lParam);
+//    }
 //    if(uMsg == WM_RBUTTONDOWN)
 //    {
 //        keyboardAndMouse->wParamMouse = wParam;

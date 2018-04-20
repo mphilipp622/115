@@ -1,10 +1,11 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include <windows.h>
 #include <Model.h>
 #include <TextureLoader.h>
 #include <Grid.h>
-#include <TurnManager.h>
+#include <Projectile.h>
 
 class Player : public Model
 {
@@ -17,9 +18,12 @@ class Player : public Model
         void ShootProjectile(double x, double y);
         static Player* player;
 
+        void SetInput(WPARAM newParam);
+
     protected:
 
     private:
+        WPARAM wParam;
         int runFrame, idleFrame;
         TextureLoader run[4];
         TextureLoader idle[1];

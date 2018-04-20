@@ -132,5 +132,6 @@ void Projectile::Destroy()
     // find this projectile in the main vector and remove it. Then delete this projectile
     auto finder = find(GLScene::movableObjects.begin(), GLScene::movableObjects.end(), this);
     GLScene::movableObjects.erase(finder);
+    TurnManager::turnManager->NextTurn();
     delete this;
 }

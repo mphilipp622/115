@@ -7,6 +7,7 @@
 #include <TextureLoader.h>
 #include <AudioSource.h>
 #include <cmath>
+#include <TurnManager.h>
 
 using namespace std;
 
@@ -46,6 +47,8 @@ class Model
 
         string GetName();
         string GetTag();
+
+        virtual void Move();
 
     protected:
         float width, height, radius;

@@ -3,10 +3,10 @@
 
 #include <windows.h>
 #include <iostream>
-#include <Model.h>
-#include <unordered_map>
 #include <string>
 #include <Player.h>
+
+class Player;
 
 class Inputs
 {
