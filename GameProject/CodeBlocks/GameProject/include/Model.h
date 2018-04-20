@@ -49,6 +49,7 @@ class Model
         string GetTag();
 
         virtual void Move();
+        virtual void Destroy();
 
     protected:
         float width, height, radius;
@@ -58,12 +59,6 @@ class Model
 
         // This model will check square-to-square collision with other objects. Useful for certain types of environmental collision maybe
         virtual bool CheckCollision();
-
-        // This model will check circle-to-circle collision with other objects. Useful for checking player-to-enemy or player-to-projectile collision.
-        virtual bool CheckCircleCollision();
-
-        // This model will check circle-to-square collision. Useful for player and enemy models checking collision with platforms
-        virtual bool CheckCircleSquareCollision();
 
     private:
         bool Overlapping(double min0, double max0, double min1, double max1);

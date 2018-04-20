@@ -19,6 +19,8 @@ class Enemy : public Model
 
         void Move();
 
+        void Destroy();
+
     protected:
 
     private:

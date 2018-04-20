@@ -5,6 +5,7 @@
 #include <GLScene.h>
 #include <algorithm>
 #include <Timer.h>
+#include <Grid.h>
 
 using namespace std;
 
@@ -23,9 +24,7 @@ class Projectile : public Model
         double targetX, targetY;
         void Move();
         bool CheckCollision();
-        bool CheckCollisionEnemy();
-        bool CheckCircleCollision();
-        bool CheckCircleSquareCollision();
+        void CheckCollisionEnemy();
 
     private:
         double vectorDist, normalizedX, normalizedY;

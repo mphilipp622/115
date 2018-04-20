@@ -18,6 +18,8 @@ class Player : public Model
         void ShootProjectile(double x, double y);
         static Player* player;
 
+        void SetLocked();
+
         void SetInput(WPARAM newParam);
 
     protected:
@@ -27,6 +29,8 @@ class Player : public Model
         int runFrame, idleFrame;
         TextureLoader run[4];
         TextureLoader idle[1];
+
+        bool playerLocked; // will be used to stop user input while arrows move
 };
 
 #endif // PLAYER_H

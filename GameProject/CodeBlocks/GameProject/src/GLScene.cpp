@@ -203,6 +203,7 @@ void GLScene::GenerateGrid()
                 Player::player = new Player(i, j); // create player
             if(grid->GetTile(i, j)->GetType() == Type::enemy)
                 enemies.push_back(new Enemy(i, j));
+
         }
     }
 //	for (int i = 0; i < gridSizeX; i++)

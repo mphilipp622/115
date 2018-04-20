@@ -43,6 +43,8 @@ Player::Player(double newX, double newY)
 
     player = this;
 
+    playerLocked = false;
+
     InitModel("Images/Player/play.png", true);
 }
 
@@ -74,9 +76,9 @@ void Player::Move(double dirX, double dirY)
 
 void Player::ShootProjectile(double x, double y)
 {
-    Projectile *newProjectile = new Projectile(xPos, yPos, 0.5, 0.5, 1, 4.0, "Arrow", x + xPos, y + yPos);
+    playerLocked = true; // player will be locked from input while arrow is moving.
 
-    cout << "Hello" << endl;
+    Projectile *newProjectile = new Projectile(xPos, yPos, 0.5, 0.5, 1, 4.0, "Arrow", x + xPos, y + yPos);
 
     if(x == 1.0)
         newProjectile->InitModel("Images/ArrowRight.png", true);
@@ -93,6 +95,9 @@ void Player::ShootProjectile(double x, double y)
 
 void Player::SetInput(WPARAM newParam)
 {
+    if(playerLocked)
+        return; // prevent player input
+
     wParam = newParam;
 
     const int aKey = 0x41, dKey = 0x44, sKey = 0x53, wKey = 0x57;
@@ -113,4 +118,9 @@ void Player::SetInput(WPARAM newParam)
         ShootProjectile(0, -1.0); // shoot down
     if(wParam == VK_UP)
         ShootProjectile(0, 1.0); // shoot up
+}
+
+void Player::SetLocked()
+{
+    playerLocked = !playerLocked;
 }

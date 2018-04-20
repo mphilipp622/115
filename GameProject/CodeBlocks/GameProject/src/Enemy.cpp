@@ -60,3 +60,9 @@ void Enemy::Move()
     Grid::grid->GetTile(xPos, yPos)->SetType(Type::enemy); // tile now has enemy
 }
 
+void Enemy::Destroy()
+{
+    auto finder = find(GLScene::enemies.begin(), GLScene::enemies.end(), this); // find the enemy in the scene
+    GLScene::enemies.erase(finder); // remove the enemy from the vector
+    delete this; // free memory
+}

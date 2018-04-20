@@ -143,7 +143,7 @@
 	<Enemy.h>
 	<TurnManager.h>
 
-1524244707 c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\include\model.h
+1524248057 c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\include\model.h
 	<windows.h>
 	<glut.h>
 	<string>
@@ -183,7 +183,7 @@
 1519964614 c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\include\gllight.h
 	<GLScene.h>
 
-1524244743 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\model.cpp
+1524248069 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\model.cpp
 	<Model.h>
 	<TextureLoader.h>
 	<DeltaTime.h>
@@ -214,32 +214,33 @@
 	<DeltaTime.h>
 	<string>
 
-1524244611 c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\include\player.h
+1524248385 c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\include\player.h
 	<windows.h>
 	<Model.h>
 	<TextureLoader.h>
 	<Grid.h>
 	<Projectile.h>
 
-1524245672 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\glscene.cpp
+1524249075 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\glscene.cpp
 	<GLScene.h>
 	<GLLight.h>
 	<DeltaTime.h>
 	<Timer.h>
 
-1524244790 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\player.cpp
+1524248445 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\player.cpp
 	"Player.h"
 
-1524243562 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\projectile.cpp
+1524248667 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\projectile.cpp
 	"Projectile.h"
 	<cmath>
 
-1522714546 c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\include\projectile.h
+1524248125 c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\include\projectile.h
 	<Model.h>
 	<DeltaTime.h>
 	<GLScene.h>
 	<algorithm>
 	<Timer.h>
+	<Grid.h>
 
 1524242662 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\tile.cpp
 	"Tile.h"
@@ -551,7 +552,7 @@
 
 1524242662 c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\include\turnmanager.h
 
-1524244628 c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\include\enemy.h
+1524249128 c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\include\enemy.h
 	<Pathfinder.h>
 	<Grid.h>
 	<Player.h>
@@ -565,7 +566,7 @@
 	<map>
 	<tuple>
 
-1524242662 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\enemy.cpp
+1524249120 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\enemy.cpp
 	"Enemy.h"
 
 1524242662 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\pathfinder.cpp

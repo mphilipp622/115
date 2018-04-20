@@ -208,38 +208,13 @@ bool Model::CheckCollision()
 bool Model::Collision(Model* collider)
 {
     double widthOffset = width / 2, heightOffset = height / 2;
-    if(name == "player")
-    {
-        // temporary workaround for player collision. Don't like this.
-        widthOffset = width / 4;
-        heightOffset = width / 2.6;
-    }
+
     return Overlapping(xPos - widthOffset, xPos + widthOffset, collider->GetX() - collider->GetWidth() / 2,
                        collider->GetX() + collider->GetWidth() / 2) &&
            Overlapping(yPos - heightOffset, yPos + heightOffset, collider->GetY() - collider->GetHeight() / 2,
                        collider->GetY() + collider->GetHeight() / 2);
 }
 
-bool Model::CheckCircleCollision()
-{
-    return false;
-//    if(name == "MusicCircle")
-//    {
-//        for(auto& enemy : GLScene::movableObjects)
-//        {
-//            if(enemy->GetTag() == "Enemy")
-//            {
-//                if(CollisionCircle(enemy))
-//                    cout << "Music Hit " << enemy->GetName() << endl; // put enemy damage in here later.
-//            }
-//        }
-//    }
-}
-
-bool Model::CheckCircleSquareCollision()
-{
-    return false;
-}
 
 bool Model::Overlapping(double min0, double max0, double min1, double max1)
 {
@@ -263,4 +238,9 @@ bool Model::OverlappingCircles(double x0, double y0, double x1, double y1, doubl
 void Model::Move()
 {
     return; // virtual move function used for polymorphism in Player and Enemy classes
+}
+
+void Model::Destroy()
+{
+    delete this;
 }

@@ -85,45 +85,35 @@ void Projectile::Move()
     if(CheckCollision())
         // if we collide with something, destroy object. If object is enemy, we need to deal damage
         Destroy();
-    if(name == "PlayerProjectile" && CheckCollisionEnemy())
-        Destroy(); // implement damage code here later
+
+    CheckCollisionEnemy();
 }
 
 bool Projectile::CheckCollision()
 {
-    for(auto& model : GLScene::staticObjects)
+    for(auto& tile : Grid::grid->GetTiles())
     {
-        if(Collision(model))
-            return true;
+        for(auto& tile2 : tile)
+        {
+            if(tile2->IsWall() && Collision(tile2))
+                return true; // if the arrow hits a wall, return true
+        }
     }
 
-
-    return false;
-}
-bool Projectile::CheckCollisionEnemy()
-{
-    // check for collision with an enemy
-//    for(auto& enemy : GLScene::enemies)
-//    {
-//        if(Collision(enemy))
-//        {
-//            enemy->TakeDamage(damage);
-//            return true; // will ignore player collision.
-//        }
-//
-//    }
-
     return false;
 }
 
-bool Projectile::CheckCircleCollision()
+void Projectile::CheckCollisionEnemy()
 {
-    return false;
-}
-
-bool Projectile::CheckCircleSquareCollision()
-{
-    return false;
+    for(auto& enemy : GLScene::enemies)
+    {
+        if(Collision(enemy))
+        {
+            cout << enemy->GetX() << "    " << enemy->GetY() << endl;
+            enemy->Destroy();  // kill the enemy
+            Destroy();
+        }
+    }
 }
 
 
@@ -132,6 +122,7 @@ void Projectile::Destroy()
     // find this projectile in the main vector and remove it. Then delete this projectile
     auto finder = find(GLScene::movableObjects.begin(), GLScene::movableObjects.end(), this);
     GLScene::movableObjects.erase(finder);
+    Player::player->SetLocked(); // unlock player
     TurnManager::turnManager->NextTurn();
     delete this;
 }
