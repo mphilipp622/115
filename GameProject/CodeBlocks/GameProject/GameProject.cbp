@@ -49,17 +49,20 @@
 		<Unit filename="include/AudioEngine.h" />
 		<Unit filename="include/AudioSource.h" />
 		<Unit filename="include/DeltaTime.h" />
+		<Unit filename="include/Enemy.h" />
 		<Unit filename="include/GLLight.h" />
 		<Unit filename="include/GLScene.h" />
 		<Unit filename="include/Grid.h" />
 		<Unit filename="include/Inputs.h" />
 		<Unit filename="include/Model.h" />
+		<Unit filename="include/Pathfinder.h" />
 		<Unit filename="include/Player.h" />
 		<Unit filename="include/Projectile.h" />
 		<Unit filename="include/Texture.h" />
 		<Unit filename="include/TextureLoader.h" />
 		<Unit filename="include/Tile.h" />
 		<Unit filename="include/Timer.h" />
+		<Unit filename="include/TurnManager.h" />
 		<Unit filename="include/Type.h" />
 		<Unit filename="main.cpp">
 			<Option compilerVar="CC" />
@@ -67,17 +70,20 @@
 		<Unit filename="src/AudioEngine.cpp" />
 		<Unit filename="src/AudioSource.cpp" />
 		<Unit filename="src/DeltaTime.cpp" />
+		<Unit filename="src/Enemy.cpp" />
 		<Unit filename="src/GLLight.cpp" />
 		<Unit filename="src/GLScene.cpp" />
 		<Unit filename="src/Grid.cpp" />
 		<Unit filename="src/Inputs.cpp" />
 		<Unit filename="src/Model.cpp" />
+		<Unit filename="src/Pathfinder.cpp" />
 		<Unit filename="src/Player.cpp" />
 		<Unit filename="src/Projectile.cpp" />
 		<Unit filename="src/Texture.cpp" />
 		<Unit filename="src/TextureLoader.cpp" />
 		<Unit filename="src/Tile.cpp" />
 		<Unit filename="src/Timer.cpp" />
+		<Unit filename="src/TurnManager.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

@@ -74,7 +74,7 @@ void Tile::SetType(Type newType)
 
 bool Tile::IsTraversable()
 {
-	return tileType == Type::traversable;
+	return tileType != Type::wall; // user can traverse any tile that isn't a wall. They can even run into enemies if they want.
 }
 
 bool Tile::IsTreasure()

@@ -32,7 +32,7 @@ Tile* Pathfinder::GetNextTile(int x, int y)
         if(IsGoal(currentNode))
         {
             // this node contains our player, grab the 0th index of the node's path
-            if(currentNode.path.size() > 0)
+            if(currentNode.path.size() > 0 && !currentNode.path.at(0)->IsEnemy())
                 return currentNode.path.at(0);
 
             return currentNode.tile; // this case should never happen, but putting it in just in case
@@ -83,6 +83,9 @@ vector<Tile*> Pathfinder::GetSuccessors(Tile* originTile)
 
             if(!Grid::grid->BoundSafe(originTile->GetX() + j, originTile->GetY() + i))
                 continue;
+
+//            if(Grid::grid->GetTile(originTile->GetX() + j, originTile->GetY() + i)->IsEnemy())
+//                continue; // ignore if enemy already occupies tile.
 
 //            if(Grid::grid->GetTile(originTile->GetX() + j, originTile->GetY() + i)->IsWall())
 //                continue;
