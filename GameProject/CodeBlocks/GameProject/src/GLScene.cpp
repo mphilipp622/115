@@ -19,7 +19,6 @@ GLScene::GLScene()
     gridSizeX = 0;
     gridSizeY = 0;
     mapFilePath = "Maps/TestMap.txt";
-
 //    testEnemy = new MeleeEnemy(0.7, 0.7, 2, 0.5, "TestEnemy");
 }
 
@@ -30,9 +29,7 @@ GLScene::~GLScene()
 // Static Variables for use in player class to check collision
 vector<Model*> GLScene::movableObjects;
 vector<Model*> GLScene::staticObjects;
-vector<Model*> GLScene::enemies;
-
-Grid* GLScene::grid;
+vector<Enemy*> GLScene::enemies;
 
 // static input for player to use as well
 Inputs* GLScene::keyboardAndMouse;
@@ -100,7 +97,18 @@ GLint GLScene::drawGLScene()
             tile2->DrawModel();
     }
 
-    grid->GetPlayer()->DrawModel();
+    for(auto& enemy : enemies)
+    {
+        if(TurnManager::turnManager->IsEnemyTurn())
+            enemy->Move();
+
+        enemy->DrawModel();
+    }
+
+    if(TurnManager::turnManager->IsEnemyTurn())
+        TurnManager::turnManager->NextTurn(); // end turn after enemies have moved
+
+    Player::player->DrawModel();
 //    for(auto& model : staticObjects)
 //        model->DrawModel();
 //
@@ -129,6 +137,9 @@ GLvoid GLScene::resizeGLScene(GLsizei width, GLsizei height)
 }
 int GLScene::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
+    if(TurnManager::turnManager->IsEnemyTurn())
+        return 1; // don't allow input if it's not player's turn
+
     if(uMsg == WM_KEYDOWN)
     {
 //        testAudio->UpdatePosition();
@@ -137,7 +148,7 @@ int GLScene::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 //        testAudio->Play();
 //        PlaySound("Audio/Music/ab9.wav", NULL, SND_ASYNC);
         keyboardAndMouse->wParamKeys = wParam;
-        keyboardAndMouse->KeyPressed(grid->GetPlayer(), grid);
+        keyboardAndMouse->KeyPressed(Player::player);
     }
 //    if(uMsg == WM_KEYUP)
 //    {
@@ -151,7 +162,7 @@ int GLScene::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     {
         // left-click functionality
         keyboardAndMouse->wParamMouse = wParam;
-        keyboardAndMouse->MouseDown(player, lParam);
+        keyboardAndMouse->MouseDown(Player::player, lParam);
     }
 //    if(uMsg == WM_RBUTTONDOWN)
 //    {
@@ -184,6 +195,16 @@ void GLScene::GenerateGrid()
 
 	grid = new Grid(gridSizeX, gridSizeY, gridMap);
 
+    for(int i = 0; i < gridSizeX; i++)
+    {
+        for(int j = 0; j < gridSizeY; j++)
+        {
+            if(grid->GetTile(i, j)->GetType() == Type::player)
+                Player::player = new Player(i, j); // create player
+            if(grid->GetTile(i, j)->GetType() == Type::enemy)
+                enemies.push_back(new Enemy(i, j));
+        }
+    }
 //	for (int i = 0; i < gridSizeX; i++)
 //	{
 //		for (int j = 0; j < gridSizeY; j++)

@@ -53,23 +53,24 @@ Player::~Player()
 
 void Player::Move(double dirX, double dirY)
 {
-//    if(xPos + dirX > GLScene::grid->GetSizeX() || xPos + dirX < 0)
-//        return; // bounds checking on the grid.
-//    if(yPos + dirY > GLScene::grid->GetSizeY() || yPos + dirY < 0)
-//        return;
-//
-//    if(GLScene::grid->GetTile(xPos +dirX, yPos + dirY)->IsTraversable())
-//    {
-//        xPos += dirX;
-//        yPos += dirY;
-//    }
+    // bounds checking on the grid.
+    if(!Grid::grid->BoundSafe(xPos + dirX, yPos + dirY))
+        return;
+
+    // Check player collision against walls or enemies.
+    if(Grid::grid->GetTile(xPos + dirX, yPos + dirY)->IsTraversable())
+    {
+        Grid::grid->GetTile(xPos, yPos)->SetType(Type::traversable); // set player's previous tile to traversable
+
+        xPos += dirX;
+        yPos += dirY;
+
+        Grid::grid->GetTile(xPos, yPos)->SetType(Type::player);
+
+        TurnManager::turnManager->NextTurn(); // end player turn and start enemy turn
+    }
+
 }
-
-bool Player::CheckCollision(int x, int y)
-{
-
-}
-
 
 void Player::ShootProjectile(double x, double y)
 {

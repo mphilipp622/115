@@ -1,5 +1,7 @@
 #include "Grid.h"
 
+Grid* Grid::grid;
+
 Grid::Grid(int newXSize, int newYSize, vector<vector<int>> map)
 {
 	sizeX = newXSize;
@@ -19,11 +21,13 @@ Grid::Grid(int newXSize, int newYSize, vector<vector<int>> map)
         {
 			tiles[j].push_back(new Tile(j, i, 1.0, 1.0, static_cast<Type>(map.at(sizeY - i - 1).at(j)))); // create a new tile at (i, j) position
 
-			if(map.at(sizeY - i - 1).at(j) == Type::player)
-                // create player
-                player = new Player(j, i);
+//			if(map.at(sizeY - i - 1).at(j) == Type::player)
+//                // create player
+//                Player::player = new Player(j, i);
         }
 	}
+
+	grid = this;
 }
 
 Grid::~Grid()
@@ -40,10 +44,10 @@ vector<vector<Tile*>> &Grid::GetTiles()
     return tiles;
 }
 
-Player* Grid::GetPlayer()
-{
-    return player;
-}
+//Player* Grid::GetPlayer()
+//{
+//    return player;
+//}
 
 int Grid::GetSizeX()
 {
@@ -53,4 +57,17 @@ int Grid::GetSizeX()
 int Grid::GetSizeY()
 {
     return sizeY;
+}
+
+bool Grid::BoundSafe(int x, int y)
+{
+    if(x > sizeX || x < 0)
+        return false;
+    if(y > sizeY || y < 0)
+        return false;
+
+    if(tiles[x][y]->IsWall())
+        return false;
+
+    return true;
 }

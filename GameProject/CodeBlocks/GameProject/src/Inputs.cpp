@@ -14,39 +14,59 @@ Inputs::~Inputs()
 {
 }
 
-void Inputs::KeyPressed(Player* model, Grid* grid)
+void Inputs::KeyPressed(Player* model)
 {
     // Handle key presses for model passed to this function
     const int aKey = 0x41, dKey = 0x44, sKey = 0x53, wKey = 0x57;
     // Use the unordered map of booleans to keep track of which keys are pressed. This allows multiple keys being pressed at once
-    if(wParamKeys == aKey && grid->GetPlayer()->GetX() - 1.0 > 0) // includes boundary checking
+    if(wParamKeys == aKey) // includes boundary checking
     {
-        int newX = grid->GetPlayer()->GetX() - 1.0;
-
-        if(grid->GetTile(newX, grid->GetPlayer()->GetY())->IsTraversable())
-            model->Move(-1.0, 0);
+        model->Move(-1.0, 0);
+//        int newX = Player::player->GetX() - 1.0;
+//
+//        if(grid->GetTile(newX, Player::player->GetY())->IsTraversable())
+//        {
+//            grid->GetTile(Player::player->GetX(), Player::player->GetY())->SetType(Type::traversable); // set tile to traversable
+//            model->Move(-1.0, 0); // move player
+//        }
     }
 
-    if(wParamKeys == dKey && grid->GetPlayer()->GetX() + 1.0 < grid->GetSizeX())
+    if(wParamKeys == dKey)
     {
-        int newX = grid->GetPlayer()->GetX() - 1.0;
+        model->Move(1.0, 0); // move player
 
-        if(grid->GetTile(newX, grid->GetPlayer()->GetY())->IsTraversable())
-            model->Move(1.0, 0);
+//        int newX = Player::player->GetX() + 1.0;
+//
+////        cout << grid->GetTile(newX, Player::player->GetY())->GetY() << "    " << grid->GetTile(newX, Player::player->GetY())->GetY() << endl;
+//        if(grid->GetTile(newX, Player::player->GetY())->IsTraversable())
+//        {
+//            grid->GetTile(Player::player->GetX(), Player::player->GetY())->SetType(Type::traversable); // set tile to traversable
+//            model->Move(1.0, 0); // move player
+//        }
+
     }
-    if(wParamKeys == sKey && grid->GetPlayer()->GetY() - 1.0 > 0)
+    if(wParamKeys == sKey)
     {
-        int newY = grid->GetPlayer()->GetY() - 1.0;
+        model->Move(0, -1.0); // move player
 
-        if(grid->GetTile(grid->GetPlayer()->GetX(), newY)->IsTraversable())
-            model->Move(0, -1.0);
+//        int newY = Player::player->GetY() - 1.0;
+//
+//        if(grid->GetTile(Player::player->GetX(), newY)->IsTraversable())
+//        {
+//            grid->GetTile(Player::player->GetX(), Player::player->GetY())->SetType(Type::traversable); // set tile to traversable
+//            model->Move(0, -1.0); // move player
+//        }
     }
-    if(wParamKeys == wKey && grid->GetPlayer()->GetY() + 1.0 < grid->GetSizeY())
+    if(wParamKeys == wKey)
     {
-        int newY = grid->GetPlayer()->GetY() + 1.0;
-
-        if(grid->GetTile(grid->GetPlayer()->GetX(), newY)->IsTraversable())
-            model->Move(0, 1.0);
+        model->Move(0, 1.0); // move player
+//        int newY = Player::player->GetY() + 1.0;
+//
+//        if(grid->GetTile(Player::player->GetX(), newY)->IsTraversable())
+//        {
+//            grid->GetTile(Player::player->GetX(), Player::player->GetY())->SetType(Type::traversable); // set tile to traversable
+//            model->Move(0, 1.0); // move player
+//        }
     }
 
 }

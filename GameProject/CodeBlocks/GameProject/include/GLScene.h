@@ -16,6 +16,8 @@
 #include <Player.h>
 #include <Grid.h>
 #include <fstream>
+#include <Enemy.h>
+#include <TurnManager.h>
 
 using namespace std;
 
@@ -35,9 +37,7 @@ class GLScene
 
         static vector<Model*> movableObjects; // only moving objects will check for collision
         static vector<Model*> staticObjects; // environmental, non-moving objects don't need to check for collision
-        static vector<Model*> enemies;
-
-        static Grid* grid;
+        static vector<Enemy*> enemies;
 
         static Inputs *keyboardAndMouse;
 
@@ -58,10 +58,10 @@ class GLScene
         int gridSizeX, gridSizeY;
         string mapFilePath;
 
-
+        Grid* grid;
 
         vector<vector<int>> gridMap;
-//        Enemy* testEnemy;
+
 };
 
 #endif // GLSCENE_H

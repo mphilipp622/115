@@ -3,6 +3,8 @@
 
 #include <Model.h>
 #include <TextureLoader.h>
+#include <Grid.h>
+#include <TurnManager.h>
 
 class Player : public Model
 {
@@ -21,8 +23,6 @@ class Player : public Model
         int runFrame, idleFrame;
         TextureLoader run[4];
         TextureLoader idle[1];
-
-        bool CheckCollision(int x, int y);
 };
 
 #endif // PLAYER_H

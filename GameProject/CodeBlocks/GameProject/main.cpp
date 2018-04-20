@@ -14,6 +14,7 @@
 #include <GLScene.h>
 #include <stdlib.h>
 #include <iostream>
+#include <TurnManager.h>
 
 //#include "DeltaTime.h"
 #include <string>
@@ -35,6 +36,7 @@ LRESULT	CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);	// Declaration For WndProc
 //SceneManager *SM = new SceneManager();
 //string activeScene = "TestLevel"; // will keep track of active scene
 
+TurnManager* tm = new TurnManager();
 GLScene *Scene = new GLScene();
 //SM->scenes.insert({activeScene, Scene});
 
