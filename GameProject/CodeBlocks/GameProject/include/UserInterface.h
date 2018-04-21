@@ -3,6 +3,7 @@
 
 #include <Player.h>
 #include <Model.h>
+#include <Grid.h>
 #include <vector>
 
 using namespace std;
@@ -22,9 +23,12 @@ class UserInterface
         // Called on by Player to remove an arrow from the HUD
         void RemoveArrow();
 
+        static UserInterface* UI;
+
     protected:
 
     private:
+        double scaleX, scaleY;
         vector<Model*> arrows;
 };
 

@@ -21,6 +21,10 @@ public:
 	// Sets The type of the tile
 	void SetType(Type newType);
 
+	void RevertType();
+
+	void RemoveArrows();
+
 	// Returns true if tile is traversible
 	bool IsTraversable();
 
@@ -36,10 +40,14 @@ public:
 	// Returns true if tile has arrows
 	bool IsArrows();
 
+	// returns true if tile has player
+	bool IsPlayer();
+
 private:
 //	int xPos, yPos;
 	// Model* model;
 	Type tileType;
+	Type originalType;
 
 };
 

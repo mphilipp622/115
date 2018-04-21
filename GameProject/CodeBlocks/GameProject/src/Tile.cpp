@@ -6,6 +6,7 @@ Tile::Tile(int newX, int newY, double newWidth, double newHeight, Type newType)
 	xPos = newX;
 	yPos = newY;
 	tileType = newType;
+	originalType = newType;
 
 	width = newWidth;
     height = newHeight;
@@ -74,7 +75,7 @@ void Tile::SetType(Type newType)
 
 bool Tile::IsTraversable()
 {
-	return tileType != Type::wall; // user can traverse any tile that isn't a wall. They can even run into enemies if they want.
+	return tileType != wall; // user can traverse any tile that isn't a wall. They can even run into enemies if they want.
 }
 
 bool Tile::IsTreasure()
@@ -97,3 +98,19 @@ bool Tile::IsEnemy()
 	return tileType == enemy;
 }
 
+bool Tile::IsPlayer()
+{
+    return tileType == player;
+}
+
+void Tile::RevertType()
+{
+    tileType = originalType;
+}
+
+void Tile::RemoveArrows()
+{
+    // convert original type back to traversable once arrows have been picked up.
+    originalType = Type::traversable;
+    InitModel("Images/Tiles/StoneTile.png", true); // update image
+}

@@ -17,8 +17,7 @@
 #include <fstream>
 #include <Enemy.h>
 #include <TurnManager.h>
-
-class UserInterface;
+#include <UserInterface.h>
 
 using namespace std;
 
@@ -57,8 +56,6 @@ class GLScene
         string mapFilePath;
 
         Grid* grid;
-
-        UserInterface* UI;
 
         vector<vector<int>> gridMap;
 

@@ -51,6 +51,8 @@ class Model
         virtual void Move();
         virtual void Destroy();
 
+        void SetZoom(double newZoom);
+
     protected:
         float width, height, radius;
         double xPos, yPos;

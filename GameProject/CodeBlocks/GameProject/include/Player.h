@@ -6,6 +6,8 @@
 #include <TextureLoader.h>
 #include <Grid.h>
 #include <Projectile.h>
+#include <UserInterface.h>
+#include <WinLose.h>
 
 class Player : public Model
 {
@@ -24,6 +26,8 @@ class Player : public Model
 
         int GetArrowCount();
 
+        void Die();
+
     protected:
 
     private:
@@ -35,6 +39,7 @@ class Player : public Model
         int arrowCount;
 
         bool playerLocked; // will be used to stop user input while arrows move
+
 };
 
 #endif // PLAYER_H

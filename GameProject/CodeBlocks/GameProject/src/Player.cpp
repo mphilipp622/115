@@ -64,10 +64,21 @@ void Player::Move(double dirX, double dirY)
     // Check player collision against walls or enemies.
     if(Grid::grid->GetTile(xPos + dirX, yPos + dirY)->IsTraversable())
     {
-        Grid::grid->GetTile(xPos, yPos)->SetType(Type::traversable); // set player's previous tile to traversable
+        Grid::grid->GetTile(xPos, yPos)->RevertType(); // set player's previous tile to traversable
 
         xPos += dirX;
         yPos += dirY;
+
+        if(Grid::grid->GetTile(xPos, yPos)->IsArrows())
+        {
+            arrowCount++;
+            UserInterface::UI->AddArrow();
+            Grid::grid->GetTile(xPos, yPos)->RemoveArrows();
+        }
+        if(Grid::grid->GetTile(xPos, yPos)->IsTreasure())
+            WinLose::winLose->Win();
+        if(Grid::grid->GetTile(xPos, yPos)->IsEnemy())
+            Die();
 
         Grid::grid->GetTile(xPos, yPos)->SetType(Type::player);
 
@@ -78,6 +89,9 @@ void Player::Move(double dirX, double dirY)
 
 void Player::ShootProjectile(double x, double y)
 {
+    if(arrowCount <= 0)
+        return; // Make sure we have arrows before firing.
+
     playerLocked = true; // player will be locked from input while arrow is moving.
 
     Projectile *newProjectile = new Projectile(xPos, yPos, 0.5, 0.5, 1, 6.0, "Arrow", x + xPos, y + yPos);
@@ -92,6 +106,8 @@ void Player::ShootProjectile(double x, double y)
     else if(y == -1.0)
         newProjectile->InitModel("Images/ArrowDown.png", true);
 
+    arrowCount--;
+    UserInterface::UI->RemoveArrow();
     GLScene::movableObjects.push_back(newProjectile);
 }
 
@@ -130,4 +146,9 @@ void Player::SetLocked()
 int Player::GetArrowCount()
 {
     return arrowCount;
+}
+
+void Player::Die()
+{
+    WinLose::winLose->Lose();
 }

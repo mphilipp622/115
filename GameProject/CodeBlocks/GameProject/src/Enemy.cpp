@@ -55,8 +55,12 @@ void Enemy::Move()
     Tile* tempTile = pathfind->GetNextTile(xPos, yPos);
 
     // once we've found our next tile, move enemy into it and set types accordingly.
-    Grid::grid->GetTile(xPos, yPos)->SetType(Type::traversable);
+    Grid::grid->GetTile(xPos, yPos)->RevertType();
     SetPosition(tempTile->GetX(), tempTile->GetY());
+
+    if(Grid::grid->GetTile(xPos, yPos)->IsPlayer())
+        Player::player->Die();
+
     Grid::grid->GetTile(xPos, yPos)->SetType(Type::enemy); // tile now has enemy
 }
 

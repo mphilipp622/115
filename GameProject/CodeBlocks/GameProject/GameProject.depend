@@ -118,16 +118,17 @@
 	<GL/gl.h>
 	<GL/glu.h>
 
-1524242662 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\main.cpp
+1524281905 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\main.cpp
 	<windows.h>
 	<windows.h>
 	<GLScene.h>
 	<stdlib.h>
 	<iostream>
 	<TurnManager.h>
+	<WinLose.h>
 	<string>
 
-1524244540 c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\include\glscene.h
+1524281264 c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\include\glscene.h
 	<windows.h>
 	<glut.h>
 	<iostream>
@@ -142,8 +143,9 @@
 	<fstream>
 	<Enemy.h>
 	<TurnManager.h>
+	<UserInterface.h>
 
-1524248057 c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\include\model.h
+1524278723 c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\include\model.h
 	<windows.h>
 	<glut.h>
 	<string>
@@ -183,7 +185,7 @@
 1519964614 c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\include\gllight.h
 	<GLScene.h>
 
-1524248069 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\model.cpp
+1524278741 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\model.cpp
 	<Model.h>
 	<TextureLoader.h>
 	<DeltaTime.h>
@@ -214,20 +216,23 @@
 	<DeltaTime.h>
 	<string>
 
-1524248385 c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\include\player.h
+1524281838 c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\include\player.h
 	<windows.h>
 	<Model.h>
 	<TextureLoader.h>
 	<Grid.h>
 	<Projectile.h>
+	<UserInterface.h>
+	<WinLose.h>
 
-1524249075 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\glscene.cpp
+1524282007 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\glscene.cpp
 	<GLScene.h>
 	<GLLight.h>
 	<DeltaTime.h>
 	<Timer.h>
+	<UserInterface.h>
 
-1524248445 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\player.cpp
+1524281885 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\player.cpp
 	"Player.h"
 
 1524248667 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\projectile.cpp
@@ -242,11 +247,11 @@
 	<Timer.h>
 	<Grid.h>
 
-1524242662 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\tile.cpp
+1524281578 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\tile.cpp
 	"Tile.h"
 	<iostream>
 
-1524165880 c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\include\tile.h
+1524281552 c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\include\tile.h
 	"Type.h"
 	<Model.h>
 
@@ -566,7 +571,7 @@
 	<map>
 	<tuple>
 
-1524249120 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\enemy.cpp
+1524282137 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\enemy.cpp
 	"Enemy.h"
 
 1524242662 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\pathfinder.cpp
@@ -582,4 +587,19 @@
 	<Player.h>
 	<Model.h>
 	<vector>
+
+1524279562 c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\include\userinterface.h
+	<Player.h>
+	<Model.h>
+	<Grid.h>
+	<vector>
+
+1524280971 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\userinterface.cpp
+	"UserInterface.h"
+
+1524282038 c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\include\winlose.h
+	<iostream>
+
+1524282023 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\winlose.cpp
+	"WinLose.h"
 

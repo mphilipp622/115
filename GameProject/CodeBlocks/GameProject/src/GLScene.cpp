@@ -54,7 +54,7 @@ GLint GLScene::initGL()
     // Initialize Models Here
 
      GenerateGrid();
-    UI = new UserInterface();
+     UserInterface::UI = new UserInterface();
 //    block->InitModel("Images/Block.png", true);
 //    block2->InitModel("Images/Block2.png", true);
 //    ground->InitModel("Images/Block.png", true);
@@ -88,7 +88,11 @@ GLint GLScene::drawGLScene()
             gridSizeX / 2, gridSizeY / 2, 0,
             0.0f, 1.0f, 0.0f);
 
-    UI->DrawArrows(); // render arrow icons to screen
+    if(enemies.size() <= 0) // check and see if all enemies are dead. IF so, then player wins
+        WinLose::winLose->Win();
+
+    if(UserInterface::UI)
+        UserInterface::UI->DrawArrows(); // render arrow icons to screen
 
     for(auto& tile : grid->GetTiles())
     {
@@ -216,4 +220,3 @@ void GLScene::GenerateGrid()
 //		cout << endl;
 //	}
 }
-

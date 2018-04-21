@@ -244,3 +244,8 @@ void Model::Destroy()
 {
     delete this;
 }
+
+void Model::SetZoom(double newZoom)
+{
+    zoom = newZoom;
+}

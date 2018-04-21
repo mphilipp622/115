@@ -66,6 +66,7 @@
 		<Unit filename="include/TurnManager.h" />
 		<Unit filename="include/Type.h" />
 		<Unit filename="include/UserInterface.h" />
+		<Unit filename="include/WinLose.h" />
 		<Unit filename="main.cpp">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -87,6 +88,7 @@
 		<Unit filename="src/Timer.cpp" />
 		<Unit filename="src/TurnManager.cpp" />
 		<Unit filename="src/UserInterface.cpp" />
+		<Unit filename="src/WinLose.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
