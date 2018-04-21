@@ -4,6 +4,7 @@
 #include <GLLight.h>
 #include <DeltaTime.h>
 #include <Timer.h>
+#include <UserInterface.h>
 
 //Model *ground = new Model(6.0, 0.3, 0, -1.0, "ground", "Environment");
 //Model *block = new Model(2.0, 0.2, 3.0, 0, "block", "Environment");
@@ -53,7 +54,7 @@ GLint GLScene::initGL()
     // Initialize Models Here
 
      GenerateGrid();
-
+    UI = new UserInterface();
 //    block->InitModel("Images/Block.png", true);
 //    block2->InitModel("Images/Block2.png", true);
 //    ground->InitModel("Images/Block.png", true);
@@ -86,6 +87,8 @@ GLint GLScene::drawGLScene()
     gluLookAt(gridSizeX / 2, gridSizeY / 2, gridSizeX + 3.33 + 1,
             gridSizeX / 2, gridSizeY / 2, 0,
             0.0f, 1.0f, 0.0f);
+
+    UI->DrawArrows(); // render arrow icons to screen
 
     for(auto& tile : grid->GetTiles())
     {

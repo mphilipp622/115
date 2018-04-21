@@ -22,6 +22,8 @@ class Player : public Model
 
         void SetInput(WPARAM newParam);
 
+        int GetArrowCount();
+
     protected:
 
     private:
@@ -29,6 +31,8 @@ class Player : public Model
         int runFrame, idleFrame;
         TextureLoader run[4];
         TextureLoader idle[1];
+
+        int arrowCount;
 
         bool playerLocked; // will be used to stop user input while arrows move
 };

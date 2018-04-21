@@ -45,6 +45,8 @@ Player::Player(double newX, double newY)
 
     playerLocked = false;
 
+    arrowCount = 1; // player starts with 1 arrow
+
     InitModel("Images/Player/play.png", true);
 }
 
@@ -78,7 +80,7 @@ void Player::ShootProjectile(double x, double y)
 {
     playerLocked = true; // player will be locked from input while arrow is moving.
 
-    Projectile *newProjectile = new Projectile(xPos, yPos, 0.5, 0.5, 1, 4.0, "Arrow", x + xPos, y + yPos);
+    Projectile *newProjectile = new Projectile(xPos, yPos, 0.5, 0.5, 1, 6.0, "Arrow", x + xPos, y + yPos);
 
     if(x == 1.0)
         newProjectile->InitModel("Images/ArrowRight.png", true);
@@ -123,4 +125,9 @@ void Player::SetInput(WPARAM newParam)
 void Player::SetLocked()
 {
     playerLocked = !playerLocked;
+}
+
+int Player::GetArrowCount()
+{
+    return arrowCount;
 }

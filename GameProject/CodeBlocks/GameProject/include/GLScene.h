@@ -18,6 +18,8 @@
 #include <Enemy.h>
 #include <TurnManager.h>
 
+class UserInterface;
+
 using namespace std;
 
 class GLScene
@@ -55,6 +57,8 @@ class GLScene
         string mapFilePath;
 
         Grid* grid;
+
+        UserInterface* UI;
 
         vector<vector<int>> gridMap;
 
