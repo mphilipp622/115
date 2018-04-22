@@ -18,6 +18,9 @@ class TurnManager
         // ends current turn and goes to next turn
         void NextTurn();
 
+        // Sets current turn to variable turn's value.
+        void SetTurn(int newTurn);
+
         // global instance of class
         static TurnManager* turnManager;
 

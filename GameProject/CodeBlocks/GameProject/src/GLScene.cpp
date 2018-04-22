@@ -20,6 +20,20 @@ GLScene::GLScene()
     gridSizeX = 0;
     gridSizeY = 0;
     mapFilePath = "Maps/TestMap.txt";
+    sceneName = "Game";
+
+    // clear static vectors when scene is loaded, just in case there is still data in them.
+    enemies.clear();
+    movableObjects.clear();
+
+    auto finder = SceneManager::scenes.find("Game");
+
+    if(finder == SceneManager::scenes.end())
+    {
+        // if scene isn't in scenemanager yet, add it
+        SceneManager::scenes.insert( {"Game", this} );
+        SceneManager::activeScene = "Game";
+    }
 //    testEnemy = new MeleeEnemy(0.7, 0.7, 2, 0.5, "TestEnemy");
 }
 
@@ -29,7 +43,6 @@ GLScene::~GLScene()
 
 // Static Variables for use in player class to check collision
 vector<Model*> GLScene::movableObjects;
-vector<Model*> GLScene::staticObjects;
 vector<Model*> GLScene::enemies;
 
 // initialize our graphic settings for our scene
@@ -53,8 +66,9 @@ GLint GLScene::initGL()
 
     // Initialize Models Here
 
-     GenerateGrid();
-     UserInterface::UI = new UserInterface();
+    GenerateGrid();
+    UserInterface::UI = new UserInterface();
+
 //    block->InitModel("Images/Block.png", true);
 //    block2->InitModel("Images/Block2.png", true);
 //    ground->InitModel("Images/Block.png", true);
@@ -88,7 +102,9 @@ GLint GLScene::drawGLScene()
             gridSizeX / 2, gridSizeY / 2, 0,
             0.0f, 1.0f, 0.0f);
 
-    if(enemies.size() <= 0) // check and see if all enemies are dead. IF so, then player wins
+    CheckWinCondition();
+
+    if(!WinLose::winLose->IsGameOver() && enemies.size() <= 0) // check and see if all enemies are dead. IF so, then player wins
         WinLose::winLose->Win();
 
     if(UserInterface::UI)
@@ -143,41 +159,21 @@ GLvoid GLScene::resizeGLScene(GLsizei width, GLsizei height)
 }
 int GLScene::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-    if(TurnManager::turnManager->IsEnemyTurn())
-        return 1; // don't allow input if it's not player's turn
-
     if(uMsg == WM_KEYDOWN)
     {
-        Player::player->SetInput(wParam);
-//        testAudio->UpdatePosition();
+        if(WinLose::winLose->IsGameOver())
+        {
+            if(wParam == VK_NUMPAD1 || wParam == 0x31) // 0x31 is hex value for keypad 1
+                LoadScene("Game");
+            else if(wParam == VK_NUMPAD2 || wParam == 0x32) // 0x32 is hex value for keypad 2
+                LoadScene("MainMenu");
+        }
 
-//        testAudio->Update();
-//        testAudio->Play();
-//        PlaySound("Audio/Music/ab9.wav", NULL, SND_ASYNC);
-//        keyboardAndMouse->wParamKeys = wParam;
-//        keyboardAndMouse->KeyPressed(Player::player);
+        if(TurnManager::turnManager->IsEnemyTurn() || WinLose::winLose->IsGameOver())
+            return 1; // don't allow input if it's not player's turn or if the game is over
+
+        Player::player->SetInput(wParam);
     }
-//    if(uMsg == WM_KEYUP)
-//    {
-//        keyboardAndMouse->wParamKeys = wParam;
-//        keyboardAndMouse->KeyUp(player);
-//    }
-//    if(uMsg == WM_MOUSEMOVE)
-//    // should constantly update mouse pointer x and y positions
-//        keyboardAndMouse->SetMousePointer(LOWORD(lParam), HIWORD(lParam));
-//    if(uMsg == WM_LBUTTONDOWN)
-//    {
-//        // left-click functionality
-//        keyboardAndMouse->wParamMouse = wParam;
-//        keyboardAndMouse->MouseDown(Player::player, lParam);
-//    }
-//    if(uMsg == WM_RBUTTONDOWN)
-//    {
-//        keyboardAndMouse->wParamMouse = wParam;
-//        keyboardAndMouse->MouseDown(player, lParam);
-//    }
-//    if(uMsg == WM_MOUSEWHEEL)
-//        keyboardAndMouse->WheelMove(player, GET_WHEEL_DELTA_WPARAM(wParam));
 
 	return 1;
 }
@@ -213,10 +209,44 @@ void GLScene::GenerateGrid()
 
         }
     }
-//	for (int i = 0; i < gridSizeX; i++)
-//	{
-//		for (int j = 0; j < gridSizeY; j++)
-//			cout << grid->GetTile(i, j)->GetType();
-//		cout << endl;
-//	}
+}
+
+void GLScene::CheckWinCondition()
+{
+    if(WinLose::winLose->HasWon())
+        UserInterface::UI->YouWin();
+    else if(WinLose::winLose->HasLost())
+        UserInterface::UI->YouLose();
+}
+
+void GLScene::LoadScene(string name)
+{
+    if(name == "Game")
+    {
+        GLScene* newGame = new GLScene();
+
+        SceneManager::scenes["Game"] = newGame;
+        Reset();
+        newGame->initGL();
+
+        delete this;
+    }
+    else if(name == "MainMenu")
+    {
+        Reset();
+        SceneManager::activeScene = "MainMenu";
+        delete this;
+    }
+}
+
+string GLScene::GetSceneName()
+{
+    return sceneName;
+}
+
+void GLScene::Reset()
+{
+    UserInterface::UI->Reset();
+    WinLose::winLose->Reset();
+    TurnManager::turnManager->SetTurn(0);
 }

@@ -17,6 +17,7 @@
 #include <fstream>
 #include <Enemy.h>
 #include <TurnManager.h>
+#include <SceneManager.h>
 #include <UserInterface.h>
 
 using namespace std;
@@ -26,17 +27,20 @@ class GLScene
     public:
         GLScene();
         virtual ~GLScene();
-        GLint initGL();
-        GLint drawGLScene();
+        virtual GLint initGL();
+        virtual GLint drawGLScene();
         GLvoid resizeGLScene(GLsizei, GLsizei);
 
-        int windowsMsg(HWND, UINT, WPARAM, LPARAM);
+        virtual int windowsMsg(HWND, UINT, WPARAM, LPARAM);
+
+        virtual void LoadScene(string name);
+
+        string GetSceneName();
 
         WPARAM wParam;
         float screenHeight, screenWidth;
 
         static vector<Model*> movableObjects; // only moving objects will check for collision
-        static vector<Model*> staticObjects; // environmental, non-moving objects don't need to check for collision
         static vector<Model*> enemies;
 
     protected:
@@ -45,6 +49,7 @@ class GLScene
         bool isLoaded;
         AudioSource* BGM;
 
+        string sceneName;
 
     private:
 
@@ -58,6 +63,11 @@ class GLScene
         Grid* grid;
 
         vector<vector<int>> gridMap;
+
+        void CheckWinCondition();
+
+        // Resets static and global data.
+        void Reset();
 
 };
 

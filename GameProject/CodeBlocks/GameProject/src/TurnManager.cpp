@@ -30,3 +30,8 @@ void TurnManager::NextTurn()
 {
     turn = !turn;
 }
+
+void TurnManager::SetTurn(int newTurn)
+{
+    turn = newTurn;
+}

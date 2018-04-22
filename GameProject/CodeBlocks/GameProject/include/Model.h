@@ -53,6 +53,11 @@ class Model
 
         void SetZoom(double newZoom);
 
+        // used for UI Button elements
+        void ChangeImage(string filename);
+
+        void DrawSquare(float newWidth, float newHeight);
+
     protected:
         float width, height, radius;
         double xPos, yPos;

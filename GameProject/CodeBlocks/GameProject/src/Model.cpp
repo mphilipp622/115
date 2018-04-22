@@ -138,6 +138,25 @@ void Model::DrawModel()
     glPopMatrix();
 }
 
+void Model::DrawSquare(float newWidth, float newHeight)
+{
+    glColor3f(1.0,1.0,1.0);
+    texture->Binder();
+    glBegin(GL_POLYGON);
+        glTexCoord2f(0, 1.0);
+        glVertex3f(-newWidth/newHeight,-1,-8.0f);
+
+        glTexCoord2f(1.0, 1.0);
+        glVertex3f(newWidth/newHeight,-1,-8.0f);
+
+        glTexCoord2f(1.0, 0);
+        glVertex3f(newWidth/newHeight,1,-8.0f);
+
+        glTexCoord2f(0, 0);
+        glVertex3f(-newWidth/newHeight,1,-8.0f);
+     glEnd();
+}
+
 void Model::InitModel(string fileName, bool transparent)
 {
 
@@ -145,7 +164,7 @@ void Model::InitModel(string fileName, bool transparent)
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // blends object to background color instead. Change it to mess with cool effects
 
 //    texture->Binder();
-    this->texture->BindTexture(fileName);
+    texture->BindTexture(fileName);
 
 }
 
@@ -248,4 +267,9 @@ void Model::Destroy()
 void Model::SetZoom(double newZoom)
 {
     zoom = newZoom;
+}
+
+void Model::ChangeImage(string filename)
+{
+    texture->BindTexture(filename);
 }

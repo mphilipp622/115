@@ -4,6 +4,9 @@ Grid* Grid::grid;
 
 Grid::Grid(int newXSize, int newYSize, vector<vector<int>> map)
 {
+    if(grid)
+        delete grid;
+
 	sizeX = newXSize;
 	sizeY = newYSize;
 

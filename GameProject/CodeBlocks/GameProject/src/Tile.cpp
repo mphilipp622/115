@@ -105,7 +105,10 @@ bool Tile::IsPlayer()
 
 void Tile::RevertType()
 {
-    tileType = originalType;
+    if(originalType == enemy || originalType == player)
+        tileType = traversable; // players and enemies are layered on top of traversable tiles. If either moves off the tile, we want to set traversable, not back to enemy or player
+    else
+        tileType = originalType;
 }
 
 void Tile::RemoveArrows()

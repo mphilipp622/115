@@ -384,7 +384,7 @@
 	<windows.h>
 	<AudioEngine.h>
 
-1524261447 e:\college\115\gameproject\codeblocks\gameproject\include\glscene.h
+1524437303 e:\college\115\gameproject\codeblocks\gameproject\include\glscene.h
 	<windows.h>
 	<glut.h>
 	<iostream>
@@ -399,6 +399,8 @@
 	<fstream>
 	<Enemy.h>
 	<TurnManager.h>
+	<SceneManager.h>
+	<UserInterface.h>
 
 1524017310 e:\college\115\gameproject\codeblocks\common\include\gl\glut.h
 	<windows.h>
@@ -406,7 +408,7 @@
 	<GL/gl.h>
 	<GL/glu.h>
 
-1524254559 e:\college\115\gameproject\codeblocks\gameproject\include\model.h
+1524438451 e:\college\115\gameproject\codeblocks\gameproject\include\model.h
 	<windows.h>
 	<glut.h>
 	<string>
@@ -429,12 +431,14 @@
 	<string>
 	<Player.h>
 
-1524260798 e:\college\115\gameproject\codeblocks\gameproject\include\player.h
+1524429857 e:\college\115\gameproject\codeblocks\gameproject\include\player.h
 	<windows.h>
 	<Model.h>
 	<TextureLoader.h>
 	<Grid.h>
 	<Projectile.h>
+	<UserInterface.h>
+	<WinLose.h>
 
 1524017310 e:\college\115\gameproject\codeblocks\gameproject\include\deltatime.h
 
@@ -445,7 +449,7 @@
 
 1524017310 e:\college\115\gameproject\codeblocks\gameproject\include\type.h
 
-1524176836 e:\college\115\gameproject\codeblocks\gameproject\include\tile.h
+1524429854 e:\college\115\gameproject\codeblocks\gameproject\include\tile.h
 	"Type.h"
 	<Model.h>
 
@@ -461,7 +465,7 @@
 1524017310 e:\college\115\gameproject\codeblocks\gameproject\include\gllight.h
 	<GLScene.h>
 
-1524261457 source:e:\college\115\gameproject\codeblocks\gameproject\src\glscene.cpp
+1524441074 source:e:\college\115\gameproject\codeblocks\gameproject\src\glscene.cpp
 	<GLScene.h>
 	<GLLight.h>
 	<DeltaTime.h>
@@ -471,7 +475,7 @@
 1524017310 e:\college\115\gameproject\codeblocks\gameproject\include\timer.h
 	<time.h>
 
-1524197043 source:e:\college\115\gameproject\codeblocks\gameproject\src\grid.cpp
+1524437485 source:e:\college\115\gameproject\codeblocks\gameproject\src\grid.cpp
 	"Grid.h"
 
 1524254559 source:e:\college\115\gameproject\codeblocks\gameproject\src\inputs.cpp
@@ -480,7 +484,7 @@
 	<DeltaTime.h>
 	<string>
 
-1524254559 source:e:\college\115\gameproject\codeblocks\gameproject\src\model.cpp
+1524439331 source:e:\college\115\gameproject\codeblocks\gameproject\src\model.cpp
 	<Model.h>
 	<TextureLoader.h>
 	<DeltaTime.h>
@@ -488,7 +492,7 @@
 	<algorithm>
 	<string>
 
-1524260809 source:e:\college\115\gameproject\codeblocks\gameproject\src\player.cpp
+1524437474 source:e:\college\115\gameproject\codeblocks\gameproject\src\player.cpp
 	"Player.h"
 
 1524254559 source:e:\college\115\gameproject\codeblocks\gameproject\src\projectile.cpp
@@ -503,13 +507,16 @@
 	<Timer.h>
 	<Grid.h>
 
-1524183593 source:e:\college\115\gameproject\codeblocks\gameproject\main.cpp
+1524440579 source:e:\college\115\gameproject\codeblocks\gameproject\main.cpp
 	<windows.h>
 	<windows.h>
 	<GLScene.h>
 	<stdlib.h>
 	<iostream>
 	<TurnManager.h>
+	<WinLose.h>
+	<SceneManager.h>
+	<MainMenu.h>
 	<string>
 
 1524017310 source:e:\college\115\gameproject\codeblocks\gameproject\src\texture.cpp
@@ -523,24 +530,24 @@
 	<GL\GL.h>
 	<iostream>
 
-1524197969 source:e:\college\115\gameproject\codeblocks\gameproject\src\tile.cpp
+1524432109 source:e:\college\115\gameproject\codeblocks\gameproject\src\tile.cpp
 	"Tile.h"
 	<iostream>
 
 1524017310 source:e:\college\115\gameproject\codeblocks\gameproject\src\timer.cpp
 	<Timer.h>
 
-1524254559 source:e:\college\115\gameproject\codeblocks\gameproject\src\enemy.cpp
+1524441395 source:e:\college\115\gameproject\codeblocks\gameproject\src\enemy.cpp
 	"Enemy.h"
 
-1524254559 e:\college\115\gameproject\codeblocks\gameproject\include\enemy.h
+1524429859 e:\college\115\gameproject\codeblocks\gameproject\include\enemy.h
 	<Pathfinder.h>
 	<Grid.h>
 	<Player.h>
 
-1524183402 e:\college\115\gameproject\codeblocks\gameproject\include\turnmanager.h
+1524436803 e:\college\115\gameproject\codeblocks\gameproject\include\turnmanager.h
 
-1524183426 source:e:\college\115\gameproject\codeblocks\gameproject\src\turnmanager.cpp
+1524436796 source:e:\college\115\gameproject\codeblocks\gameproject\src\turnmanager.cpp
 	"TurnManager.h"
 
 1524196152 e:\college\115\gameproject\codeblocks\gameproject\include\pathfinder.h
@@ -580,12 +587,14 @@
 1524242662 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\turnmanager.cpp
 	"TurnManager.h"
 
-1524261522 source:e:\college\115\gameproject\codeblocks\gameproject\src\userinterface.cpp
+1524437502 source:e:\college\115\gameproject\codeblocks\gameproject\src\userinterface.cpp
 	"UserInterface.h"
+	<cmath>
 
-1524261213 e:\college\115\gameproject\codeblocks\gameproject\include\userinterface.h
+1524436224 e:\college\115\gameproject\codeblocks\gameproject\include\userinterface.h
 	<Player.h>
 	<Model.h>
+	<Grid.h>
 	<vector>
 
 1524279562 c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\include\userinterface.h
@@ -602,4 +611,26 @@
 
 1524282023 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\winlose.cpp
 	"WinLose.h"
+
+1524436251 e:\college\115\gameproject\codeblocks\gameproject\include\winlose.h
+	<iostream>
+	<UserInterface.h>
+
+1524436667 source:e:\college\115\gameproject\codeblocks\gameproject\src\winlose.cpp
+	"WinLose.h"
+
+1524435706 e:\college\115\gameproject\codeblocks\gameproject\include\scenemanager.h
+	<unordered_map>
+	<string>
+
+1524441339 source:e:\college\115\gameproject\codeblocks\gameproject\src\mainmenu.cpp
+	"MainMenu.h"
+
+1524440708 e:\college\115\gameproject\codeblocks\gameproject\include\mainmenu.h
+	<GLScene.h>
+	<GLLight.h>
+
+1524435708 source:e:\college\115\gameproject\codeblocks\gameproject\src\scenemanager.cpp
+	"SceneManager.h"
+	<GLScene.h>
 

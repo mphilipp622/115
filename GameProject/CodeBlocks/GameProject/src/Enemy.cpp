@@ -68,5 +68,6 @@ void Enemy::Destroy()
 {
     auto finder = find(GLScene::enemies.begin(), GLScene::enemies.end(), this); // find the enemy in the scene
     GLScene::enemies.erase(finder); // remove the enemy from the vector
+    Grid::grid->GetTile(xPos, yPos)->RevertType();
     delete this; // free memory
 }

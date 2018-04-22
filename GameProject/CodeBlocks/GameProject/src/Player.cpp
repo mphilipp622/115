@@ -9,6 +9,9 @@ Player::Player()
 
 Player::Player(double newX, double newY)
 {
+    if(player)
+        delete player;
+
     xPos = newX;
 	yPos = newY;
 

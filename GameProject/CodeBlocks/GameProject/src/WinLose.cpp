@@ -6,6 +6,9 @@ WinLose::WinLose()
 {
     //ctor
     winLose = this;
+    gameOver = false;
+    hasWon = false;
+    hasLost = false;
 }
 
 WinLose::~WinLose()
@@ -15,12 +18,36 @@ WinLose::~WinLose()
 
 void WinLose::Win()
 {
-    cout << "WIN" << endl;
+    gameOver = true;
+    hasWon = true;
     return;
 }
 
 void WinLose::Lose()
 {
-    cout << "LOSE" << endl;
+    gameOver = true;
+    hasLost = true;
     return;
+}
+
+bool WinLose::IsGameOver()
+{
+    return gameOver;
+}
+
+bool WinLose::HasWon()
+{
+    return hasWon;
+}
+
+bool WinLose::HasLost()
+{
+    return hasLost;
+}
+
+void WinLose::Reset()
+{
+    hasLost = false;
+    hasWon = false;
+    gameOver = false;
 }
