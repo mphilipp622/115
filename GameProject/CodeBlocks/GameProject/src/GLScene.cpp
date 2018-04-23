@@ -111,16 +111,20 @@ GLint GLScene::drawGLScene()
     for(auto& enemy : enemies)
     {
         if(TurnManager::turnManager->IsEnemyTurn())
+        {
             enemy->Move();
+            enemy->Update();
+        }
 
-        enemy->DrawModel();
+
+
     }
 
     if(TurnManager::turnManager->IsEnemyTurn())
         TurnManager::turnManager->NextTurn(); // end turn after enemies have moved
 
     Player::player->Update();
-    Player::player->DrawModel();
+//    Player::player->DrawModel();
 //    for(auto& model : staticObjects)
 //        model->DrawModel();
 //

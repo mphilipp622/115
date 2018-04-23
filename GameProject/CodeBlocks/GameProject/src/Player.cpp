@@ -22,8 +22,13 @@ Player::Player(double newX, double newY)
     rotateY = 0;
     rotateZ = 0;
 
+    xDir = 1.0;
+    yDir = 0;
+
     // translations
     zoom = 0;
+
+    moveSpeed = 2.0;
 
     // Initialize Quad
     vertices[0].x = -width / 2;
@@ -52,7 +57,18 @@ Player::Player(double newX, double newY)
 
     InitModel("Images/Player/play.png", true);
 
+    for(int i = 0; i < 4; i++)
+        run[i].BindTexture("Images/Player/player" + to_string(i) + ".png");
+
+    idle[0].BindTexture("Images/Player/play.png");
+
     isMoving = false;
+
+    frameTimer = new Timer();
+    frameTimer->Start();
+
+    idleFrame = 0;
+    runFrame = 0;
 }
 
 Player::~Player()
@@ -63,7 +79,12 @@ Player::~Player()
 void Player::Update()
 {
     if(isMoving)
+    {
         MoveToDestination();
+        Animate("Run");
+    }
+    else
+        Animate("Idle");
 }
 
 void Player::Move(double dirX, double dirY)
@@ -88,8 +109,8 @@ void Player::Move(double dirX, double dirY)
 
 void Player::MoveToDestination()
 {
-    xPos += xDir * DeltaTime::GetDeltaTime();
-    yPos += yDir * DeltaTime::GetDeltaTime();
+    xPos += xDir * DeltaTime::GetDeltaTime() * moveSpeed;
+    yPos += yDir * DeltaTime::GetDeltaTime() * moveSpeed;
 
     if(xPos >= destX - 0.05 && xPos <= destX + 0.05 && yPos >= destY - 0.05 && yPos <= destY + 0.05)
     {
@@ -114,6 +135,89 @@ void Player::MoveToDestination()
         TurnManager::turnManager->NextTurn(); // end player turn and start enemy turn
     }
 
+}
+
+void Player::DrawPlayer()
+{
+    glColor3f(1.0, 1.0, 1.0);
+
+    glBegin(GL_QUADS);
+
+	if (xDir == -1.0)
+	{
+		// flip texture to the left
+
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(-vertices[0].x, vertices[0].y, vertices[0].z);
+
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(-vertices[1].x, vertices[1].y, vertices[1].z);
+
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(-vertices[2].x, vertices[2].y, vertices[2].z);
+
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(-vertices[3].x, vertices[3].y, vertices[3].z);
+	}
+	else
+	{
+		// flip texture to the right
+
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(vertices[0].x, vertices[0].y, vertices[0].z);
+
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(vertices[1].x, vertices[1].y, vertices[1].z);
+
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(vertices[2].x, vertices[2].y, vertices[2].z);
+
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(vertices[3].x, vertices[3].y, vertices[3].z);
+	}
+
+    glEnd();
+
+}
+
+void Player::Animate(string animation)
+{
+    if(animation == "Run")
+    {
+        glPushMatrix();
+
+        glTranslated(xPos, yPos, zoom);
+
+        if(frameTimer->GetTicks() > 60)
+        {
+            runFrame++;
+            runFrame %= 4;
+            frameTimer->Reset();
+        }
+
+        run[runFrame].Binder();
+        DrawPlayer();
+
+        glPopMatrix();
+    }
+    else if(animation == "Idle")
+    {
+        glPushMatrix();
+
+        glTranslated(xPos, yPos, zoom);
+
+        if(frameTimer->GetTicks() > 60)
+        {
+            idleFrame++;
+            idleFrame %= 1;
+            frameTimer->Reset();
+        }
+
+        idle[idleFrame].Binder();
+        DrawPlayer();
+
+        glPopMatrix();
+    }
 }
 
 void Player::ShootProjectile(double x, double y)

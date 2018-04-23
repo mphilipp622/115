@@ -38,6 +38,10 @@ class Player : public Model
         TextureLoader run[4];
         TextureLoader idle[1];
 
+        float moveSpeed;
+
+        Timer* frameTimer;
+
         int arrowCount;
 
         bool playerLocked; // will be used to stop user input while arrows move
@@ -46,6 +50,9 @@ class Player : public Model
         int destX, destY, xDir, yDir;
 
         void MoveToDestination();
+        void Animate(string animation);
+        void DrawPlayer();
+
 };
 
 #endif // PLAYER_H

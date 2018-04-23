@@ -44,7 +44,6 @@ Enemy::Enemy(double newX, double newY)
     frameTimer->Start();
 
     moveFrame = 0;
-    moveSpeed = 2.0;
 
     InitAnimations();
 
@@ -65,8 +64,8 @@ void Enemy::Update()
     }
     else if(isMoving && xDir == -1)
     {
-        MoveToDestination()
-        Animate("MoveLeft");
+            MoveToDestination()
+            Animate("MoveLeft");
     }
     else if(isMoving && yDir == 1)
     {
@@ -84,9 +83,6 @@ void Enemy::Update()
 
 void Enemy::Move()
 {
-    if(isMoving) return;
-
-    isMoving = true;
     Tile* tempTile = pathfind->GetNextTile(xPos, yPos);
 
     destX = tempTile->GetX();
@@ -96,26 +92,12 @@ void Enemy::Move()
 
     // once we've found our next tile, move enemy into it and set types accordingly.
     Grid::grid->GetTile(xPos, yPos)->RevertType();
-}
+    SetPosition(tempTile->GetX(), tempTile->GetY());
 
-void Enemy::MoveToDestination()
-{
-    xPos += xDir * DeltaTime::GetDeltaTime() * moveSpeed;
-    yPos += yDir * DeltaTime::GetDeltaTime() * moveSpeed;
+    if(Grid::grid->GetTile(xPos, yPos)->IsPlayer())
+        Player::player->Die();
 
-    if(xPos >= destX - 0.05 && xPos <= destX + 0.05 && yPos >= destY - 0.05 && yPos <= destY + 0.05)
-    {
-        xPos = destX;
-        yPos = destY;
-
-        if(Grid::grid->GetTile(xPos, yPos)->IsPlayer())
-            Player::player->Die();
-
-        Grid::grid->GetTile(xPos, yPos)->SetType(Type::enemy); // tile now has enemy
-
-        isMoving = false;
-    }
-
+    Grid::grid->GetTile(xPos, yPos)->SetType(Type::enemy); // tile now has enemy
 }
 
 void Enemy::Destroy()
@@ -140,95 +122,11 @@ void Enemy::InitAnimations()
 
     for(int i = 0; i < 4; i++)
         moveLeft[i].BindTexture("Images/Enemy/EnemyLeft" + to_string(i) + ".png");
-
-    idle[0].BindTexture("Images/Enemy/EnemyRight.png");
 }
 
 void Enemy::Animate(string animation)
 {
-    if(animation == "MoveRight")
-    {
-        glPushMatrix();
 
-        glTranslated(xPos, yPos, zoom);
-
-        if(frameTimer->GetTicks() > 60)
-        {
-            moveFrame++;
-            moveFrame %= 4;
-            frameTimer->Reset();
-        }
-
-        moveRight[moveFrame].Binder();
-        DrawModel();
-
-        glPopMatrix();
-    }
-    else if(animation == "MoveLeft")
-    {
-        glPushMatrix();
-
-        glTranslated(xPos, yPos, zoom);
-
-        if(frameTimer->GetTicks() > 60)
-        {
-            moveFrame++;
-            moveFrame %= 4;
-            frameTimer->Reset();
-        }
-
-        moveLeft[moveFrame].Binder();
-        DrawModel();
-
-        glPopMatrix();
-    }
-    else if(animation == "MoveUp")
-    {
-        glPushMatrix();
-
-        glTranslated(xPos, yPos, zoom);
-
-        if(frameTimer->GetTicks() > 60)
-        {
-            moveFrame++;
-            moveFrame %= 4;
-            frameTimer->Reset();
-        }
-
-        moveUp[moveFrame].Binder();
-        DrawModel();
-
-        glPopMatrix();
-    }
-    else if(animation == "MoveDown")
-    {
-        glPushMatrix();
-
-        glTranslated(xPos, yPos, zoom);
-
-        if(frameTimer->GetTicks() > 60)
-        {
-            moveFrame++;
-            moveFrame %= 4;
-            frameTimer->Reset();
-        }
-
-        moveDown[moveFrame].Binder();
-        DrawModel();
-
-        glPopMatrix();
-    }
-    else if(animation == "Idle")
-    {
-        glPushMatrix();
-
-        glTranslated(xPos, yPos, zoom);
-
-        idle[0].Binder();
-        DrawModel();
-
-        glPopMatrix();
-    }
 }
 
 void Enemy::MoveToDestination()

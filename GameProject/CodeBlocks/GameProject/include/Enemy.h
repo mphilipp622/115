@@ -18,15 +18,34 @@ class Enemy : public Model
         virtual ~Enemy();
 
         void Move();
+        void Update();
 
         void Destroy();
 
     protected:
 
     private:
+        TextureLoader moveRight[4];
+        TextureLoader moveLeft[4];
+        TextureLoader moveDown[4];
+        TextureLoader moveUp[4];
+        TextureLoader idle[0];
+
+        int moveFrame;
+
+        int xDir, yDir, destX, destY;
+
+        Timer* frameTimer;
+
         Pathfinder* pathfind;
 
+        void InitAnimations();
+        void Animate(string animation);
 
+        float moveSpeed;
+        void MoveToDestination();
+
+        bool isMoving;
 };
 
 #endif // ENEMY_H
