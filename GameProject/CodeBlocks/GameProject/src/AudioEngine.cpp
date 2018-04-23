@@ -5,7 +5,8 @@ ISoundEngine* AudioEngine::engine;
 AudioEngine::AudioEngine()
 {
     // start the sound engine with default parameters
-    engine = createIrrKlangDevice();
+    if(!engine)
+        engine = createIrrKlangDevice(); // initialize static engine if it doesn't exist already
 
     if (!engine)
     {

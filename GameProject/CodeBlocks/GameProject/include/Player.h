@@ -20,6 +20,8 @@ class Player : public Model
         void ShootProjectile(double x, double y);
         static Player* player;
 
+        void Update();
+
         void SetLocked();
 
         void SetInput(WPARAM newParam);
@@ -39,7 +41,11 @@ class Player : public Model
         int arrowCount;
 
         bool playerLocked; // will be used to stop user input while arrows move
+        bool isMoving;
 
+        int destX, destY, xDir, yDir;
+
+        void MoveToDestination();
 };
 
 #endif // PLAYER_H

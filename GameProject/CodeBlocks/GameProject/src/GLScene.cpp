@@ -13,29 +13,37 @@ Timer *sceneTimer = new Timer();
 //Model* temp2 = new Model(1, 1, 0, 1,"test2", "type");
 
 GLScene::GLScene()
+{}
+
+GLScene::GLScene(string newSceneName, string newFilepath)
 {
     screenHeight = GetSystemMetrics(SM_CYSCREEN); // get x size of screen
     screenWidth = GetSystemMetrics(SM_CXSCREEN); // get y size of screen
 
     gridSizeX = 0;
     gridSizeY = 0;
-    mapFilePath = "Maps/TestMap.txt";
-    sceneName = "Game";
+    mapFilePath = newFilepath;
+    sceneName = newSceneName;
 
     // clear static vectors when scene is loaded, just in case there is still data in them.
     enemies.clear();
     movableObjects.clear();
 
-    auto finder = SceneManager::scenes.find("Game");
+    auto finder = SceneManager::scenes.find(sceneName);
 
     if(finder == SceneManager::scenes.end())
     {
         // if scene isn't in scenemanager yet, add it
-        SceneManager::scenes.insert( {"Game", this} );
-        SceneManager::activeScene = "Game";
+        SceneManager::scenes.insert( {sceneName, this} );
+        SceneManager::activeScene = sceneName;
     }
-//    testEnemy = new MeleeEnemy(0.7, 0.7, 2, 0.5, "TestEnemy");
+    else
+    {
+        SceneManager::scenes[sceneName] = this;
+        SceneManager::activeScene = sceneName;
+    }
 }
+
 
 GLScene::~GLScene()
 {
@@ -49,7 +57,7 @@ vector<Model*> GLScene::enemies;
 GLint GLScene::initGL()
 {
 
-    audioEngine = new AudioEngine();
+//    audioEngine = new AudioEngine();
 //    player = new Player(0.0, 0);
 //    testEnemy = new MeleeEnemy(0.7, 3, 0.8, 0.8, "Enemy");
 
@@ -65,31 +73,12 @@ GLint GLScene::initGL()
     GLLight Light(GL_LIGHT0);
 
     // Initialize Models Here
-
     GenerateGrid();
     UserInterface::UI = new UserInterface();
 
-//    block->InitModel("Images/Block.png", true);
-//    block2->InitModel("Images/Block2.png", true);
-//    ground->InitModel("Images/Block.png", true);
-//
-
-//    movableObjects.push_back(player);
-//    enemies.push_back(testEnemy);
-////    movableObjects.push_back(testEnemy);
-//
-//    staticObjects.push_back(block);
-//    staticObjects.push_back(ground);
-//    staticObjects.push_back(block2);
-
-//    sky->LoadTextures();
-//
-//    player->InitPlayer();
-//    Player::player = player;
-//    testEnemy->InitEnemy();
-
 //    BGM = new AudioSource("Music", "Audio/Music/BGM/DrumLoop.wav",0, 0, .8, true);
 //    BGM->PlayMusic();
+
     dTime = new DeltaTime();
     return true;
 }
@@ -130,6 +119,7 @@ GLint GLScene::drawGLScene()
     if(TurnManager::turnManager->IsEnemyTurn())
         TurnManager::turnManager->NextTurn(); // end turn after enemies have moved
 
+    Player::player->Update();
     Player::player->DrawModel();
 //    for(auto& model : staticObjects)
 //        model->DrawModel();
@@ -223,19 +213,27 @@ void GLScene::LoadScene(string name)
 {
     if(name == "Game")
     {
-        GLScene* newGame = new GLScene();
+        // reload the scene
+        GLScene* newGame = new GLScene(sceneName, mapFilePath); // create new scene
 
-        SceneManager::scenes["Game"] = newGame;
-        Reset();
-        newGame->initGL();
+        SceneManager::scenes[sceneName] = newGame; // set the key value pair in hash table to the new instance
+        Reset(); // reset static data
+        newGame->initGL(); // initialize new scene
 
-        delete this;
+        delete this; // kill old scene
     }
     else if(name == "MainMenu")
     {
         Reset();
-        SceneManager::activeScene = "MainMenu";
-        delete this;
+
+        // Remove the scene from scene manager
+        auto finder = SceneManager::scenes.find(sceneName);
+
+        if(finder != SceneManager::scenes.end())
+            SceneManager::scenes.erase(finder);
+
+        SceneManager::activeScene = "MainMenu"; // set active scene to main menu
+        delete this; // delete this scene
     }
 }
 

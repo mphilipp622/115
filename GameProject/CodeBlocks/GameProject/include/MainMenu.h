@@ -26,6 +26,10 @@ class MainMenu : public GLScene
 
         double screenWidth, screenHeight;
         bool killGame;
+
+        void InitModels();
+
+        AudioEngine* audioEngine;
 };
 
 #endif // MAINMENU_H

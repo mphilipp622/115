@@ -51,11 +51,19 @@ Player::Player(double newX, double newY)
     arrowCount = 1; // player starts with 1 arrow
 
     InitModel("Images/Player/play.png", true);
+
+    isMoving = false;
 }
 
 Player::~Player()
 {
     //dtor
+}
+
+void Player::Update()
+{
+    if(isMoving)
+        MoveToDestination();
 }
 
 void Player::Move(double dirX, double dirY)
@@ -67,10 +75,26 @@ void Player::Move(double dirX, double dirY)
     // Check player collision against walls or enemies.
     if(Grid::grid->GetTile(xPos + dirX, yPos + dirY)->IsTraversable())
     {
+        isMoving = true;
         Grid::grid->GetTile(xPos, yPos)->RevertType(); // set player's previous tile to traversable
 
-        xPos += dirX;
-        yPos += dirY;
+        destX = xPos + dirX;
+        destY = yPos + dirY;
+        xDir = dirX;
+        yDir = dirY;
+    }
+
+}
+
+void Player::MoveToDestination()
+{
+    xPos += xDir * DeltaTime::GetDeltaTime();
+    yPos += yDir * DeltaTime::GetDeltaTime();
+
+    if(xPos >= destX - 0.05 && xPos <= destX + 0.05 && yPos >= destY - 0.05 && yPos <= destY + 0.05)
+    {
+        xPos = destX;
+        yPos = destY;
 
         if(Grid::grid->GetTile(xPos, yPos)->IsArrows())
         {
@@ -84,6 +108,8 @@ void Player::Move(double dirX, double dirY)
             Die();
 
         Grid::grid->GetTile(xPos, yPos)->SetType(Type::player);
+
+        isMoving = false;
 
         TurnManager::turnManager->NextTurn(); // end player turn and start enemy turn
     }

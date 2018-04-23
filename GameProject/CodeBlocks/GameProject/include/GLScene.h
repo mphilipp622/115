@@ -26,6 +26,7 @@ class GLScene
 {
     public:
         GLScene();
+        GLScene(string newSceneName, string newFilepath);
         virtual ~GLScene();
         virtual GLint initGL();
         virtual GLint drawGLScene();
@@ -45,7 +46,6 @@ class GLScene
 
     protected:
         unordered_map<string, AudioSource*> audioSources;
-        AudioEngine* audioEngine;
         bool isLoaded;
         AudioSource* BGM;
 
