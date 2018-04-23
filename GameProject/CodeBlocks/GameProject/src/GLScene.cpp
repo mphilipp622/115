@@ -44,6 +44,13 @@ GLScene::GLScene(string newSceneName, string newFilepath)
         SceneManager::scenes[sceneName] = this;
         SceneManager::activeScene = sceneName;
     }
+
+    if(!AudioEngine::engine->isCurrentlyPlaying("Audio/Music/Anxious.mp3"))
+    {
+        BGM = new AudioSource("Music", "Audio/Music/Anxious.mp3",0, 0, 0.8, true);
+        BGM->PlayMusic();
+    }
+
 }
 
 
@@ -232,6 +239,7 @@ void GLScene::LoadScene(string name)
 
         SceneManager::scenes[sceneName] = newGame; // set the key value pair in hash table to the new instance
         Reset(); // reset static data
+//        BGM->Stop();
         newGame->initGL(); // initialize new scene
 
         delete this; // kill old scene
@@ -239,7 +247,7 @@ void GLScene::LoadScene(string name)
     else if(name == "MainMenu")
     {
         Reset();
-
+        BGM->Stop();
         // Remove the scene from scene manager
         auto finder = SceneManager::scenes.find(sceneName);
 

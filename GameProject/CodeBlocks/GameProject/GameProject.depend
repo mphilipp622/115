@@ -376,7 +376,7 @@
 	"ik_IRefCounted.h"
 	"ik_ISoundSource.h"
 
-1524017310 source:e:\college\115\gameproject\codeblocks\gameproject\src\audiosource.cpp
+1524523244 source:e:\college\115\gameproject\codeblocks\gameproject\src\audiosource.cpp
 	"AudioSource.h"
 	<iostream>
 	<GLScene.h>
@@ -469,7 +469,7 @@
 1524017310 e:\college\115\gameproject\codeblocks\gameproject\include\gllight.h
 	<GLScene.h>
 
-1524520157 source:e:\college\115\gameproject\codeblocks\gameproject\src\glscene.cpp
+1524522911 source:e:\college\115\gameproject\codeblocks\gameproject\src\glscene.cpp
 	<GLScene.h>
 	<GLLight.h>
 	<DeltaTime.h>
@@ -541,7 +541,7 @@
 1524017310 source:e:\college\115\gameproject\codeblocks\gameproject\src\timer.cpp
 	<Timer.h>
 
-1524520125 source:e:\college\115\gameproject\codeblocks\gameproject\src\enemy.cpp
+1524520639 source:e:\college\115\gameproject\codeblocks\gameproject\src\enemy.cpp
 	"Enemy.h"
 
 1524520491 e:\college\115\gameproject\codeblocks\gameproject\include\enemy.h

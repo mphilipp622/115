@@ -62,7 +62,10 @@ void AudioSource::PlayChord(string newChord)
 
 void AudioSource::Stop()
 {
-    sound->stop();
+    AudioEngine::engine->stopAllSounds();
+//    sound->setIsPaused(true);
+//    sound->drop();
+//    sound->stop();
 }
 
 void AudioSource::SetVolume(float newVal)
