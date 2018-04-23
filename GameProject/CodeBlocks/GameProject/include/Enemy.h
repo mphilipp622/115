@@ -29,7 +29,10 @@ class Enemy : public Model
         TextureLoader moveLeft[4];
         TextureLoader moveDown[4];
         TextureLoader moveUp[4];
-        TextureLoader idle[0];
+        TextureLoader idleLeft[1];
+        TextureLoader idleRight[1];
+        TextureLoader idleUp[1];
+        TextureLoader idleDown[1];
 
         int moveFrame;
 
@@ -46,6 +49,8 @@ class Enemy : public Model
         void MoveToDestination();
 
         bool isMoving;
+
+        void DrawEnemy();
 };
 
 #endif // ENEMY_H

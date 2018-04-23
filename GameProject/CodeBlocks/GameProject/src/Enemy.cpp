@@ -10,6 +10,11 @@ Enemy::Enemy(double newX, double newY)
     xPos = newX;
 	yPos = newY;
 
+	xDir = 0;
+	yDir = -1;
+	destX = 0;
+	destY = 0;
+
 	width = 1.0;
     height = 1.0;
 
@@ -49,6 +54,10 @@ Enemy::Enemy(double newX, double newY)
     InitAnimations();
 
     InitModel("Images/Enemy/EnemyLeft.png", true);
+
+    isMoving = false;
+
+    active = false;
 }
 
 Enemy::~Enemy()
@@ -58,28 +67,41 @@ Enemy::~Enemy()
 
 void Enemy::Update()
 {
-    if(isMoving && xDir == 1)
+    if(active)
     {
-        MoveToDestination();
-        Animate("MoveRight");
-    }
-    else if(isMoving && xDir == -1)
-    {
-        MoveToDestination()
-        Animate("MoveLeft");
-    }
-    else if(isMoving && yDir == 1)
-    {
-        MoveToDestination();
-        Animate("MoveUp");
-    }
-    else if(isMoving && yDir == -1)
-    {
-        MoveToDestination();
-        Animate("MoveDown");
+        if(isMoving && xDir > 0)
+        {
+            MoveToDestination();
+            Animate("MoveRight");
+        }
+        else if(isMoving && xDir < 0)
+        {
+            MoveToDestination();
+            Animate("MoveLeft");
+        }
+        else if(isMoving && yDir > 0)
+        {
+            MoveToDestination();
+            Animate("MoveUp");
+        }
+        else if(isMoving && yDir <0)
+        {
+            MoveToDestination();
+            Animate("MoveDown");
+        }
     }
     else
-        Animate("Idle");
+    {
+        if(xDir > 0)
+            Animate("IdleRight");
+        else if(xDir < 0)
+            Animate("IdleLeft");
+        else if(yDir > 0)
+            Animate("IdleUp");
+        else if(yDir < 0)
+            Animate("IdleDown");
+    }
+
 }
 
 void Enemy::Move()
@@ -114,6 +136,12 @@ void Enemy::MoveToDestination()
         Grid::grid->GetTile(xPos, yPos)->SetType(Type::enemy); // tile now has enemy
 
         isMoving = false;
+        active = false;
+
+        GLScene::activeEnemy++;
+        if(GLScene::activeEnemy >= GLScene::enemies.size())
+            TurnManager::turnManager->NextTurn();
+        GLScene::activeEnemy %= GLScene::enemies.size();
     }
 
 }
@@ -141,7 +169,10 @@ void Enemy::InitAnimations()
     for(int i = 0; i < 4; i++)
         moveLeft[i].BindTexture("Images/Enemy/EnemyLeft" + to_string(i) + ".png");
 
-    idle[0].BindTexture("Images/Enemy/EnemyRight.png");
+    idleRight[0].BindTexture("Images/Enemy/EnemyRight.png");
+    idleLeft[0].BindTexture("Images/Enemy/EnemyLeft.png");
+    idleUp[0].BindTexture("Images/Enemy/EnemyUp.png");
+    idleDown[0].BindTexture("Images/Enemy/EnemyDown.png");
 }
 
 void Enemy::Animate(string animation)
@@ -160,7 +191,7 @@ void Enemy::Animate(string animation)
         }
 
         moveRight[moveFrame].Binder();
-        DrawModel();
+        DrawEnemy();
 
         glPopMatrix();
     }
@@ -178,7 +209,7 @@ void Enemy::Animate(string animation)
         }
 
         moveLeft[moveFrame].Binder();
-        DrawModel();
+        DrawEnemy();
 
         glPopMatrix();
     }
@@ -196,7 +227,7 @@ void Enemy::Animate(string animation)
         }
 
         moveUp[moveFrame].Binder();
-        DrawModel();
+        DrawEnemy();
 
         glPopMatrix();
     }
@@ -214,24 +245,73 @@ void Enemy::Animate(string animation)
         }
 
         moveDown[moveFrame].Binder();
-        DrawModel();
+        DrawEnemy();
 
         glPopMatrix();
     }
-    else if(animation == "Idle")
+    else if(animation == "IdleRight")
     {
         glPushMatrix();
 
         glTranslated(xPos, yPos, zoom);
 
-        idle[0].Binder();
-        DrawModel();
+        idleRight[0].Binder();
+        DrawEnemy();
+
+        glPopMatrix();
+    }
+    else if(animation == "IdleLeft")
+    {
+        glPushMatrix();
+
+        glTranslated(xPos, yPos, zoom);
+
+        idleLeft[0].Binder();
+        DrawEnemy();
+
+        glPopMatrix();
+    }
+    else if(animation == "IdleUp")
+    {
+        glPushMatrix();
+
+        glTranslated(xPos, yPos, zoom);
+
+        idleUp[0].Binder();
+        DrawEnemy();
+
+        glPopMatrix();
+    }
+    else if(animation == "IdleDown")
+    {
+        glPushMatrix();
+
+        glTranslated(xPos, yPos, zoom);
+
+        idleDown[0].Binder();
+        DrawEnemy();
 
         glPopMatrix();
     }
 }
 
-void Enemy::MoveToDestination()
+void Enemy::DrawEnemy()
 {
+    glColor3f(1.0, 1.0, 1.0);
 
+    glBegin(GL_QUADS);
+
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(vertices[0].x, vertices[0].y, vertices[0].z);
+
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(vertices[1].x, vertices[1].y, vertices[1].z);
+
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(vertices[2].x, vertices[2].y, vertices[2].z);
+
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(vertices[3].x, vertices[3].y, vertices[3].z);
+
+    glEnd();
 }

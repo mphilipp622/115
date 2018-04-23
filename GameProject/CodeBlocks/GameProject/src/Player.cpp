@@ -97,6 +97,7 @@ void Player::Move(double dirX, double dirY)
     if(Grid::grid->GetTile(xPos + dirX, yPos + dirY)->IsTraversable())
     {
         isMoving = true;
+        playerLocked = true;
         Grid::grid->GetTile(xPos, yPos)->RevertType(); // set player's previous tile to traversable
 
         destX = xPos + dirX;
@@ -133,6 +134,7 @@ void Player::MoveToDestination()
         isMoving = false;
 
         TurnManager::turnManager->NextTurn(); // end player turn and start enemy turn
+        playerLocked = false;
     }
 
 }
@@ -177,7 +179,6 @@ void Player::DrawPlayer()
 	}
 
     glEnd();
-
 }
 
 void Player::Animate(string animation)

@@ -273,3 +273,14 @@ void Model::ChangeImage(string filename)
 {
     texture->BindTexture(filename);
 }
+
+bool Model::IsActive()
+{
+    return active;
+}
+
+void Model::SetActive()
+{
+    active = true;
+    Move();
+}

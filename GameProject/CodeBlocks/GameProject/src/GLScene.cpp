@@ -25,6 +25,8 @@ GLScene::GLScene(string newSceneName, string newFilepath)
     mapFilePath = newFilepath;
     sceneName = newSceneName;
 
+    activeEnemy = 0;
+
     // clear static vectors when scene is loaded, just in case there is still data in them.
     enemies.clear();
     movableObjects.clear();
@@ -52,6 +54,8 @@ GLScene::~GLScene()
 // Static Variables for use in player class to check collision
 vector<Model*> GLScene::movableObjects;
 vector<Model*> GLScene::enemies;
+
+int GLScene::activeEnemy;
 
 // initialize our graphic settings for our scene
 GLint GLScene::initGL()
@@ -108,20 +112,26 @@ GLint GLScene::drawGLScene()
     for(auto& arrow : movableObjects)
         arrow->Update();
 
-    for(auto& enemy : enemies)
-    {
-        if(TurnManager::turnManager->IsEnemyTurn())
-        {
-            enemy->Move();
-            enemy->Update();
-        }
-
-
-
-    }
 
     if(TurnManager::turnManager->IsEnemyTurn())
-        TurnManager::turnManager->NextTurn(); // end turn after enemies have moved
+    {
+        if(!enemies[activeEnemy]->IsActive())
+            enemies[activeEnemy]->SetActive();
+//        enemies[activeEnemy]->Update();
+    }
+
+
+    for(auto& enemy : enemies)
+    {
+        enemy->Update();
+    }
+//
+//
+//
+//    }
+
+//    if(activeEnemy >= enemies.size() && TurnManager::turnManager->IsEnemyTurn())
+//        TurnManager::turnManager->NextTurn(); // end turn after enemies have moved
 
     Player::player->Update();
 //    Player::player->DrawModel();
@@ -251,4 +261,5 @@ void GLScene::Reset()
     UserInterface::UI->Reset();
     WinLose::winLose->Reset();
     TurnManager::turnManager->SetTurn(0);
+    activeEnemy = 0;
 }

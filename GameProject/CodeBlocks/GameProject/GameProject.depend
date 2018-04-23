@@ -271,7 +271,7 @@
 1523994970 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\type.cpp
 	"Type.h"
 
-1524017310 source:e:\college\115\gameproject\codeblocks\gameproject\src\audioengine.cpp
+1524510827 source:e:\college\115\gameproject\codeblocks\gameproject\src\audioengine.cpp
 	"AudioEngine.h"
 
 1524017310 e:\college\115\gameproject\codeblocks\gameproject\include\audioengine.h
@@ -387,7 +387,7 @@
 	<windows.h>
 	<AudioEngine.h>
 
-1524437303 e:\college\115\gameproject\codeblocks\gameproject\include\glscene.h
+1524518659 e:\college\115\gameproject\codeblocks\gameproject\include\glscene.h
 	<windows.h>
 	<glut.h>
 	<iostream>
@@ -411,7 +411,7 @@
 	<GL/gl.h>
 	<GL/glu.h>
 
-1524438451 e:\college\115\gameproject\codeblocks\gameproject\include\model.h
+1524518421 e:\college\115\gameproject\codeblocks\gameproject\include\model.h
 	<windows.h>
 	<glut.h>
 	<string>
@@ -419,6 +419,7 @@
 	<AudioSource.h>
 	<cmath>
 	<TurnManager.h>
+	<Timer.h>
 
 1524017310 e:\college\115\gameproject\codeblocks\gameproject\include\textureloader.h
 	<SOIL.h>
@@ -434,7 +435,7 @@
 	<string>
 	<Player.h>
 
-1524429857 e:\college\115\gameproject\codeblocks\gameproject\include\player.h
+1524510827 e:\college\115\gameproject\codeblocks\gameproject\include\player.h
 	<windows.h>
 	<Model.h>
 	<TextureLoader.h>
@@ -468,7 +469,7 @@
 1524017310 e:\college\115\gameproject\codeblocks\gameproject\include\gllight.h
 	<GLScene.h>
 
-1524441074 source:e:\college\115\gameproject\codeblocks\gameproject\src\glscene.cpp
+1524520157 source:e:\college\115\gameproject\codeblocks\gameproject\src\glscene.cpp
 	<GLScene.h>
 	<GLLight.h>
 	<DeltaTime.h>
@@ -487,7 +488,7 @@
 	<DeltaTime.h>
 	<string>
 
-1524439331 source:e:\college\115\gameproject\codeblocks\gameproject\src\model.cpp
+1524520188 source:e:\college\115\gameproject\codeblocks\gameproject\src\model.cpp
 	<Model.h>
 	<TextureLoader.h>
 	<DeltaTime.h>
@@ -495,7 +496,7 @@
 	<algorithm>
 	<string>
 
-1524437474 source:e:\college\115\gameproject\codeblocks\gameproject\src\player.cpp
+1524519732 source:e:\college\115\gameproject\codeblocks\gameproject\src\player.cpp
 	"Player.h"
 
 1524254559 source:e:\college\115\gameproject\codeblocks\gameproject\src\projectile.cpp
@@ -533,17 +534,17 @@
 	<GL\GL.h>
 	<iostream>
 
-1524432109 source:e:\college\115\gameproject\codeblocks\gameproject\src\tile.cpp
+1524441512 source:e:\college\115\gameproject\codeblocks\gameproject\src\tile.cpp
 	"Tile.h"
 	<iostream>
 
 1524017310 source:e:\college\115\gameproject\codeblocks\gameproject\src\timer.cpp
 	<Timer.h>
 
-1524441395 source:e:\college\115\gameproject\codeblocks\gameproject\src\enemy.cpp
+1524520125 source:e:\college\115\gameproject\codeblocks\gameproject\src\enemy.cpp
 	"Enemy.h"
 
-1524429859 e:\college\115\gameproject\codeblocks\gameproject\include\enemy.h
+1524520491 e:\college\115\gameproject\codeblocks\gameproject\include\enemy.h
 	<Pathfinder.h>
 	<Grid.h>
 	<Player.h>
@@ -628,10 +629,10 @@
 	<unordered_map>
 	<string>
 
-1524441339 source:e:\college\115\gameproject\codeblocks\gameproject\src\mainmenu.cpp
+1524510827 source:e:\college\115\gameproject\codeblocks\gameproject\src\mainmenu.cpp
 	"MainMenu.h"
 
-1524440708 e:\college\115\gameproject\codeblocks\gameproject\include\mainmenu.h
+1524510827 e:\college\115\gameproject\codeblocks\gameproject\include\mainmenu.h
 	<GLScene.h>
 	<GLLight.h>
 

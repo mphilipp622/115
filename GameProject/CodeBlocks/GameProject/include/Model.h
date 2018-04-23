@@ -8,6 +8,7 @@
 #include <AudioSource.h>
 #include <cmath>
 #include <TurnManager.h>
+#include <Timer.h>
 
 using namespace std;
 
@@ -58,6 +59,9 @@ class Model
 
         void DrawSquare(float newWidth, float newHeight);
 
+        bool IsActive();
+        void SetActive();
+
     protected:
         float width, height, radius;
         double xPos, yPos;
@@ -66,6 +70,8 @@ class Model
 
         // This model will check square-to-square collision with other objects. Useful for certain types of environmental collision maybe
         virtual bool CheckCollision();
+
+        bool active;
 
     private:
         bool Overlapping(double min0, double max0, double min1, double max1);

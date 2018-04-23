@@ -43,6 +43,7 @@ class GLScene
 
         static vector<Model*> movableObjects; // only moving objects will check for collision
         static vector<Model*> enemies;
+        static int activeEnemy;
 
     protected:
         unordered_map<string, AudioSource*> audioSources;
