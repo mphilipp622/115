@@ -47,7 +47,7 @@ GLScene::GLScene(string newSceneName, string newFilepath)
 
     if(!AudioEngine::engine->isCurrentlyPlaying("Audio/Music/Anxious.mp3"))
     {
-        BGM = new AudioSource("Music", "Audio/Music/Anxious.mp3",0, 0, 0.8, true);
+        BGM = new AudioSource("Music", "Audio/Music/Anxious.mp3",0, 0, 0.9, true);
         BGM->PlayMusic();
     }
 

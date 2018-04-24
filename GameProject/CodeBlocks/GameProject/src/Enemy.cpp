@@ -58,6 +58,8 @@ Enemy::Enemy(double newX, double newY)
     isMoving = false;
 
     active = false;
+
+    dyingSound = new AudioSource("MonsterDie", "Audio/SFX/MonsterDie.mp3", xPos, yPos, 0.6, false);
 }
 
 Enemy::~Enemy()
@@ -148,6 +150,7 @@ void Enemy::MoveToDestination()
 
 void Enemy::Destroy()
 {
+    dyingSound->Play();
     auto finder = find(GLScene::enemies.begin(), GLScene::enemies.end(), this); // find the enemy in the scene
     GLScene::enemies.erase(finder); // remove the enemy from the vector
     Grid::grid->GetTile(xPos, yPos)->RevertType();

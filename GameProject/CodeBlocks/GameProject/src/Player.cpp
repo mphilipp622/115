@@ -64,6 +64,8 @@ Player::Player(double newX, double newY)
     frameTimer = new Timer();
     frameTimer->Start();
 
+    arrowSound = new AudioSource("ArrowSound", "Audio/SFX/Arrow.mp3", xPos, yPos, 1.0, false);
+    dyingSound = new AudioSource("PlayerDie", "Audio/SFX/PlayerDie.ogg", xPos, yPos, 0.6, false);
     idleFrame = 0;
     runFrame = 0;
 }
@@ -316,6 +318,7 @@ void Player::ShootProjectile(double x, double y)
         newProjectile->InitModel("Images/ArrowDown.png", true);
 
     arrowCount--;
+    arrowSound->Play();
     UserInterface::UI->RemoveArrow();
     GLScene::movableObjects.push_back(newProjectile);
 }
@@ -359,6 +362,7 @@ int Player::GetArrowCount()
 
 void Player::Die()
 {
+    dyingSound->Play();
     WinLose::winLose->Lose();
 }
 

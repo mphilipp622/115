@@ -61,6 +61,8 @@ class Player : public Model
 
         void InitAnimations();
 
+        AudioSource* arrowSound;
+        AudioSource* dyingSound;
 };
 
 #endif // PLAYER_H

@@ -51,6 +51,8 @@ class Enemy : public Model
         bool isMoving;
 
         void DrawEnemy();
+
+        AudioSource* dyingSound;
 };
 
 #endif // ENEMY_H

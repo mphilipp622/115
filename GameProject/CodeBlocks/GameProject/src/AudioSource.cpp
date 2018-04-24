@@ -37,12 +37,17 @@ void AudioSource::Update(double newX, double newY)
 
 void AudioSource::Play()
 {
-    sound = AudioEngine::engine->play3D(filePath.c_str(), vec3df(xPos, yPos, 0), loop, false);
+    sound = AudioEngine::engine->play2D(filePath.c_str(), false, true);
+    SetVolume(volume);
+    sound->setIsPaused(false);
+//    sound = AudioEngine::engine->play3D(filePath.c_str(), vec3df(xPos, yPos, 0), loop, false);
 }
 
 void AudioSource::PlayMusic()
 {
-    sound = AudioEngine::engine->play2D(filePath.c_str(), loop);
+    sound = AudioEngine::engine->play2D(filePath.c_str(), loop, true);
+    SetVolume(volume);
+    sound->setIsPaused(false);
 }
 
 void AudioSource::PlayChord(string newChord)
@@ -76,7 +81,8 @@ void AudioSource::SetVolume(float newVal)
     else if(newVal < 0)
         newVal = 0;
 
-    source->setDefaultVolume(newVal);
+    sound->setVolume(newVal);
+//    source->setDefaultVolume(newVal);
 }
 
 string AudioSource::GetName()
