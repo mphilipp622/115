@@ -111,7 +111,10 @@ void Enemy::Move()
     if(isMoving) return;
 
     isMoving = true;
+
     Tile* tempTile = pathfind->GetNextTile(xPos, yPos);
+    if(tempTile == Grid::grid->GetTile(xPos, yPos))
+        return; // handles cases where the enemy can't move due to obstructions
 
     destX = tempTile->GetX();
     destY = tempTile->GetY();
@@ -120,6 +123,7 @@ void Enemy::Move()
 
     // once we've found our next tile, move enemy into it and set types accordingly.
     Grid::grid->GetTile(xPos, yPos)->RevertType();
+
 }
 
 void Enemy::MoveToDestination()

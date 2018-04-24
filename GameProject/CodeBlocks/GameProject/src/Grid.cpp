@@ -64,9 +64,9 @@ int Grid::GetSizeY()
 
 bool Grid::BoundSafe(int x, int y)
 {
-    if(x > sizeX || x < 0)
+    if(x >= sizeX || x < 0)
         return false;
-    if(y > sizeY || y < 0)
+    if(y >= sizeY || y < 0)
         return false;
 
     if(tiles[x][y]->IsWall())

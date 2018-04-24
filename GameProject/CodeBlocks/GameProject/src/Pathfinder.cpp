@@ -35,7 +35,7 @@ Tile* Pathfinder::GetNextTile(int x, int y)
             if(currentNode.path.size() > 0 && !currentNode.path.at(0)->IsEnemy())
                 return currentNode.path.at(0);
 
-            return currentNode.tile; // this case should never happen, but putting it in just in case
+            return startNode.tile; // basically, if we found no path or our next tile is an enemy, we don't move
         }
 
         MapKey newKey = MapKey(currentNode.tile->GetX(), currentNode.tile->GetY());
@@ -73,7 +73,7 @@ vector<Tile*> Pathfinder::GetSuccessors(Tile* originTile)
 {
     vector<Tile*> successors;
 
-    // start from top left tile from origin and move right and down and get successors.
+    // start from bottom left tile from origin and move right and up and get successors.
     for(int i = -1; i <= 1; i++)
     {
         for(int j = -1; j <= 1; j++)
@@ -84,14 +84,8 @@ vector<Tile*> Pathfinder::GetSuccessors(Tile* originTile)
             if(!Grid::grid->BoundSafe(originTile->GetX() + j, originTile->GetY() + i))
                 continue;
 
-//            if(Grid::grid->GetTile(originTile->GetX() + j, originTile->GetY() + i)->IsEnemy())
-//                continue; // ignore if enemy already occupies tile.
-
-//            if(Grid::grid->GetTile(originTile->GetX() + j, originTile->GetY() + i)->IsWall())
-//                continue;
-
             if(ManhattanDistance(originTile->GetX(), originTile->GetY(), originTile->GetX() + j, originTile->GetY() + i) > 1)
-                continue;
+                continue; // rule out any diagonal tiles
 
             successors.push_back(Grid::grid->GetTile(originTile->GetX() + j, originTile->GetY() + i));
         }
