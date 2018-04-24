@@ -57,10 +57,7 @@ Player::Player(double newX, double newY)
 
     InitModel("Images/Player/play.png", true);
 
-    for(int i = 0; i < 4; i++)
-        run[i].BindTexture("Images/Player/player" + to_string(i) + ".png");
-
-    idle[0].BindTexture("Images/Player/play.png");
+    InitAnimations();
 
     isMoving = false;
 
@@ -81,10 +78,27 @@ void Player::Update()
     if(isMoving)
     {
         MoveToDestination();
-        Animate("Run");
+        if(xDir > 0)
+            Animate("RunRight");
+        else if(xDir < 0)
+            Animate("RunLeft");
+        else if(yDir > 0)
+            Animate("RunUp");
+        else if(yDir < 0)
+            Animate("RunDown");
     }
     else
-        Animate("Idle");
+    {
+        if(xDir > 0)
+            Animate("IdleRight");
+        else if(xDir < 0)
+            Animate("IdleLeft");
+        else if(yDir > 0)
+            Animate("IdleUp");
+        else if(yDir <0)
+            Animate("IdleDown");
+    }
+
 }
 
 void Player::Move(double dirX, double dirY)
@@ -145,24 +159,6 @@ void Player::DrawPlayer()
 
     glBegin(GL_QUADS);
 
-	if (xDir == -1.0)
-	{
-		// flip texture to the left
-
-		glTexCoord2f(0.0, 1.0);
-		glVertex3f(-vertices[0].x, vertices[0].y, vertices[0].z);
-
-		glTexCoord2f(1.0, 1.0);
-		glVertex3f(-vertices[1].x, vertices[1].y, vertices[1].z);
-
-		glTexCoord2f(1.0, 0.0);
-		glVertex3f(-vertices[2].x, vertices[2].y, vertices[2].z);
-
-		glTexCoord2f(0.0, 0.0);
-		glVertex3f(-vertices[3].x, vertices[3].y, vertices[3].z);
-	}
-	else
-	{
 		// flip texture to the right
 
 		glTexCoord2f(0.0, 1.0);
@@ -176,14 +172,13 @@ void Player::DrawPlayer()
 
 		glTexCoord2f(0.0, 0.0);
 		glVertex3f(vertices[3].x, vertices[3].y, vertices[3].z);
-	}
 
     glEnd();
 }
 
 void Player::Animate(string animation)
 {
-    if(animation == "Run")
+    if(animation == "RunRight")
     {
         glPushMatrix();
 
@@ -196,12 +191,12 @@ void Player::Animate(string animation)
             frameTimer->Reset();
         }
 
-        run[runFrame].Binder();
+        runRight[runFrame].Binder();
         DrawPlayer();
 
         glPopMatrix();
     }
-    else if(animation == "Idle")
+    else if(animation == "RunLeft")
     {
         glPushMatrix();
 
@@ -209,12 +204,92 @@ void Player::Animate(string animation)
 
         if(frameTimer->GetTicks() > 60)
         {
-            idleFrame++;
-            idleFrame %= 1;
+            runFrame++;
+            runFrame %= 4;
             frameTimer->Reset();
         }
 
-        idle[idleFrame].Binder();
+        runLeft[runFrame].Binder();
+        DrawPlayer();
+
+        glPopMatrix();
+    }
+    else if(animation == "RunUp")
+    {
+        glPushMatrix();
+
+        glTranslated(xPos, yPos, zoom);
+
+        if(frameTimer->GetTicks() > 60)
+        {
+            runFrame++;
+            runFrame %= 4;
+            frameTimer->Reset();
+        }
+
+        runUp[runFrame].Binder();
+        DrawPlayer();
+
+        glPopMatrix();
+    }
+    else if(animation == "RunDown")
+    {
+        glPushMatrix();
+
+        glTranslated(xPos, yPos, zoom);
+
+        if(frameTimer->GetTicks() > 60)
+        {
+            runFrame++;
+            runFrame %= 4;
+            frameTimer->Reset();
+        }
+
+        runDown[runFrame].Binder();
+        DrawPlayer();
+
+        glPopMatrix();
+    }
+    else if(animation == "IdleLeft")
+    {
+        glPushMatrix();
+
+        glTranslated(xPos, yPos, zoom);
+
+        idleLeft[0].Binder();
+        DrawPlayer();
+
+        glPopMatrix();
+    }
+    else if(animation == "IdleRight")
+    {
+        glPushMatrix();
+
+        glTranslated(xPos, yPos, zoom);
+
+        idleRight[0].Binder();
+        DrawPlayer();
+
+        glPopMatrix();
+    }
+    else if(animation == "IdleDown")
+    {
+        glPushMatrix();
+
+        glTranslated(xPos, yPos, zoom);
+
+        idleDown[0].Binder();
+        DrawPlayer();
+
+        glPopMatrix();
+    }
+    else if(animation == "IdleUp")
+    {
+        glPushMatrix();
+
+        glTranslated(xPos, yPos, zoom);
+
+        idleUp[0].Binder();
         DrawPlayer();
 
         glPopMatrix();
@@ -285,4 +360,25 @@ int Player::GetArrowCount()
 void Player::Die()
 {
     WinLose::winLose->Lose();
+}
+
+
+void Player::InitAnimations()
+{
+    for(int i = 0; i < 6; i++)
+        runLeft[i].BindTexture("Images/Player/PlayerLeft" + to_string(i) + ".png");
+
+    for(int i = 0; i < 6; i++)
+        runRight[i].BindTexture("Images/Player/PlayerRight" + to_string(i) + ".png");
+
+    for(int i = 0; i < 6; i++)
+        runUp[i].BindTexture("Images/Player/PlayerUp" + to_string(i) + ".png");
+
+    for(int i = 0; i < 6; i++)
+        runDown[i].BindTexture("Images/Player/PlayerDown" + to_string(i) + ".png");
+
+    idleRight[0].BindTexture("Images/Player/PlayerRight0.png");
+    idleLeft[0].BindTexture("Images/Player/PlayerLeft0.png");
+    idleUp[0].BindTexture("Images/Player/PlayerUp0.png");
+    idleDown[0].BindTexture("Images/Player/PlayerDown0.png");
 }

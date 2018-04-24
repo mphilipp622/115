@@ -35,8 +35,14 @@ class Player : public Model
     private:
         WPARAM wParam;
         int runFrame, idleFrame;
-        TextureLoader run[4];
-        TextureLoader idle[1];
+        TextureLoader runRight[6];
+        TextureLoader runLeft[6];
+        TextureLoader runDown[6];
+        TextureLoader runUp[6];
+        TextureLoader idleRight[1];
+        TextureLoader idleLeft[1];
+        TextureLoader idleUp[1];
+        TextureLoader idleDown[1];
 
         float moveSpeed;
 
@@ -52,6 +58,8 @@ class Player : public Model
         void MoveToDestination();
         void Animate(string animation);
         void DrawPlayer();
+
+        void InitAnimations();
 
 };
 
