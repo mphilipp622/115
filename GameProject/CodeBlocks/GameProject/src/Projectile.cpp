@@ -109,7 +109,6 @@ void Projectile::CheckCollisionEnemy()
     {
         if(Collision(enemy))
         {
-            cout << enemy->GetX() << "    " << enemy->GetY() << endl;
             enemy->Destroy();  // kill the enemy
             Destroy();
         }

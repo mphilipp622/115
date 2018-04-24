@@ -15,7 +15,7 @@ Player::Player(double newX, double newY)
     xPos = newX;
 	yPos = newY;
 
-	width = 1.0;
+	width = 0.7;
     height = 1.0;
 
     rotateX = 0;
