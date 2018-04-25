@@ -55,7 +55,7 @@ Player::Player(double newX, double newY)
 
     arrowCount = 1; // player starts with 1 arrow
 
-    InitModel("Images/Player/play.png", true);
+    InitModel("Images/Player/PlayerRight0.png", true);
 
     InitAnimations();
 

@@ -11,9 +11,7 @@ Grid::Grid(int newXSize, int newYSize, vector<vector<int>> map)
 	sizeY = newYSize;
 
 	for(int i = 0; i < sizeX; i++)
-    {
         tiles.push_back(vector<Tile*>());
-    }
 
     // GRID COORDINATES START FROM BOTTOM LEFT.
     // Origin at bottom left is (0, 0). Top right is (sizeX, sizeY)
@@ -66,11 +64,13 @@ bool Grid::BoundSafe(int x, int y)
 {
     if(x >= sizeX || x < 0)
         return false;
+
     if(y >= sizeY || y < 0)
         return false;
 
     if(tiles[x][y]->IsWall())
         return false;
+
 
     return true;
 }

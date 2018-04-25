@@ -116,40 +116,29 @@ GLint GLScene::drawGLScene()
             tile2->DrawModel();
     }
 
-    for(auto& arrow : movableObjects)
-        arrow->Update();
-
-
-    if(TurnManager::turnManager->IsEnemyTurn())
+    if(movableObjects.size() > 0)
     {
-        if(!enemies[activeEnemy]->IsActive())
-            enemies[activeEnemy]->SetActive();
-//        enemies[activeEnemy]->Update();
+        for(auto& arrow : movableObjects)
+            arrow->Update();
     }
 
 
-    for(auto& enemy : enemies)
-    {
-        enemy->Update();
-    }
-//
-//
-//
-//    }
 
-//    if(activeEnemy >= enemies.size() && TurnManager::turnManager->IsEnemyTurn())
-//        TurnManager::turnManager->NextTurn(); // end turn after enemies have moved
+    if(enemies.size() > 0)
+    {
+        if(TurnManager::turnManager->IsEnemyTurn())
+        {
+            if(!enemies[activeEnemy]->IsActive())
+                enemies[activeEnemy]->SetActive();
+        }
+
+        for(auto& enemy : enemies)
+        {
+            enemy->Update();
+        }
+    }
 
     Player::player->Update();
-//    Player::player->DrawModel();
-//    for(auto& model : staticObjects)
-//        model->DrawModel();
-//
-//    for(auto& enemy : enemies)
-//        enemy->Update();
-//
-//    for(auto& model : movableObjects)
-//        model->Update();
 
     dTime->UpdateDeltaTime();
 
@@ -216,7 +205,7 @@ void GLScene::GenerateGrid()
             if(grid->GetTile(i, j)->GetType() == Type::player)
                 Player::player = new Player(i, j); // create player
             if(grid->GetTile(i, j)->GetType() == Type::enemy)
-                enemies.push_back(new Enemy(i, j));
+                enemies.push_back(new Enemy(i, j, "Enemy" + to_string(i) + to_string(j)));
 
         }
     }

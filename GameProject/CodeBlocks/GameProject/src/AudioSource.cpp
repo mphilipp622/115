@@ -21,8 +21,8 @@ AudioSource::AudioSource(string newName, string newFilePath, double newX, double
     volume = newVolume;
     loop = isLooping;
 
-    sound = 0;
-    source = 0;
+//    sound = 0;
+//    source = 0;
 }
 
 AudioSource::~AudioSource()

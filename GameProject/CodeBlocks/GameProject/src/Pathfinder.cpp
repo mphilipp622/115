@@ -15,8 +15,8 @@ Tile* Pathfinder::GetNextTile(int x, int y)
     // A* pathfinding implementation.
 
     priority_queue<Node, vector<Node>, greater<Node> > frontier; // ascending order priority queue for Nodes
-    map<MapKey, Node> visitedNodes;
-
+//    map<MapKey, Node> visitedNodes;
+    vector<Node> visitedNodes;
     Node startNode = Node(Grid::grid->GetTile(x, y), 0, ManhattanDistance(Grid::grid->GetTile(x, y)));
     frontier.push(startNode);
 
@@ -25,7 +25,7 @@ Tile* Pathfinder::GetNextTile(int x, int y)
         Node currentNode = frontier.top(); // grab next node
         frontier.pop(); // remove it from priority queue
 
-        if(!visitedNodes.empty() && visitedNodes.find(MapKey(currentNode.tile->GetX(), currentNode.tile->GetY())) != visitedNodes.end())
+        if(find(visitedNodes.begin(), visitedNodes.end(), currentNode) != visitedNodes.end())
             // node is already visited, continue
             continue;
 
@@ -38,8 +38,8 @@ Tile* Pathfinder::GetNextTile(int x, int y)
             return startNode.tile; // basically, if we found no path or our next tile is an enemy, we don't move
         }
 
-        MapKey newKey = MapKey(currentNode.tile->GetX(), currentNode.tile->GetY());
-        visitedNodes.insert( { newKey, currentNode } ); // add current node to our list of visited nodes
+//        MapKey newKey = MapKey(currentNode.tile->GetX(), currentNode.tile->GetY());
+        visitedNodes.push_back( currentNode); // add current node to our list of visited nodes
 
         for(auto& tile : GetSuccessors(currentNode.tile))
         {
@@ -50,12 +50,14 @@ Tile* Pathfinder::GetNextTile(int x, int y)
 
             nextNode.path.push_back(tile); // add this node to the path
 
-            if(visitedNodes.find(MapKey(tile->GetX(), tile->GetY())) == visitedNodes.end())
+            if(find(visitedNodes.begin(), visitedNodes.end(), nextNode) == visitedNodes.end())
                 // Add this node to the priority queue if it hasn't already been added to the visitedNodes
                 frontier.push(nextNode);
 
         }
     }
+
+    return startNode.tile;
 }
 
 int Pathfinder::ManhattanDistance(Tile* tile)

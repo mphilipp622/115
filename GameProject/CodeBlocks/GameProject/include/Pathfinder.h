@@ -45,30 +45,10 @@ class Pathfinder
             {
                 return fCost > other.fCost;
             }
-        };
-
-        struct MapKey
-        {
-            int x;
-            int y;
-
-            MapKey(int newX, int newY)
+            bool operator==(const struct Node& other) const
             {
-                x = newX;
-                y = newY;
+                return (tile->GetX() == other.tile->GetX() && tile->GetY() == other.tile->GetY());
             }
-
-            bool operator < (const struct MapKey &other) const
-            {
-                return (x < other.x || y < other.y);
-            }
-
-            bool operator == (const struct MapKey &other) const
-            {
-                return (x == other.x && y == other.y);
-            }
-
-
         };
 
         bool IsGoal(Node node);

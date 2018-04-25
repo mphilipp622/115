@@ -130,7 +130,7 @@
 	<MainMenu.h>
 	<string>
 
-1524504647 c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\include\glscene.h
+1524629531 c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\include\glscene.h
 	<windows.h>
 	<glut.h>
 	<iostream>
@@ -148,7 +148,7 @@
 	<SceneManager.h>
 	<UserInterface.h>
 
-1524501875 c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\include\model.h
+1524629531 c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\include\model.h
 	<windows.h>
 	<glut.h>
 	<string>
@@ -156,6 +156,7 @@
 	<AudioSource.h>
 	<cmath>
 	<TurnManager.h>
+	<Timer.h>
 
 1520900072 c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\include\textureloader.h
 	<SOIL.h>
@@ -177,7 +178,7 @@
 	<string>
 	<Player.h>
 
-1523923320 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\audiosource.cpp
+1524639114 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\audiosource.cpp
 	"AudioSource.h"
 	<iostream>
 	<GLScene.h>
@@ -188,7 +189,7 @@
 1519964614 c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\include\gllight.h
 	<GLScene.h>
 
-1524501875 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\model.cpp
+1524629531 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\model.cpp
 	<Model.h>
 	<TextureLoader.h>
 	<DeltaTime.h>
@@ -219,7 +220,7 @@
 	<DeltaTime.h>
 	<string>
 
-1524507370 c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\include\player.h
+1524629531 c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\include\player.h
 	<windows.h>
 	<Model.h>
 	<TextureLoader.h>
@@ -228,17 +229,17 @@
 	<UserInterface.h>
 	<WinLose.h>
 
-1524507048 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\glscene.cpp
+1524639025 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\glscene.cpp
 	<GLScene.h>
 	<GLLight.h>
 	<DeltaTime.h>
 	<Timer.h>
 	<UserInterface.h>
 
-1524507402 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\player.cpp
+1524638736 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\player.cpp
 	"Player.h"
 
-1524248667 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\projectile.cpp
+1524638314 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\projectile.cpp
 	"Projectile.h"
 	<cmath>
 
@@ -260,7 +261,7 @@
 
 1523995195 c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\include\type.h
 
-1524501875 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\grid.cpp
+1524632269 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\grid.cpp
 	"Grid.h"
 
 1524242662 c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\include\grid.h
@@ -568,12 +569,12 @@
 
 1524501875 c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\include\turnmanager.h
 
-1524509131 c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\include\enemy.h
+1524639033 c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\include\enemy.h
 	<Pathfinder.h>
 	<Grid.h>
 	<Player.h>
 
-1524242662 c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\include\pathfinder.h
+1524637067 c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\include\pathfinder.h
 	<Tile.h>
 	<Grid.h>
 	<cmath>
@@ -582,10 +583,10 @@
 	<map>
 	<tuple>
 
-1524501875 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\enemy.cpp
+1524639098 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\enemy.cpp
 	"Enemy.h"
 
-1524242662 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\pathfinder.cpp
+1524639202 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\pathfinder.cpp
 	"Pathfinder.h"
 
 1524501875 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\turnmanager.cpp
@@ -607,7 +608,7 @@
 	<Grid.h>
 	<vector>
 
-1524501875 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\userinterface.cpp
+1524638535 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\userinterface.cpp
 	"UserInterface.h"
 	<cmath>
 
@@ -615,7 +616,7 @@
 	<iostream>
 	<UserInterface.h>
 
-1524501875 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\winlose.cpp
+1524637971 source:c:\users\seapanda\documents\college\115\gameproject\codeblocks\gameproject\src\winlose.cpp
 	"WinLose.h"
 
 1524436251 e:\college\115\gameproject\codeblocks\gameproject\include\winlose.h

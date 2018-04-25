@@ -5,7 +5,7 @@ Enemy::Enemy()
     //ctor
 }
 
-Enemy::Enemy(double newX, double newY)
+Enemy::Enemy(double newX, double newY, string newName)
 {
     xPos = newX;
 	yPos = newY;
@@ -24,6 +24,8 @@ Enemy::Enemy(double newX, double newY)
 
     // translations
     zoom = 0;
+
+    name = newName;
 
     // Initialize Quad
     vertices[0].x = -width / 2;

@@ -14,7 +14,7 @@ class Enemy : public Model
 {
     public:
         Enemy();
-        Enemy(double newX, double newY);
+        Enemy(double newX, double newY, string newName);
         virtual ~Enemy();
 
         void Move();
