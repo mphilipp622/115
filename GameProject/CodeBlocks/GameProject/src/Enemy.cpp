@@ -51,7 +51,7 @@ Enemy::Enemy(double newX, double newY, string newName)
     frameTimer->Start();
 
     moveFrame = 0;
-    moveSpeed = 2.0;
+    moveSpeed = 6.0;
 
     InitAnimations();
 
@@ -112,19 +112,32 @@ void Enemy::Move()
 {
     if(isMoving) return;
 
-    isMoving = true;
 
     Tile* tempTile = pathfind->GetNextTile(xPos, yPos);
-    if(tempTile == Grid::grid->GetTile(xPos, yPos))
-        return; // handles cases where the enemy can't move due to obstructions
+//    cout << tempTile->GetX() << ", " << tempTile->GetY() << endl;
+    if(Grid::grid->GetTile(tempTile->GetX(), tempTile->GetY())->IsEnemy())
+    {
+        // handle the case where the next tile is an enemy. In this case, enemy should stay stationary.
+        isMoving = false;
+        active = false;
+        destX = xPos;
+        destY = yPos;
 
-    destX = tempTile->GetX();
-    destY = tempTile->GetY();
-    xDir = destX - xPos;
-    yDir = destY - yPos;
-
-    // once we've found our next tile, move enemy into it and set types accordingly.
-    Grid::grid->GetTile(xPos, yPos)->RevertType();
+        GLScene::activeEnemy++;
+        if(GLScene::activeEnemy >= GLScene::enemies.size())
+            TurnManager::turnManager->NextTurn();
+        GLScene::activeEnemy %= GLScene::enemies.size();
+    }
+    else
+    {
+        isMoving = true;
+        destX = tempTile->GetX();
+        destY = tempTile->GetY();
+        xDir = destX - xPos;
+        yDir = destY - yPos;
+        // once we've found our next tile, move enemy into it and set types accordingly.
+        Grid::grid->GetTile(xPos, yPos)->RevertType();
+    }
 
 }
 

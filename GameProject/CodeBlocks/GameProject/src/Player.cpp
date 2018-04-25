@@ -28,7 +28,7 @@ Player::Player(double newX, double newY)
     // translations
     zoom = 0;
 
-    moveSpeed = 2.0;
+    moveSpeed = 3.0;
 
     // Initialize Quad
     vertices[0].x = -width / 2;

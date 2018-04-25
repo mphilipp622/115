@@ -122,8 +122,6 @@ GLint GLScene::drawGLScene()
             arrow->Update();
     }
 
-
-
     if(enemies.size() > 0)
     {
         if(TurnManager::turnManager->IsEnemyTurn())

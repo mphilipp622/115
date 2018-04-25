@@ -12,6 +12,7 @@ Pathfinder::~Pathfinder()
 
 Tile* Pathfinder::GetNextTile(int x, int y)
 {
+
     // A* pathfinding implementation.
 
     priority_queue<Node, vector<Node>, greater<Node> > frontier; // ascending order priority queue for Nodes
@@ -75,6 +76,7 @@ vector<Tile*> Pathfinder::GetSuccessors(Tile* originTile)
 {
     vector<Tile*> successors;
 
+//    cout << "Successors of (" << originTile->GetX() << ", " << originTile->GetY() << ") " << endl;
     // start from bottom left tile from origin and move right and up and get successors.
     for(int i = -1; i <= 1; i++)
     {
@@ -93,6 +95,9 @@ vector<Tile*> Pathfinder::GetSuccessors(Tile* originTile)
         }
     }
 
+//    for(auto& i : successors)
+//        cout << i->GetX() << ", " << i->GetY() << endl;
+//    cout << endl;
     return successors;
 }
 
