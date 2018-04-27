@@ -30,7 +30,7 @@ Tile* Pathfinder::GetNextTile(int x, int y)
             // node is already visited, continue
             continue;
 
-        if(IsGoal(currentNode))
+        if(IsGoal(currentNode) && !ContainsEnemy(currentNode))
         {
             // this node contains our player, grab the 0th index of the node's path
             if(currentNode.path.size() > 0 && !currentNode.path.at(0)->IsEnemy())
@@ -105,6 +105,17 @@ bool Pathfinder::IsGoal(Node node)
 {
     if(node.tile->GetX() == Player::player->GetX() && node.tile->GetY() == Player::player->GetY())
         return true;
+
+    return false;
+}
+
+bool Pathfinder::ContainsEnemy(Node node)
+{
+    for(auto& tile : node.path)
+    {
+        if(tile->IsEnemy())
+            return true;
+    }
 
     return false;
 }

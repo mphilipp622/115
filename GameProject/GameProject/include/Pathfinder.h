@@ -53,6 +53,10 @@ class Pathfinder
 
         bool IsGoal(Node node);
 
+        // returns true if this node's path contains an enemy
+        bool ContainsEnemy(Node node);
+
+
 };
 
 #endif // PATHFINDER_H
