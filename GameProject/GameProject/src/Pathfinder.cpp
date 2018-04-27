@@ -30,7 +30,7 @@ Tile* Pathfinder::GetNextTile(int x, int y)
             // node is already visited, continue
             continue;
 
-        if(IsGoal(currentNode) && !ContainsEnemy(currentNode))
+        if(IsGoal(currentNode))
         {
             // this node contains our player, grab the 0th index of the node's path
             if(currentNode.path.size() > 0 && !currentNode.path.at(0)->IsEnemy())
@@ -44,6 +44,7 @@ Tile* Pathfinder::GetNextTile(int x, int y)
 
         for(auto& tile : GetSuccessors(currentNode.tile))
         {
+
             Node nextNode = Node(tile, currentNode.path.size() + 1, ManhattanDistance(tile));
 
             for(int i = 0; i < currentNode.path.size(); i++)

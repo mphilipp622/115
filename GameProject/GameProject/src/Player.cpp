@@ -28,7 +28,7 @@ Player::Player(double newX, double newY)
     // translations
     zoom = 0;
 
-    moveSpeed = 3.0;
+    moveSpeed = 4.0;
 
     // Initialize Quad
     vertices[0].x = -width / 2;
@@ -305,7 +305,7 @@ void Player::ShootProjectile(double x, double y)
 
     playerLocked = true; // player will be locked from input while arrow is moving.
 
-    Projectile *newProjectile = new Projectile(xPos, yPos, 0.5, 0.5, 1, 6.0, "Arrow", x + xPos, y + yPos);
+    Projectile *newProjectile = new Projectile(xPos, yPos, 0.5, 0.5, 1, 10.0, "Arrow", x + xPos, y + yPos);
 
     if(x == 1.0)
         newProjectile->InitModel("Images/ArrowRight.png", true);

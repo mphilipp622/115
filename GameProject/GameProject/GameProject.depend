@@ -980,3 +980,330 @@
 1524637971 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\winlose.cpp
 	"WinLose.h"
 
+1524859549 source:e:\college\115\gameproject\gameproject\main.cpp
+	<windows.h>
+	<windows.h>
+	<GLScene.h>
+	<stdlib.h>
+	<iostream>
+	<TurnManager.h>
+	<WinLose.h>
+	<SceneManager.h>
+	<MainMenu.h>
+	<string>
+
+1524859549 e:\college\115\gameproject\gameproject\include\glscene.h
+	<windows.h>
+	<glut.h>
+	<iostream>
+	<vector>
+	<Model.h>
+	<unordered_map>
+	<AudioSource.h>
+	<AudioEngine.h>
+	<DeltaTime.h>
+	<Player.h>
+	<Grid.h>
+	<fstream>
+	<Enemy.h>
+	<TurnManager.h>
+	<SceneManager.h>
+	<UserInterface.h>
+
+1524859548 e:\college\115\gameproject\common\include\gl\glut.h
+	<windows.h>
+	<stdlib.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1524859549 e:\college\115\gameproject\gameproject\include\model.h
+	<windows.h>
+	<glut.h>
+	<string>
+	<TextureLoader.h>
+	<AudioSource.h>
+	<cmath>
+	<TurnManager.h>
+	<Timer.h>
+
+1524859549 e:\college\115\gameproject\gameproject\include\textureloader.h
+	<SOIL.h>
+	<GL\GL.h>
+	<iostream>
+	<string>
+
+1524859548 e:\college\115\gameproject\common\include\soil.h
+
+1524859549 e:\college\115\gameproject\gameproject\include\audiosource.h
+	<string>
+	"irrKlang.h"
+	<windows.h>
+	<AudioEngine.h>
+
+1524859549 e:\college\115\gameproject\gameproject\irrklang-1.6.0\include\irrklang.h
+	"ik_irrKlangTypes.h"
+	"ik_vec3d.h"
+	"ik_IRefCounted.h"
+	"ik_IVirtualRefCounted.h"
+	"ik_ESoundOutputDrivers.h"
+	"ik_ESoundEngineOptions.h"
+	"ik_EStreamModes.h"
+	"ik_SAudioStreamFormat.h"
+	"ik_ISoundEngine.h"
+	"ik_ISoundSource.h"
+	"ik_ISound.h"
+	"ik_IAudioStream.h"
+	"ik_IAudioStreamLoader.h"
+	"ik_ISoundEffectControl.h"
+	"ik_ISoundStopEventReceiver.h"
+	"ik_IFileFactory.h"
+	"ik_IFileReader.h"
+	"ik_ISoundDeviceList.h"
+	"ik_IAudioRecorder.h"
+	"ik_ISoundMixedOutputReceiver.h"
+
+1524859549 e:\college\115\gameproject\gameproject\irrklang-1.6.0\include\ik_irrklangtypes.h
+	<wchar.h>
+
+1524859549 e:\college\115\gameproject\gameproject\irrklang-1.6.0\include\ik_vec3d.h
+	<math.h>
+	"ik_irrKlangTypes.h"
+
+1524859549 e:\college\115\gameproject\gameproject\irrklang-1.6.0\include\ik_irefcounted.h
+	"ik_irrKlangTypes.h"
+
+1524859549 e:\college\115\gameproject\gameproject\irrklang-1.6.0\include\ik_ivirtualrefcounted.h
+	"ik_irrKlangTypes.h"
+
+1524859549 e:\college\115\gameproject\gameproject\irrklang-1.6.0\include\ik_esoundoutputdrivers.h
+
+1524859549 e:\college\115\gameproject\gameproject\irrklang-1.6.0\include\ik_esoundengineoptions.h
+
+1524859549 e:\college\115\gameproject\gameproject\irrklang-1.6.0\include\ik_estreammodes.h
+
+1524859549 e:\college\115\gameproject\gameproject\irrklang-1.6.0\include\ik_saudiostreamformat.h
+	"ik_IRefCounted.h"
+
+1524859549 e:\college\115\gameproject\gameproject\irrklang-1.6.0\include\ik_isoundengine.h
+	"ik_IRefCounted.h"
+	"ik_vec3d.h"
+	"ik_ISoundSource.h"
+	"ik_ISound.h"
+	"ik_EStreamModes.h"
+	"ik_IFileFactory.h"
+	"ik_ISoundMixedOutputReceiver.h"
+
+1524859549 e:\college\115\gameproject\gameproject\irrklang-1.6.0\include\ik_isoundsource.h
+	"ik_IVirtualRefCounted.h"
+	"ik_vec3d.h"
+	"ik_EStreamModes.h"
+	"ik_SAudioStreamFormat.h"
+
+1524859549 e:\college\115\gameproject\gameproject\irrklang-1.6.0\include\ik_isound.h
+	"ik_IVirtualRefCounted.h"
+	"ik_ISoundEffectControl.h"
+	"ik_vec3d.h"
+
+1524859549 e:\college\115\gameproject\gameproject\irrklang-1.6.0\include\ik_isoundeffectcontrol.h
+	"ik_IVirtualRefCounted.h"
+	"ik_vec3d.h"
+
+1524859549 e:\college\115\gameproject\gameproject\irrklang-1.6.0\include\ik_ifilefactory.h
+	"ik_IRefCounted.h"
+
+1524859549 e:\college\115\gameproject\gameproject\irrklang-1.6.0\include\ik_isoundmixedoutputreceiver.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1524859549 e:\college\115\gameproject\gameproject\irrklang-1.6.0\include\ik_iaudiostream.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1524859549 e:\college\115\gameproject\gameproject\irrklang-1.6.0\include\ik_iaudiostreamloader.h
+	"ik_IRefCounted.h"
+	"ik_IFileReader.h"
+
+1524859549 e:\college\115\gameproject\gameproject\irrklang-1.6.0\include\ik_ifilereader.h
+	"ik_IRefCounted.h"
+
+1524859549 e:\college\115\gameproject\gameproject\irrklang-1.6.0\include\ik_isoundstopeventreceiver.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1524859549 e:\college\115\gameproject\gameproject\irrklang-1.6.0\include\ik_isounddevicelist.h
+	"ik_IRefCounted.h"
+
+1524859549 e:\college\115\gameproject\gameproject\irrklang-1.6.0\include\ik_iaudiorecorder.h
+	"ik_IRefCounted.h"
+	"ik_ISoundSource.h"
+
+1524859549 e:\college\115\gameproject\gameproject\include\audioengine.h
+	<irrKlang.h>
+	<windows.h>
+	<iostream>
+
+1524859549 e:\college\115\gameproject\gameproject\include\turnmanager.h
+
+1524859549 e:\college\115\gameproject\gameproject\include\timer.h
+	<time.h>
+
+1524859549 e:\college\115\gameproject\gameproject\include\deltatime.h
+
+1524859549 e:\college\115\gameproject\gameproject\include\player.h
+	<windows.h>
+	<Model.h>
+	<TextureLoader.h>
+	<Grid.h>
+	<Projectile.h>
+	<UserInterface.h>
+	<WinLose.h>
+
+1524859549 e:\college\115\gameproject\gameproject\include\grid.h
+	"Type.h"
+	"Tile.h"
+	<vector>
+
+1524859549 e:\college\115\gameproject\gameproject\include\type.h
+
+1524859549 e:\college\115\gameproject\gameproject\include\tile.h
+	"Type.h"
+	<Model.h>
+
+1524862652 e:\college\115\gameproject\gameproject\include\projectile.h
+	<Model.h>
+	<DeltaTime.h>
+	<GLScene.h>
+	<algorithm>
+	<Timer.h>
+	<Grid.h>
+
+1524859549 e:\college\115\gameproject\gameproject\include\userinterface.h
+	<Player.h>
+	<Model.h>
+	<Grid.h>
+	<vector>
+
+1524859549 e:\college\115\gameproject\gameproject\include\winlose.h
+	<iostream>
+	<UserInterface.h>
+
+1524859549 e:\college\115\gameproject\gameproject\include\enemy.h
+	<Pathfinder.h>
+	<Grid.h>
+	<Player.h>
+
+1524862206 e:\college\115\gameproject\gameproject\include\pathfinder.h
+	<Tile.h>
+	<Grid.h>
+	<cmath>
+	<queue>
+	<Player.h>
+	<map>
+	<tuple>
+
+1524859549 e:\college\115\gameproject\gameproject\include\scenemanager.h
+	<unordered_map>
+	<string>
+
+1524859549 e:\college\115\gameproject\gameproject\include\mainmenu.h
+	<GLScene.h>
+	<GLLight.h>
+
+1524859549 e:\college\115\gameproject\gameproject\include\gllight.h
+	<GLScene.h>
+
+1524859549 source:e:\college\115\gameproject\gameproject\src\audioengine.cpp
+	"AudioEngine.h"
+
+1524859549 source:e:\college\115\gameproject\gameproject\src\audiosource.cpp
+	"AudioSource.h"
+	<iostream>
+	<GLScene.h>
+
+1524859549 source:e:\college\115\gameproject\gameproject\src\deltatime.cpp
+	<DeltaTime.h>
+	<windows.h>
+	<glut.h>
+	<iostream>
+
+1524859549 source:e:\college\115\gameproject\gameproject\src\enemy.cpp
+	"Enemy.h"
+
+1524859549 source:e:\college\115\gameproject\gameproject\src\gllight.cpp
+	<GLLight.h>
+
+1524860034 source:e:\college\115\gameproject\gameproject\src\glscene.cpp
+	<GLScene.h>
+	<GLLight.h>
+	<DeltaTime.h>
+	<Timer.h>
+	<UserInterface.h>
+
+1524859550 source:e:\college\115\gameproject\gameproject\src\grid.cpp
+	"Grid.h"
+
+1524859550 source:e:\college\115\gameproject\gameproject\src\inputs.cpp
+	<Inputs.h>
+	<iostream>
+	<DeltaTime.h>
+	<string>
+
+1524859549 e:\college\115\gameproject\gameproject\include\inputs.h
+	<windows.h>
+	<iostream>
+	<string>
+	<Player.h>
+
+1524859550 source:e:\college\115\gameproject\gameproject\src\mainmenu.cpp
+	"MainMenu.h"
+
+1524859550 source:e:\college\115\gameproject\gameproject\src\model.cpp
+	<Model.h>
+	<TextureLoader.h>
+	<DeltaTime.h>
+	<iostream>
+	<algorithm>
+	<string>
+
+1524862689 source:e:\college\115\gameproject\gameproject\src\player.cpp
+	"Player.h"
+
+1524862649 source:e:\college\115\gameproject\gameproject\src\projectile.cpp
+	"Projectile.h"
+	<cmath>
+
+1524859550 source:e:\college\115\gameproject\gameproject\src\scenemanager.cpp
+	"SceneManager.h"
+	<GLScene.h>
+
+1524859550 source:e:\college\115\gameproject\gameproject\src\texture.cpp
+	"Texture.h"
+
+1524859549 e:\college\115\gameproject\gameproject\include\texture.h
+
+1524859550 source:e:\college\115\gameproject\gameproject\src\textureloader.cpp
+	<TextureLoader.h>
+	<SOIL.h>
+	<GL\GL.h>
+	<iostream>
+
+1524859550 source:e:\college\115\gameproject\gameproject\src\tile.cpp
+	"Tile.h"
+	<iostream>
+
+1524859550 source:e:\college\115\gameproject\gameproject\src\timer.cpp
+	<Timer.h>
+
+1524859550 source:e:\college\115\gameproject\gameproject\src\turnmanager.cpp
+	"TurnManager.h"
+
+1524859550 source:e:\college\115\gameproject\gameproject\src\userinterface.cpp
+	"UserInterface.h"
+	<cmath>
+
+1524859550 source:e:\college\115\gameproject\gameproject\src\winlose.cpp
+	"WinLose.h"
+
+1524862347 source:e:\college\115\gameproject\gameproject\src\pathfinder.cpp
+	"Pathfinder.h"
+

@@ -98,8 +98,8 @@ GLint GLScene::drawGLScene()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
-    gluLookAt(gridSizeX / 2, gridSizeY / 2, gridSizeX + 3.33 + 1,
-            gridSizeX / 2, gridSizeY / 2, 0,
+    gluLookAt(gridSizeX / 2, gridSizeY / 2 - 0.5, gridSizeX + 3.33 + 1.5,
+            gridSizeX / 2, gridSizeY / 2 - 0.5, 0,
             0.0f, 1.0f, 0.0f);
 
     CheckWinCondition();
