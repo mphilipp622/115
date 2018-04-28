@@ -3,26 +3,27 @@
 #include <glut.h>
 #include <iostream>
 
-double deltaTime = 0.0;
+double deltaTime = 0.0; // initialize deltaTime to be 0
 
 DeltaTime::DeltaTime()
 {
     oldTime = glutGet(GLUT_ELAPSED_TIME);
-    UpdateDeltaTime();
+    UpdateDeltaTime(); // start updating delta time as soon as instance is created
 }
 
 DeltaTime::~DeltaTime()
 {
     //dtor
 }
+
 void DeltaTime::UpdateDeltaTime()
 {
+    // Updates delta time. This is, essentially, the time that's elapsed since the last frame render to the current frame
     double time = glutGet(GLUT_ELAPSED_TIME);
     deltaTime = (time - oldTime) / 1000.0;
     oldTime = time;
-
-//    glutPostRedisplay();
 }
+
 double DeltaTime::GetDeltaTime()
 {
     return deltaTime;

@@ -18,8 +18,6 @@ class AudioEngine
 
         static ISoundEngine* engine;
 
-        static void SetPosition(double newX, double newY);
-
     protected:
 
     private:

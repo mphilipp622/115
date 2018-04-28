@@ -64,8 +64,8 @@ Player::Player(double newX, double newY)
     frameTimer = new Timer();
     frameTimer->Start();
 
-    arrowSound = new AudioSource("ArrowSound", "Audio/SFX/Arrow.mp3", xPos, yPos, 1.0, false);
-    dyingSound = new AudioSource("PlayerDie", "Audio/SFX/PlayerDie.ogg", xPos, yPos, 0.6, false);
+    arrowSound = new AudioSource("Audio/SFX/Arrow.mp3", 1.0, false);
+    dyingSound = new AudioSource("Audio/SFX/PlayerDie.ogg", 0.6, false);
     idleFrame = 0;
     runFrame = 0;
 }

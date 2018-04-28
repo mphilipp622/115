@@ -710,7 +710,7 @@
 
 1518657083 c:\users\seapanda\documents\college\115\gameproject\common\include\soil.h
 
-1523318563 c:\users\seapanda\documents\college\115\gameproject\gameproject\include\audiosource.h
+1524883478 c:\users\seapanda\documents\college\115\gameproject\gameproject\include\audiosource.h
 	<string>
 	"irrKlang.h"
 	<windows.h>
@@ -813,7 +813,7 @@
 	"ik_IRefCounted.h"
 	"ik_ISoundSource.h"
 
-1523226218 c:\users\seapanda\documents\college\115\gameproject\gameproject\include\audioengine.h
+1524883170 c:\users\seapanda\documents\college\115\gameproject\gameproject\include\audioengine.h
 	<irrKlang.h>
 	<windows.h>
 	<iostream>
@@ -888,10 +888,10 @@
 1519964614 c:\users\seapanda\documents\college\115\gameproject\gameproject\include\gllight.h
 	<GLScene.h>
 
-1524504526 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\audioengine.cpp
+1524883164 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\audioengine.cpp
 	"AudioEngine.h"
 
-1524639114 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\audiosource.cpp
+1524883526 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\audiosource.cpp
 	"AudioSource.h"
 	<iostream>
 	<GLScene.h>
@@ -902,13 +902,13 @@
 	<glut.h>
 	<iostream>
 
-1524689954 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\enemy.cpp
+1524883494 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\enemy.cpp
 	"Enemy.h"
 
 1520900072 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\gllight.cpp
 	<GLLight.h>
 
-1524689954 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\glscene.cpp
+1524883539 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\glscene.cpp
 	<GLScene.h>
 	<GLLight.h>
 	<DeltaTime.h>
@@ -941,7 +941,7 @@
 	<algorithm>
 	<string>
 
-1524689954 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\player.cpp
+1524883079 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\player.cpp
 	"Player.h"
 
 1524638314 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\projectile.cpp
@@ -1305,5 +1305,8 @@
 	"WinLose.h"
 
 1524862347 source:e:\college\115\gameproject\gameproject\src\pathfinder.cpp
+	"Pathfinder.h"
+
+1524883079 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\pathfinder.cpp
 	"Pathfinder.h"
 

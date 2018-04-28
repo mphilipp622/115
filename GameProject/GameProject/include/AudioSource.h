@@ -13,14 +13,11 @@ class AudioSource
 {
     public:
         AudioSource();
-        AudioSource(string newName, string newFilePath, double newX, double newY, float newVolume, bool isLooping);
+        AudioSource(string newFilePath, float newVolume, bool isLooping);
         virtual ~AudioSource();
 
         // Plays the sound from the filepath of the object
         void Play();
-
-        // Plays chord of the same name that's passed to function
-        void PlayChord(string chordName);
 
         void PlayMusic();
 
@@ -30,23 +27,11 @@ class AudioSource
         // Sets the volume of this audio source
         void SetVolume(float newVal);
 
-        // Gets the name of this AudioSource
-        string GetName();
-
-        void SetPosition(double newX, double newY);
-
-        double GetX();
-        double GetY();
-
-        // called by drawGLScene in GLScene classes.
-        void Update(double newX, double newY);
-
     protected:
 
     private:
-        string name, filePath;
+        string filePath;
         float volume;
-        double xPos, yPos;
         bool loop;
 
         ISoundSource* source;

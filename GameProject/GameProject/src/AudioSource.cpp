@@ -5,42 +5,27 @@
 using namespace std;
 using namespace irrklang;
 
-
 AudioSource::AudioSource()
 {
-    //ctor
-//    PlaySound("Audio/Music/ab9.wav", NULL, SND_ASYNC);
 }
 
-AudioSource::AudioSource(string newName, string newFilePath, double newX, double newY, float newVolume, bool isLooping)
+AudioSource::AudioSource(string newFilePath, float newVolume, bool isLooping)
 {
-    name = newName;
     filePath = newFilePath;
-    xPos = newX;
-    yPos = newY;
     volume = newVolume;
     loop = isLooping;
-
-//    sound = 0;
-//    source = 0;
 }
 
 AudioSource::~AudioSource()
 {
-    //dtor
-    sound->drop();
-}
-
-void AudioSource::Update(double newX, double newY)
-{
+    sound->drop(); // drop sound when instance is deleted. Don't think this is necessary but doing it to be safe
 }
 
 void AudioSource::Play()
 {
-    sound = AudioEngine::engine->play2D(filePath.c_str(), false, true);
-    SetVolume(volume);
-    sound->setIsPaused(false);
-//    sound = AudioEngine::engine->play3D(filePath.c_str(), vec3df(xPos, yPos, 0), loop, false);
+    sound = AudioEngine::engine->play2D(filePath.c_str(), false, true); // Tell engine to play sound. Starts paused
+    SetVolume(volume); // set the volume of the sound
+    sound->setIsPaused(false); // unpause sound
 }
 
 void AudioSource::PlayMusic()
@@ -50,27 +35,10 @@ void AudioSource::PlayMusic()
     sound->setIsPaused(false);
 }
 
-void AudioSource::PlayChord(string newChord)
-{
-
-    if(sound)
-    {
-        // Have to pause it to drop it. Don't know why.
-        sound->setIsPaused(true);
-        sound->drop();
-    }
-
-    string path = "Audio/Music/Chords/" + newChord + ".ogg";
-    sound = AudioEngine::engine->play2D(path.c_str(), false, true);
-    sound->setIsPaused(false); // have to do this for some stupid reason.
-}
-
 void AudioSource::Stop()
 {
+    // kill all the sounds in the engine. This is not ideal but works for this project
     AudioEngine::engine->stopAllSounds();
-//    sound->setIsPaused(true);
-//    sound->drop();
-//    sound->stop();
 }
 
 void AudioSource::SetVolume(float newVal)
@@ -82,26 +50,4 @@ void AudioSource::SetVolume(float newVal)
         newVal = 0;
 
     sound->setVolume(newVal);
-//    source->setDefaultVolume(newVal);
-}
-
-string AudioSource::GetName()
-{
-    return name;
-}
-
-void AudioSource::SetPosition(double newX, double newY)
-{
-    xPos = newX;
-    yPos = newY;
-}
-
-double AudioSource::GetX()
-{
-    return xPos;
-}
-
-double AudioSource::GetY()
-{
-    return yPos;
 }

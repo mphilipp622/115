@@ -7,11 +7,12 @@ Enemy::Enemy()
 
 Enemy::Enemy(double newX, double newY, string newName)
 {
+    // initialize variables.
     xPos = newX;
 	yPos = newY;
 
 	xDir = 0;
-	yDir = -1;
+	yDir = -1;  // starts all the enemies looking downwards.
 	destX = 0;
 	destY = 0;
 
@@ -61,7 +62,7 @@ Enemy::Enemy(double newX, double newY, string newName)
 
     active = false;
 
-    dyingSound = new AudioSource("MonsterDie", "Audio/SFX/MonsterDie.mp3", xPos, yPos, 0.6, false);
+    dyingSound = new AudioSource("Audio/SFX/MonsterDie.mp3", 0.6, false);
 }
 
 Enemy::~Enemy()
@@ -73,6 +74,8 @@ void Enemy::Update()
 {
     if(active)
     {
+        // Move and animate the enemy
+
         if(isMoving && xDir > 0)
         {
             MoveToDestination();
@@ -96,6 +99,8 @@ void Enemy::Update()
     }
     else
     {
+        // Draw the enemy being idle.
+
         if(xDir > 0)
             Animate("IdleRight");
         else if(xDir < 0)
@@ -110,11 +115,10 @@ void Enemy::Update()
 
 void Enemy::Move()
 {
-    if(isMoving) return;
-
+    if(isMoving) return; // safety check to make sure enemy is not already moving.
 
     Tile* tempTile = pathfind->GetNextTile(xPos, yPos);
-//    cout << tempTile->GetX() << ", " << tempTile->GetY() << endl;
+
     if(Grid::grid->GetTile(tempTile->GetX(), tempTile->GetY())->IsEnemy())
     {
         // handle the case where the next tile is an enemy. In this case, enemy should stay stationary.
