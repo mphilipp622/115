@@ -12,16 +12,17 @@ Pathfinder::~Pathfinder()
 
 Tile* Pathfinder::GetNextTile(int startingX, int startingY)
 {
-
     // A* pathfinding implementation.
 
     priority_queue<Node, vector<Node>, greater<Node> > frontier; // ascending order priority queue for Nodes
 
     vector<Node> visitedNodes; // list of visited nodes
 
+    // First node will hav eg cost 0.
     Node startNode = Node(Grid::grid->GetTile(startingX, startingY), 0,
                           ManhattanDistance(Grid::grid->GetTile(startingX, startingY)));
-    frontier.push(startNode);
+
+    frontier.push(startNode); // push start node onto frontier
 
     while(!frontier.empty())
     {
@@ -41,12 +42,12 @@ Tile* Pathfinder::GetNextTile(int startingX, int startingY)
             return startNode.tile; // basically, if we found no path or our next tile is an enemy, we don't move
         }
 
-//        MapKey newKey = MapKey(currentNode.tile->GetX(), currentNode.tile->GetY());
         visitedNodes.push_back( currentNode); // add current node to our list of visited nodes
 
+        // Get Adjacency matrix for current tile and iterate over it
         for(auto& tile : GetSuccessors(currentNode.tile))
         {
-
+            // since all movement costs are 1, we can use the path size + 1 to get current gCost
             Node nextNode = Node(tile, currentNode.path.size() + 1, ManhattanDistance(tile));
 
             for(int i = 0; i < currentNode.path.size(); i++)
@@ -61,6 +62,7 @@ Tile* Pathfinder::GetNextTile(int startingX, int startingY)
         }
     }
 
+    // This only happens if we don't find a path. This will result in the enemy staying in position.
     return startNode.tile;
 }
 
@@ -72,40 +74,42 @@ int Pathfinder::ManhattanDistance(Tile* tile)
 
 int Pathfinder::ManhattanDistance(int x, int y, int x1, int y1)
 {
+    // Heuristic calculation between two different (x, y) pairs
     return abs(x - x1) + abs(y - y1);
 }
 
 vector<Tile*> Pathfinder::GetSuccessors(Tile* originTile)
 {
+    // initialize list
     vector<Tile*> successors;
 
-//    cout << "Successors of (" << originTile->GetX() << ", " << originTile->GetY() << ") " << endl;
     // start from bottom left tile from origin and move right and up and get successors.
     for(int i = -1; i <= 1; i++)
     {
         for(int j = -1; j <= 1; j++)
         {
             if (i == 0 && j == 0)
-                continue; // skip the current tile
+                continue; // skip the origin tile's position
 
             if(!Grid::grid->BoundSafe(originTile->GetX() + j, originTile->GetY() + i))
+                // Ensure adjacent tile is within grid boundaries and is NOT a wall
                 continue;
 
             if(ManhattanDistance(originTile->GetX(), originTile->GetY(), originTile->GetX() + j, originTile->GetY() + i) > 1)
                 continue; // rule out any diagonal tiles
 
+            // push this tile onto the successor list
             successors.push_back(Grid::grid->GetTile(originTile->GetX() + j, originTile->GetY() + i));
         }
     }
 
-//    for(auto& i : successors)
-//        cout << i->GetX() << ", " << i->GetY() << endl;
-//    cout << endl;
     return successors;
 }
 
 bool Pathfinder::IsGoal(Node node)
 {
+    // returns if this node contains the tile the player is on.
+
     if(node.tile->GetX() == Player::player->GetX() && node.tile->GetY() == Player::player->GetY())
         return true;
 

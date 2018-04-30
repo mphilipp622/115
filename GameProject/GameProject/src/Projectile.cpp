@@ -10,31 +10,26 @@ Projectile::~Projectile()
 {
     //dtor
 }
-Projectile::Projectile(double newX, double newY, double newWidth, double newHeight, int newDamage, float newSpeed, string newName, double newTargetX, double newTargetY)
+Projectile::Projectile(double newX, double newY, double newWidth, double newHeight, float newSpeed, string newName, double newDirX, double newDirY)
 {
+    // initialize starting position
     xPos = newX;
     yPos = newY;
 
-    prevX = newX;
-    prevY = newY;
+    // initialize target position
+    xDir = newDirX;
+    yDir = newDirY;
 
-    targetX = newTargetX;
-    targetY = newTargetY;
-
-    damage = newDamage;
     speed = newSpeed;
 
     name = newName;
 
-    vectorDist = sqrt(pow((targetX - xPos), 2) + pow((targetY - yPos), 2));
-    normalizedX = (targetX - xPos) / vectorDist;
-    normalizedY = (targetY - yPos) / vectorDist;
-
     width = newWidth;
     height = newHeight;
 
-    endOfLifeTime = 5000; // 5 seconds
+    endOfLifeTime = 5000; // 5 seconds. Arrows will destroy if they've been alive for 5 seconds or more
 
+    // initialize rotations
     rotateX = 0;
     rotateY = 0;
     rotateZ = 0;
@@ -61,41 +56,46 @@ Projectile::Projectile(double newX, double newY, double newWidth, double newHeig
 
     texture = new TextureLoader();
     lifetime = new Timer();
-    lifetime->Start();
+    lifetime->Start(); // start 5 second lifetime
 }
 
 void Projectile::Update()
 {
-    Move();
+    // Update() is called in GLScene::DrawGLScene
+    Move(); // move arrow
 
-    DrawModel();
+    DrawModel(); // render arrow
 
     if(lifetime->GetTicks() > endOfLifeTime)
-        Destroy();
+        Destroy(); // if arrow has been alive for 5 or more seconds, destroy it from memory
 }
 
 void Projectile::Move()
 {
-    prevX = xPos;
-    prevY = yPos;
 
-    xPos += normalizedX * speed * DeltaTime::GetDeltaTime();
-    yPos += normalizedY * speed * DeltaTime::GetDeltaTime();
+    // Move in a constant direction, smoothed by delta time and multiplied by speed
+    xPos += xDir * speed * DeltaTime::GetDeltaTime();
+    yPos += yDir * speed * DeltaTime::GetDeltaTime();
 
     if(CheckCollision())
         // if we collide with something, destroy object. If object is enemy, we need to deal damage
         Destroy();
 
-    CheckCollisionEnemy();
+    if(!Grid::grid->BoundSafe(xPos, yPos))
+        Destroy(); // check if arrow has gone out of bounds
+
+    CheckCollisionEnemy(); // if we hit an enemy, kill the enemy and destroy the arrow
 }
 
 bool Projectile::CheckCollision()
 {
+    // Iterate over every tile in the grid to see if we hit a wall or go out of bounds
     for(auto& tile : Grid::grid->GetTiles())
     {
         for(auto& tile2 : tile)
         {
             if(tile2->IsWall() && Collision(tile2))
+                // We need the && condition for knowing if the models have overlapped in the world
                 return true; // if the arrow hits a wall, return true
         }
     }
@@ -105,12 +105,13 @@ bool Projectile::CheckCollision()
 
 void Projectile::CheckCollisionEnemy()
 {
+    // iterate over all the enemies in GLScene to see if we've hit one
     for(auto& enemy : GLScene::enemies)
     {
         if(Collision(enemy))
         {
             enemy->Destroy();  // kill the enemy
-            Destroy();
+            Destroy(); // destroy the arrow
         }
     }
 }
@@ -118,8 +119,8 @@ void Projectile::CheckCollisionEnemy()
 
 void Projectile::Destroy()
 {
-    GLScene::arrow = nullptr;
+    GLScene::arrow = nullptr; // set GLScene arrow back to null
     Player::player->SetLocked(); // unlock player
-    TurnManager::turnManager->NextTurn();
-    delete this;
+    TurnManager::turnManager->NextTurn(); // start enemy turn
+    delete this; // free memory
 }

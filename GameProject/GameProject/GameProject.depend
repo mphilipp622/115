@@ -825,13 +825,12 @@
 
 1524883652 c:\users\seapanda\documents\college\115\gameproject\gameproject\include\deltatime.h
 
-1524629531 c:\users\seapanda\documents\college\115\gameproject\gameproject\include\player.h
+1525128054 c:\users\seapanda\documents\college\115\gameproject\gameproject\include\player.h
 	<windows.h>
 	<Model.h>
 	<TextureLoader.h>
 	<Grid.h>
 	<Projectile.h>
-	<UserInterface.h>
 	<WinLose.h>
 
 1525108445 c:\users\seapanda\documents\college\115\gameproject\gameproject\include\grid.h
@@ -845,7 +844,7 @@
 	"Type.h"
 	<Model.h>
 
-1524248125 c:\users\seapanda\documents\college\115\gameproject\gameproject\include\projectile.h
+1525128783 c:\users\seapanda\documents\college\115\gameproject\gameproject\include\projectile.h
 	<Model.h>
 	<DeltaTime.h>
 	<GLScene.h>
@@ -916,7 +915,7 @@
 	<UserInterface.h>
 	<Projectile.h>
 
-1525118362 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\grid.cpp
+1525126565 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\grid.cpp
 	"Grid.h"
 
 1524243021 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\inputs.cpp
@@ -942,10 +941,10 @@
 	<algorithm>
 	<string>
 
-1525107058 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\player.cpp
+1525128610 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\player.cpp
 	"Player.h"
 
-1525107046 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\projectile.cpp
+1525128543 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\projectile.cpp
 	"Projectile.h"
 	<cmath>
 
@@ -1308,6 +1307,6 @@
 1524862347 source:e:\college\115\gameproject\gameproject\src\pathfinder.cpp
 	"Pathfinder.h"
 
-1525112365 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\pathfinder.cpp
+1525126906 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\pathfinder.cpp
 	"Pathfinder.h"
 

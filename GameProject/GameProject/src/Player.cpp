@@ -10,24 +10,29 @@ Player::Player()
 Player::Player(double newX, double newY)
 {
     if(player)
-        delete player;
+        delete player; // if the global static player already exists, delete it.
 
+    // initialize positions
     xPos = newX;
 	yPos = newY;
 
+	// initialize dimensions
 	width = 0.6;
     height = 1.0;
 
+    // initialize rotations
     rotateX = 0;
     rotateY = 0;
     rotateZ = 0;
 
+    // initialize directions
     xDir = 1.0;
     yDir = 0;
 
     // translations
     zoom = 0;
 
+    // initialize move speed
     moveSpeed = 6.0;
 
     // Initialize Quad
@@ -49,14 +54,16 @@ Player::Player(double newX, double newY)
 
     texture = new TextureLoader();
 
-    player = this;
+    player = this; // assign the static global instance of Player to this instance
 
     playerLocked = false;
 
     arrowCount = 1; // player starts with 1 arrow
 
+    // Give player a texture
     InitModel("Images/Player/PlayerRight0.png", true);
 
+    // initialize animations
     InitAnimations();
 
     isMoving = false;
@@ -64,8 +71,10 @@ Player::Player(double newX, double newY)
     frameTimer = new Timer();
     frameTimer->Start();
 
+    // initialize SFX
     arrowSound = new AudioSource("Audio/SFX/Arrow.mp3", 1.0, false);
     dyingSound = new AudioSource("Audio/SFX/PlayerDie.ogg", 0.6, false);
+
     idleFrame = 0;
     runFrame = 0;
 }
@@ -77,9 +86,13 @@ Player::~Player()
 
 void Player::Update()
 {
+    // Update is called every frame by GLScene::DrawGLScene()
     if(isMoving)
     {
+        // if the player is set to move, we move to destination until we've reached it
         MoveToDestination();
+
+        // animate based on the direction of the player
         if(xDir > 0)
             Animate("RunRight");
         else if(xDir < 0)
@@ -91,6 +104,7 @@ void Player::Update()
     }
     else
     {
+        // If we are not moving, then animate idle based on the previous direction of the player
         if(xDir > 0)
             Animate("IdleRight");
         else if(xDir < 0)
@@ -105,17 +119,20 @@ void Player::Update()
 
 void Player::Move(double dirX, double dirY)
 {
-    // bounds checking on the grid.
+    // bounds check the desired destination on the grid. Return if it's not safe
     if(!Grid::grid->BoundSafe(xPos + dirX, yPos + dirY))
         return;
 
     // Check player collision against walls or enemies.
     if(Grid::grid->GetTile(xPos + dirX, yPos + dirY)->IsTraversable())
     {
+        // Set flags
         isMoving = true;
-        playerLocked = true;
+        playerLocked = true; // player cannot input actions while moving
+
         Grid::grid->GetTile(xPos, yPos)->RevertType(); // set player's previous tile to traversable
 
+        // Set our destination and direction
         destX = xPos + dirX;
         destY = yPos + dirY;
         xDir = dirX;
@@ -126,37 +143,46 @@ void Player::Move(double dirX, double dirY)
 
 void Player::MoveToDestination()
 {
+    // Increment x and y positions by our direction, normalized by delta time and multiplied by our move speed
+    // This should give us semi-smooth movement
     xPos += xDir * DeltaTime::GetDeltaTime() * moveSpeed;
     yPos += yDir * DeltaTime::GetDeltaTime() * moveSpeed;
 
     if(xPos >= destX - 0.1 && xPos <= destX + 0.1 && yPos >= destY - 0.1 && yPos <= destY + 0.1)
     {
+        // If the player is within a certain distance of the center of their destination tile,
+        // set their position to the destination and stop moving.
         xPos = destX;
         yPos = destY;
 
         if(Grid::grid->GetTile(xPos, yPos)->IsArrows())
         {
+            // Check if we've landed on arrows. If we have, increment arrow count and update our UI and Tile
             arrowCount++;
             UserInterface::UI->AddArrow();
-            Grid::grid->GetTile(xPos, yPos)->RemoveArrows();
+            Grid::grid->GetTile(xPos, yPos)->RemoveArrows(); // Remove arrows from the tile, which updates the texture
         }
         if(Grid::grid->GetTile(xPos, yPos)->IsTreasure())
+            // If we've landed on treasure, we win.
             WinLose::winLose->Win();
         if(Grid::grid->GetTile(xPos, yPos)->IsEnemy())
+            // if we've landed on an enemy, we lose
             Die();
 
-        Grid::grid->GetTile(xPos, yPos)->SetType(Type::player);
+        Grid::grid->GetTile(xPos, yPos)->SetType(Type::player); // set the destination tile to be a player type
 
-        isMoving = false;
+        isMoving = false; // stop moving
 
         TurnManager::turnManager->NextTurn(); // end player turn and start enemy turn
-        playerLocked = false;
+        playerLocked = false; // unlock player controls. TurnManager will keep player locked in GLScene
     }
 
 }
 
 void Player::DrawPlayer()
 {
+    // Renders player
+
     glColor3f(1.0, 1.0, 1.0);
 
     glBegin(GL_QUADS);
@@ -180,6 +206,8 @@ void Player::DrawPlayer()
 
 void Player::Animate(string animation)
 {
+    // Animates player
+
     if(animation == "RunRight")
     {
         glPushMatrix();
@@ -305,8 +333,10 @@ void Player::ShootProjectile(double x, double y)
 
     playerLocked = true; // player will be locked from input while arrow is moving.
 
-    Projectile *newProjectile = new Projectile(xPos, yPos, 0.5, 0.5, 1, 10.0, "Arrow", x + xPos, y + yPos);
+    // Create new projectile
+    Projectile *newProjectile = new Projectile(xPos, yPos, 0.5, 0.5, 10.0, "Arrow", x, y);
 
+    // Specify the texture to use based on the direction we fired
     if(x == 1.0)
         newProjectile->InitModel("Images/ArrowRight.png", true);
     else if(x == -1.0)
@@ -317,41 +347,43 @@ void Player::ShootProjectile(double x, double y)
     else if(y == -1.0)
         newProjectile->InitModel("Images/ArrowDown.png", true);
 
-    arrowCount--;
-    arrowSound->Play();
-    UserInterface::UI->RemoveArrow();
-    GLScene::arrow = newProjectile;
+    arrowCount--; // decrement our number of arrows
+    arrowSound->Play(); // play the arrow sound effect
+    UserInterface::UI->RemoveArrow(); // remove an arrow from the UI indicator
+    GLScene::arrow = newProjectile; // set the arrow in GLScene to the new instance of projectile
 }
 
 void Player::SetInput(WPARAM newParam)
 {
+    // parses input and executes functionality.
+
     if(playerLocked)
-        return; // prevent player input
+        return; // prevent player input if they're locked
 
-    wParam = newParam;
+    const int aKey = 0x41, dKey = 0x44, sKey = 0x53, wKey = 0x57; // hex values for Microsoft's virtual keys
 
-    const int aKey = 0x41, dKey = 0x44, sKey = 0x53, wKey = 0x57;
-    // Use the unordered map of booleans to keep track of which keys are pressed. This allows multiple keys being pressed at once
-    if(wParam == aKey) // includes boundary checking
+    // Note that bounds checking will be done in the Move function, not here.
+    if(newParam == aKey)
         Move(-1.0, 0);
-    if(wParam == dKey)
+    if(newParam == dKey)
         Move(1.0, 0); // move player
-    if(wParam == sKey)
+    if(newParam == sKey)
         Move(0, -1.0); // move player
-    if(wParam == wKey)
+    if(newParam == wKey)
         Move(0, 1.0); // move player
-    if(wParam == VK_LEFT)
+    if(newParam == VK_LEFT)
         ShootProjectile(-1.0, 0); // shoot left
-    if(wParam == VK_RIGHT)
+    if(newParam == VK_RIGHT)
         ShootProjectile(1.0, 0); // shoot right
-    if(wParam == VK_DOWN)
+    if(newParam == VK_DOWN)
         ShootProjectile(0, -1.0); // shoot down
-    if(wParam == VK_UP)
+    if(newParam == VK_UP)
         ShootProjectile(0, 1.0); // shoot up
 }
 
 void Player::SetLocked()
 {
+    // Projectile::Destroy() calls this to unlock player
     playerLocked = !playerLocked;
 }
 
@@ -362,13 +394,15 @@ int Player::GetArrowCount()
 
 void Player::Die()
 {
-    dyingSound->Play();
-    WinLose::winLose->Lose();
+    dyingSound->Play(); // play our Wilhelm Scream
+    WinLose::winLose->Lose(); // Set Lose Condition to true
 }
 
 
 void Player::InitAnimations()
 {
+    // Initialize the animations for the player.
+
     for(int i = 0; i < 6; i++)
         runLeft[i].BindTexture("Images/Player/PlayerLeft" + to_string(i) + ".png");
 
