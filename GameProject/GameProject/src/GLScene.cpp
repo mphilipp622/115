@@ -185,13 +185,15 @@ void GLScene::GenerateGrid()
 
 		getline(in, line); // read first row of data
 		gridMap.push_back(vector<int>()); // create a new vector to represent x-values for this row
-		gridSizeY = line.size(); // Get the y dimension of the maze
 
-		for (int j = 0; j < gridSizeY; j++)
+		if(gridSizeX == 0)
+            gridSizeX = line.size(); // only assign x size the first time we iterate
+
+		for (int j = 0; j < gridSizeX; j++)
             // Assign a type to this (x, y) coordinate
 			gridMap[i].push_back(line.at(j) - '0'); // convert from ascii to int
 
-		gridSizeX = i + 1; // increment x dimension of maze
+		gridSizeY = i + 1; // increment y dimension of maze
 	}
 
 	grid = new Grid(gridSizeX, gridSizeY, gridMap); // assign the grid pointer to a new grid. Constructor handles creation of Tiles
