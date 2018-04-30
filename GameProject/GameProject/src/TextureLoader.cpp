@@ -23,6 +23,7 @@ void TextureLoader::BindTexture(string fileName)
 
     glBindTexture(GL_TEXTURE_2D, tex);
 
+    // use SOIL to load an image from file into the image variable
     image = SOIL_load_image(fileName.c_str(), &width, &height, 0, SOIL_LOAD_RGBA);
 
 
@@ -41,6 +42,6 @@ void TextureLoader::BindTexture(string fileName)
 
 void TextureLoader::Binder()
 {
-   // cout << "Binding" << endl;
+    // wrap the texture
     glBindTexture(GL_TEXTURE_2D, tex);
 }

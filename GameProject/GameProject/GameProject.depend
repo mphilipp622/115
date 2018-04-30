@@ -702,7 +702,7 @@
 	<TurnManager.h>
 	<Timer.h>
 
-1520900072 c:\users\seapanda\documents\college\115\gameproject\gameproject\include\textureloader.h
+1525129078 c:\users\seapanda\documents\college\115\gameproject\gameproject\include\textureloader.h
 	<SOIL.h>
 	<GL\GL.h>
 	<iostream>
@@ -944,7 +944,7 @@
 1525128610 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\player.cpp
 	"Player.h"
 
-1525128543 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\projectile.cpp
+1525128967 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\projectile.cpp
 	"Projectile.h"
 	<cmath>
 

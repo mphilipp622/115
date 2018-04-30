@@ -3,17 +3,16 @@
 #include "Type.h"
 #include <Model.h>
 
+/*
+Class for tiles in the maze. This is useful for tracking the type of the tile. Also useful for
+knowing if enemeis and players have moved onto or off of a tile. Also useful for creating a 2D vector in
+the Grid class for easily accessing the tiles of the maze.
+*/
 class Tile : public Model
 {
 public:
 	Tile(int newX, int newY, double newWidth, double newHeight, Type newType);
 	~Tile();
-
-	// Returns x position of this tile
-//	int GetX();
-
-	// Returns y position of this tile
-//	int GetY();
 
 	// Returns type of this tile
 	int GetType();
@@ -44,8 +43,6 @@ public:
 	bool IsPlayer();
 
 private:
-//	int xPos, yPos;
-	// Model* model;
 	Type tileType;
 	Type originalType;
 

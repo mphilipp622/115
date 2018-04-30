@@ -8,20 +8,25 @@
 
 using namespace std;
 
+// Handles wrapping textures onto openGL models
 class TextureLoader
 {
     public:
         TextureLoader();
         virtual ~TextureLoader();
+
+        // Initializes Texture from a file
         void BindTexture(string); //char* is filename
+
+        // Wraps texture onto model
         void Binder();
-        unsigned char* image;
-        int width, height;
-        GLuint tex;
 
     protected:
 
     private:
+        unsigned char* image; // filename for the image.
+        int width, height; // width and height of texture
+        GLuint tex;
 };
 
 #endif // TEXTURELOADER_H
