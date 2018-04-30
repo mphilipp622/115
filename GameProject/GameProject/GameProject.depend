@@ -668,7 +668,7 @@
 	<MainMenu.h>
 	<string>
 
-1524629531 c:\users\seapanda\documents\college\115\gameproject\gameproject\include\glscene.h
+1525107338 c:\users\seapanda\documents\college\115\gameproject\gameproject\include\glscene.h
 	<windows.h>
 	<glut.h>
 	<iostream>
@@ -692,7 +692,7 @@
 	<GL/gl.h>
 	<GL/glu.h>
 
-1524629531 c:\users\seapanda\documents\college\115\gameproject\gameproject\include\model.h
+1525110364 c:\users\seapanda\documents\college\115\gameproject\gameproject\include\model.h
 	<windows.h>
 	<glut.h>
 	<string>
@@ -823,7 +823,7 @@
 1522714546 c:\users\seapanda\documents\college\115\gameproject\gameproject\include\timer.h
 	<time.h>
 
-1519258448 c:\users\seapanda\documents\college\115\gameproject\gameproject\include\deltatime.h
+1524883652 c:\users\seapanda\documents\college\115\gameproject\gameproject\include\deltatime.h
 
 1524629531 c:\users\seapanda\documents\college\115\gameproject\gameproject\include\player.h
 	<windows.h>
@@ -834,7 +834,7 @@
 	<UserInterface.h>
 	<WinLose.h>
 
-1524242662 c:\users\seapanda\documents\college\115\gameproject\gameproject\include\grid.h
+1525108445 c:\users\seapanda\documents\college\115\gameproject\gameproject\include\grid.h
 	"Type.h"
 	"Tile.h"
 	<vector>
@@ -863,7 +863,7 @@
 	<iostream>
 	<UserInterface.h>
 
-1524639033 c:\users\seapanda\documents\college\115\gameproject\gameproject\include\enemy.h
+1525109891 c:\users\seapanda\documents\college\115\gameproject\gameproject\include\enemy.h
 	<Pathfinder.h>
 	<Grid.h>
 	<Player.h>
@@ -881,11 +881,11 @@
 	<unordered_map>
 	<string>
 
-1524504656 c:\users\seapanda\documents\college\115\gameproject\gameproject\include\mainmenu.h
+1525108773 c:\users\seapanda\documents\college\115\gameproject\gameproject\include\mainmenu.h
 	<GLScene.h>
 	<GLLight.h>
 
-1519964614 c:\users\seapanda\documents\college\115\gameproject\gameproject\include\gllight.h
+1525106750 c:\users\seapanda\documents\college\115\gameproject\gameproject\include\gllight.h
 	<GLScene.h>
 
 1524883164 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\audioengine.cpp
@@ -896,24 +896,25 @@
 	<iostream>
 	<GLScene.h>
 
-1520900072 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\deltatime.cpp
+1524883753 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\deltatime.cpp
 	<DeltaTime.h>
 	<windows.h>
 	<glut.h>
 	<iostream>
 
-1524883494 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\enemy.cpp
+1525109879 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\enemy.cpp
 	"Enemy.h"
 
 1520900072 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\gllight.cpp
 	<GLLight.h>
 
-1524883539 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\glscene.cpp
+1525108311 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\glscene.cpp
 	<GLScene.h>
 	<GLLight.h>
 	<DeltaTime.h>
 	<Timer.h>
 	<UserInterface.h>
+	<Projectile.h>
 
 1524632269 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\grid.cpp
 	"Grid.h"
@@ -930,10 +931,10 @@
 	<string>
 	<Player.h>
 
-1524504568 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\mainmenu.cpp
+1525109197 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\mainmenu.cpp
 	"MainMenu.h"
 
-1524629531 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\model.cpp
+1525110088 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\model.cpp
 	<Model.h>
 	<TextureLoader.h>
 	<DeltaTime.h>
@@ -941,10 +942,10 @@
 	<algorithm>
 	<string>
 
-1524883079 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\player.cpp
+1525107058 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\player.cpp
 	"Player.h"
 
-1524638314 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\projectile.cpp
+1525107046 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\projectile.cpp
 	"Projectile.h"
 	<cmath>
 

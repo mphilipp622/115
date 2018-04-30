@@ -5,12 +5,7 @@
 #include <DeltaTime.h>
 #include <Timer.h>
 #include <UserInterface.h>
-
-//Model *ground = new Model(6.0, 0.3, 0, -1.0, "ground", "Environment");
-//Model *block = new Model(2.0, 0.2, 3.0, 0, "block", "Environment");
-//Model *block2 = new Model(2.0, 0.2, -0.5, 1.0, "block2", "Environment");
-Timer *sceneTimer = new Timer();
-//Model* temp2 = new Model(1, 1, 0, 1,"test2", "type");
+#include <Projectile.h>
 
 GLScene::GLScene()
 {}
@@ -29,9 +24,8 @@ GLScene::GLScene(string newSceneName, string newFilepath)
 
     // clear static vectors when scene is loaded, just in case there is still data in them.
     enemies.clear();
-    movableObjects.clear();
 
-    auto finder = SceneManager::scenes.find(sceneName);
+    auto finder = SceneManager::scenes.find(sceneName); // find if this scene exists in SceneManager
 
     if(finder == SceneManager::scenes.end())
     {
@@ -41,12 +35,15 @@ GLScene::GLScene(string newSceneName, string newFilepath)
     }
     else
     {
+        // Otherwise, update SceneManager's entry for this scene
         SceneManager::scenes[sceneName] = this;
         SceneManager::activeScene = sceneName;
     }
 
     if(!AudioEngine::engine->isCurrentlyPlaying("Audio/Music/Anxious.mp3"))
     {
+        // Start background music if it is not already playing. This will allow the music to keep looping
+        // if the user decides to retry the level instead of going to main menu when they lose/win.
         BGM = new AudioSource("Audio/Music/Anxious.mp3", 0.9, true);
         BGM->PlayMusic();
     }
@@ -58,22 +55,16 @@ GLScene::~GLScene()
 {
 }
 
-// Static Variables for use in player class to check collision
-vector<Model*> GLScene::movableObjects;
+// Static Variables for use in player and enemy class to check collisions
+Projectile* GLScene::arrow;
 vector<Model*> GLScene::enemies;
 
+// Will be updated by the Enemy class to iterate through the list of enemies and let them move.
 int GLScene::activeEnemy;
 
 // initialize our graphic settings for our scene
 GLint GLScene::initGL()
 {
-
-//    audioEngine = new AudioEngine();
-//    player = new Player(0.0, 0);
-//    testEnemy = new MeleeEnemy(0.7, 3, 0.8, 0.8, "Enemy");
-
-    sceneTimer->Start();
-
     glShadeModel(GL_SMOOTH); // Shading mode
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f); // set background color to black
     glClearDepth(1.0f); // depth buffer
@@ -87,24 +78,25 @@ GLint GLScene::initGL()
     GenerateGrid();
     UserInterface::UI = new UserInterface();
 
-//    BGM = new AudioSource("Music", "Audio/Music/BGM/DrumLoop.wav",0, 0, .8, true);
-//    BGM->PlayMusic();
-
-    dTime = new DeltaTime();
+    dTime = new DeltaTime(); // initialize delta time
     return true;
 }
 
 GLint GLScene::drawGLScene()
 {
+    // Draw all our models onto the screen
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
+
+    // Set camera position and focal point
     gluLookAt(gridSizeX / 2, gridSizeY / 2 - 0.5, gridSizeX + 3.33 + 1.5,
             gridSizeX / 2, gridSizeY / 2 - 0.5, 0,
             0.0f, 1.0f, 0.0f);
 
-    CheckWinCondition();
+    CheckWinCondition(); // check if win or lose condition has been met
 
-    if(!WinLose::winLose->IsGameOver() && enemies.size() <= 0) // check and see if all enemies are dead. IF so, then player wins
+    if(!WinLose::winLose->IsGameOver() && enemies.size() <= 0)
+        // check and see if all enemies are dead. IF so, then player wins
         WinLose::winLose->Win();
 
     if(UserInterface::UI)
@@ -112,39 +104,41 @@ GLint GLScene::drawGLScene()
 
     for(auto& tile : grid->GetTiles())
     {
+        // iterate over every tile in the grid and draw them on screen
         for(auto& tile2 : tile)
             tile2->DrawModel();
     }
 
-    if(movableObjects.size() > 0)
-    {
-        for(auto& arrow : movableObjects)
-            arrow->Update();
-    }
+    if(arrow)
+        // If an arrow has been fired, run its Update() function
+        arrow->Update();
 
     if(enemies.size() > 0)
     {
         if(TurnManager::turnManager->IsEnemyTurn())
         {
+            // if it's the enemy's turn, activate the next active enemy. This allows the enemy to move
             if(!enemies[activeEnemy]->IsActive())
                 enemies[activeEnemy]->SetActive();
         }
 
         for(auto& enemy : enemies)
         {
+            // Iterate over the list of enemies and run their Update() functions for rendering them to screen and moving the active enemy.
             enemy->Update();
         }
     }
 
-    Player::player->Update();
+    Player::player->Update(); // Player updates every frame. Draws player to screen and executes movement.
 
-    dTime->UpdateDeltaTime();
+    dTime->UpdateDeltaTime(); // Gets time between last frame and this frame
 
 	return 1;
 }
 
 GLvoid GLScene::resizeGLScene(GLsizei width, GLsizei height)
 {
+    // Handle window resizing.
     GLfloat aspectRatio = (GLfloat) width / (GLfloat) height;
 
     glViewport(0, 0, width, height); // window for our game
@@ -157,10 +151,13 @@ GLvoid GLScene::resizeGLScene(GLsizei width, GLsizei height)
 }
 int GLScene::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
+    // Handle keyboard inputs. All menu elements are selected using numeric keys 0 - 9.
+
     if(uMsg == WM_KEYDOWN)
     {
         if(WinLose::winLose->IsGameOver())
         {
+            // If the game is over, user can choose 1. Replay Level or 2. Main Menu
             if(wParam == VK_NUMPAD1 || wParam == 0x31) // 0x31 is hex value for keypad 1
                 LoadScene("Game");
             else if(wParam == VK_NUMPAD2 || wParam == 0x32) // 0x32 is hex value for keypad 2
@@ -170,7 +167,7 @@ int GLScene::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         if(TurnManager::turnManager->IsEnemyTurn() || WinLose::winLose->IsGameOver())
             return 1; // don't allow input if it's not player's turn or if the game is over
 
-        Player::player->SetInput(wParam);
+        Player::player->SetInput(wParam); // Tells the player if they should move or shoot an arrow.
     }
 
 	return 1;
@@ -178,24 +175,28 @@ int GLScene::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 void GLScene::GenerateGrid()
 {
-    ifstream in(mapFilePath);
+    ifstream in(mapFilePath); // get an input stream from our filepath
 
-    string line;
+    string line; // will store each line of text
 
 	for (int i = 0; !in.eof(); i++)
 	{
+	    // iterate over every line of the file.
+
 		getline(in, line); // read first row of data
-		gridMap.push_back(vector<int>());
-		gridSizeY = line.size();
+		gridMap.push_back(vector<int>()); // create a new vector to represent x-values for this row
+		gridSizeY = line.size(); // Get the y dimension of the maze
 
 		for (int j = 0; j < gridSizeY; j++)
+            // Assign a type to this (x, y) coordinate
 			gridMap[i].push_back(line.at(j) - '0'); // convert from ascii to int
 
-		gridSizeX = i + 1;
+		gridSizeX = i + 1; // increment x dimension of maze
 	}
 
-	grid = new Grid(gridSizeX, gridSizeY, gridMap);
+	grid = new Grid(gridSizeX, gridSizeY, gridMap); // assign the grid pointer to a new grid. Constructor handles creation of Tiles
 
+	// Once the grid is initialized, we need to look specifically for our enemies and players and assign them in the scene.
     for(int i = 0; i < gridSizeX; i++)
     {
         for(int j = 0; j < gridSizeY; j++)
@@ -203,14 +204,15 @@ void GLScene::GenerateGrid()
             if(grid->GetTile(i, j)->GetType() == Type::player)
                 Player::player = new Player(i, j); // create player
             if(grid->GetTile(i, j)->GetType() == Type::enemy)
+                // populate enemy vector
                 enemies.push_back(new Enemy(i, j, "Enemy" + to_string(i) + to_string(j)));
-
         }
     }
 }
 
 void GLScene::CheckWinCondition()
 {
+    // Opens the UI and locks player input if win or loss condition has happened
     if(WinLose::winLose->HasWon())
         UserInterface::UI->YouWin();
     else if(WinLose::winLose->HasLost())
@@ -219,6 +221,8 @@ void GLScene::CheckWinCondition()
 
 void GLScene::LoadScene(string name)
 {
+    // Handles going from this scene to another scene
+
     if(name == "Game")
     {
         // reload the scene
@@ -226,19 +230,21 @@ void GLScene::LoadScene(string name)
 
         SceneManager::scenes[sceneName] = newGame; // set the key value pair in hash table to the new instance
         Reset(); // reset static data
-//        BGM->Stop();
+
         newGame->initGL(); // initialize new scene
 
         delete this; // kill old scene
     }
     else if(name == "MainMenu")
     {
-        Reset();
-        BGM->Stop();
-        // Remove the scene from scene manager
+        Reset(); // reset static data
+        BGM->Stop(); // stop music
+
+        // find the scene in scene manager
         auto finder = SceneManager::scenes.find(sceneName);
 
         if(finder != SceneManager::scenes.end())
+            // Remove the scene from scene manager
             SceneManager::scenes.erase(finder);
 
         SceneManager::activeScene = "MainMenu"; // set active scene to main menu
@@ -248,11 +254,12 @@ void GLScene::LoadScene(string name)
 
 string GLScene::GetSceneName()
 {
-    return sceneName;
+    return sceneName; // return scene name
 }
 
 void GLScene::Reset()
 {
+    // reset static data
     UserInterface::UI->Reset();
     WinLose::winLose->Reset();
     TurnManager::turnManager->SetTurn(0);

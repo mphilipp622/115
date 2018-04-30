@@ -16,26 +16,25 @@ public:
 	// Gets a single tile. Useful for detecting collisions and pathfinding
 	Tile* GetTile(int xPos, int yPos);
 
-//	Player* GetPlayer();
-
 	// returns the vector of tiles. Used by GLScene to draw tile models
 	vector<vector<Tile*>> &GetTiles();
 
+	// Getters for x and y dimensions of the grid
 	int GetSizeX();
 	int GetSizeY();
 
+	// globally accessible instance of Grid. Used by Enemy, Player, and Projectile.
 	static Grid* grid;
 
 	// Checks x and y to see if they fall within grid boundaries. Returns FALSE if out of bounds
 	bool BoundSafe(int x, int y);
 
 private:
+    // Private x and y dimensions of grid
 	int sizeX, sizeY;
 
-	// 2-d grid of tiles
+	// 2-d matrix of tiles
 	vector<vector<Tile*>> tiles;
-
-//	Player* player;
 };
 
 

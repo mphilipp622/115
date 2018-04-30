@@ -118,9 +118,7 @@ void Projectile::CheckCollisionEnemy()
 
 void Projectile::Destroy()
 {
-    // find this projectile in the main vector and remove it. Then delete this projectile
-    auto finder = find(GLScene::movableObjects.begin(), GLScene::movableObjects.end(), this);
-    GLScene::movableObjects.erase(finder);
+    GLScene::arrow = nullptr;
     Player::player->SetLocked(); // unlock player
     TurnManager::turnManager->NextTurn();
     delete this;

@@ -8,9 +8,11 @@ MainMenu::MainMenu()
 
     sceneName = "MainMenu";
 
+    // Add main menu to the Scene Manager
     SceneManager::scenes.insert( {"MainMenu", this} );
     SceneManager::activeScene = "MainMenu";
 
+    // Initialize the audio engine. Will be used by other classes
     audioEngine = new AudioEngine();
 
     killGame = false;
@@ -23,6 +25,8 @@ MainMenu::~MainMenu()
 
 GLint MainMenu::initGL()
 {
+    // Initialize openGL renderer for this scene
+
     glShadeModel(GL_SMOOTH); // Shading mode
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f); // set background color to black
     glClearDepth(1.0f); // depth buffer
@@ -32,8 +36,7 @@ GLint MainMenu::initGL()
     glEnable(GL_COLOR_MATERIAL); // allows texture to have color
     GLLight Light(GL_LIGHT0);
 
-    InitModels();
-
+    InitModels(); // initialize UI Elements
 }
 
 void MainMenu::InitModels()
@@ -41,12 +44,13 @@ void MainMenu::InitModels()
     // instantiate UI elements
     background = new Model(1.0, 1.0, 0, 0, "Background", "BG");
     exit = new Model(1.0, 0.25, 0, 1.4 - (0.3 * 9), "ExitButton", "Button");
-    exit->SetZoom(-4.0);
+    exit->SetZoom(-4.0); // set the Z position. UI elements will be at -4
 
     for(int i = 0; i < 9; i++)
     {
+        // initialize UI elements for selecting maps
         maps.push_back(new Model(1.0, 0.25, 0, 1.4 - (0.3 * i), "MapButton" + to_string(i), "Button"));
-        maps.at(i)->SetZoom(-4.0);
+        maps.at(i)->SetZoom(-4.0); // set z position of this element to -4
     }
 
     // Bind textures for UI elements
@@ -54,12 +58,14 @@ void MainMenu::InitModels()
     exit->InitModel("Images/UI/Exit.png", true);
 
     for(int i = 0; i < 9; i++)
+        // assign texture to the UI element
         maps.at(i)->InitModel("Images/UI/MapButton" + to_string(i + 1) + ".png", true);
 
 }
 
 GLint MainMenu::drawGLScene()
 {
+    // Main loop. Render openGL elements to window every frame
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Clear Screen And Depth Buffer
 	glLoadIdentity();									// Reset The Current Modelview Matrix
 
@@ -67,13 +73,14 @@ GLint MainMenu::drawGLScene()
         return 0;
 
     glPushMatrix();
-    glScaled(3.33,3.33,1.0);
+    glScaled(3.33,3.33,1.0); // Scale the background image
     background->DrawSquare(screenWidth, screenHeight);
     glPopMatrix();
 
-    exit->DrawModel();
+    exit->DrawModel(); // render exit button
 
     for(auto& button : maps)
+        // draw all the UI elements
         button->DrawModel();
 
     return 1;
@@ -81,12 +88,16 @@ GLint MainMenu::drawGLScene()
 
 void MainMenu::LoadScene(int num)
 {
+    // Handle map loading. We pass an int so we can load a txt file that contains the same int number in the filename.
     if(num == 0)
+        // if user selects to exit, end the game
         killGame = true;
     else
     {
-            // if we already have this map loaded, we want to delete it
-        auto finder = SceneManager::scenes.find("Game" + to_string(num));
+        // If user selects a map, we need to load it and play it.
+
+        // if we already have the selected map loaded, we want to delete it
+        auto finder = SceneManager::scenes.find("Game" + to_string(num)); // find the scene in scene manager
 
         if(finder != SceneManager::scenes.end())
             delete SceneManager::scenes["Game" + to_string(num)]; // if hashtable already has map loaded, delete it
@@ -96,16 +107,16 @@ void MainMenu::LoadScene(int num)
         SceneManager::scenes.insert( {"Game" + to_string(num), newMap} ); // insert map into hash table
         newMap->initGL(); // initialize map
 
-        SceneManager::activeScene = "Game" + to_string(num);
+        SceneManager::activeScene = "Game" + to_string(num); // set active scene to the new scene.
     }
-
-
 }
 
 int MainMenu::windowsMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
     if(uMsg == WM_KEYDOWN)
     {
+        // Handle keyboard input. User can select options 0 - 9. Hex values represent numbers 0 - 9 at top of keyboard
+
         if(wParam == VK_NUMPAD0 || wParam == 0x30)
             LoadScene(0);
         else if(wParam == VK_NUMPAD1 || wParam == 0x31)

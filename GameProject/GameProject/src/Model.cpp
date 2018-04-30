@@ -9,29 +9,14 @@ using namespace std;
 
 Model::Model()
 {
-//    // rotations
-//    rotateX = 0;
-//    rotateY = 0;
-//    rotateZ = 0;
-//
-//    // translations
-//    zoom = -3.0;
-//    xPos = -0.5;
-//    yPos = -0.5;
-//
-//    // Create Square
-//    vertices[0].x = 0.0; vertices[0].y = 0.0; vertices[0].z = 1.0;
-//    vertices[1].x = 1.0; vertices[1].y = 0.0; vertices[1].z = 1.0;
-//    vertices[2].x = 1.0; vertices[2].y = 1.0; vertices[2].z = 1.0;
-//    vertices[3].x = 0.0; vertices[3].y = 1.0; vertices[3].z = 1.0;
 
 }
 
 Model::Model(float newWidth, float newHeight, double newX, double newY, string newName, string newTag)
 {
+    // Initialize dimensions
     width = newWidth;
     height = newHeight;
-    radius = width / 2;
 
     name = newName;
     tag = newTag;
@@ -64,45 +49,6 @@ Model::Model(float newWidth, float newHeight, double newX, double newY, string n
 
     texture = new TextureLoader();
 }
-Model::Model(float newWidth, float newHeight, double newX, double newY, string newName, string newTag, AudioSource* newSource)
-{
-    width = newWidth;
-    height = newHeight;
-    radius = width / 2;
-
-    name = newName;
-    tag = newTag;
-
-    rotateX = 0;
-    rotateY = 0;
-    rotateZ = 0;
-
-    // translations
-    zoom = 0;
-    xPos = newX;
-    yPos = newY;
-
-    // Initialize Quad
-    vertices[0].x = -width / 2;
-    vertices[0].y = -height / 2;
-    vertices[0].z = zoom;
-
-    vertices[1].x = width / 2;
-    vertices[1].y = -height / 2;
-    vertices[1].z = zoom;
-
-    vertices[2].x = width / 2;
-    vertices[2].y = height / 2;
-    vertices[2].z = zoom;
-
-    vertices[3].x = -width / 2;
-    vertices[3].y = height / 2;
-    vertices[3].z = zoom;
-
-    texture = new TextureLoader();
-}
-
-
 
 Model::~Model()
 {
@@ -198,17 +144,6 @@ string Model::GetTag()
     return tag;
 }
 
-void Model::SetPosition(double newX, double newY)
-{
-    xPos = newX;
-    yPos = newY;
-}
-
-void Model::SetWidth(double newWidth)
-{
-   width = newWidth;
-}
-
 void Model::Update()
 {
     if(name != "Player")
@@ -239,19 +174,6 @@ bool Model::Overlapping(double min0, double max0, double min1, double max1)
 {
     // Square-square overlap
     return max0 >= min1 && min0 <= max1;
-}
-
-bool Model::OverlappingCircles(double x0, double y0, double x1, double y1, double r0, double r1)
-{
-    // circle-to-circle overlap
-    double x = x1 - x0;
-    double y = y1 - y0;
-    double sumRadius = r0 + r1;
-
-    double distance = sqrt((x * x) + (y * y)); // pythagoran theorem to calculate distance between center points of both circles
-
-    return (distance <= sumRadius); // is the distance between both center points less than the sum of both radius's? If so, then we're overlapping with another circle.
-
 }
 
 void Model::Move()

@@ -28,7 +28,7 @@ Player::Player(double newX, double newY)
     // translations
     zoom = 0;
 
-    moveSpeed = 4.0;
+    moveSpeed = 6.0;
 
     // Initialize Quad
     vertices[0].x = -width / 2;
@@ -129,7 +129,7 @@ void Player::MoveToDestination()
     xPos += xDir * DeltaTime::GetDeltaTime() * moveSpeed;
     yPos += yDir * DeltaTime::GetDeltaTime() * moveSpeed;
 
-    if(xPos >= destX - 0.05 && xPos <= destX + 0.05 && yPos >= destY - 0.05 && yPos <= destY + 0.05)
+    if(xPos >= destX - 0.1 && xPos <= destX + 0.1 && yPos >= destY - 0.1 && yPos <= destY + 0.1)
     {
         xPos = destX;
         yPos = destY;
@@ -320,7 +320,7 @@ void Player::ShootProjectile(double x, double y)
     arrowCount--;
     arrowSound->Play();
     UserInterface::UI->RemoveArrow();
-    GLScene::movableObjects.push_back(newProjectile);
+    GLScene::arrow = newProjectile;
 }
 
 void Player::SetInput(WPARAM newParam)

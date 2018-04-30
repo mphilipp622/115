@@ -12,6 +12,7 @@
 
 using namespace std;
 
+// Used for x,y,z vertex values of this model
 typedef struct
 {
     float x, y, z;
@@ -21,17 +22,19 @@ class Model
 {
     public:
         Model();
+
+        // Constructor used for UI Elements
         Model(float, float, double, double, string, string);
-        Model(float, float, double, double, string, string, AudioSource*);
+
         virtual ~Model();
+
+        // Renders model in openGL
         void DrawModel();
+
+        // Assigns model a texture
         void InitModel(string fileName, bool transparent);
 
-        void InitPlayer();
-
-        double rotateX, rotateY, rotateZ;
-        double zoom;
-//        string direction;
+        // array of vertices
         vec vertices[4];
 
         // collision getters
@@ -39,43 +42,61 @@ class Model
         double GetY();
         float GetWidth();
         float GetHeight();
-        void SetPosition(double, double);
-        void SetWidth(double);
 
+        // Update is called every frame in GLScene. Overridden in child classes
         virtual void Update();
 
-        bool Collision(Model*);
+        bool Collision(Model*); // Returns true if this model collides with the passed-in Model
 
         string GetName();
         string GetTag();
 
+        // Allows the model to move in the scene. Overridden by children.
         virtual void Move();
+
+        // Destroys this model, freeing memory. Overridden by children.
         virtual void Destroy();
 
+        // Sets the x position of this model.
         void SetZoom(double newZoom);
 
-        // used for UI Button elements
+        // Changes UI Button elements. Only used if this model instance is intended to be a UI element
         void ChangeImage(string filename);
 
+        // Draws background images
         void DrawSquare(float newWidth, float newHeight);
 
+        // Returns if this model is active. Only used by Enemy child
         bool IsActive();
+
+        // Sets this model to active. Only used by Enemy child
         void SetActive();
 
     protected:
-        float width, height, radius;
+        // dimension values
+        float width, height;
+
+        // x and y positions
         double xPos, yPos;
+
         string name, tag;
-        TextureLoader *texture;
+
+        TextureLoader *texture; // texture for this model
+
+        // rotation values for the model.
+        double rotateX, rotateY, rotateZ;
+
+        // z position for the model
+        double zoom;
 
         // This model will check square-to-square collision with other objects. Useful for certain types of environmental collision maybe
         virtual bool CheckCollision();
 
-        bool active;
+        bool active; // tracks active status of this model. Used by Enemy child class
 
     private:
+        // Helper function for determining if two objects are overlapping with each other. Collision checking
         bool Overlapping(double min0, double max0, double min1, double max1);
-        bool OverlappingCircles(double x0, double y0, double x1, double y1, double r0, double r1);
 };
 
 #endif // MODEL_H

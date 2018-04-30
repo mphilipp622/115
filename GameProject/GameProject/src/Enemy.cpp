@@ -52,7 +52,7 @@ Enemy::Enemy(double newX, double newY, string newName)
     frameTimer->Start();
 
     moveFrame = 0;
-    moveSpeed = 6.0;
+    moveSpeed = 10.0;
 
     InitAnimations();
 
@@ -127,6 +127,7 @@ void Enemy::Move()
         destX = xPos;
         destY = yPos;
 
+        // Move to next enemy's turn in GLScene
         GLScene::activeEnemy++;
         if(GLScene::activeEnemy >= GLScene::enemies.size())
             TurnManager::turnManager->NextTurn();
@@ -134,11 +135,13 @@ void Enemy::Move()
     }
     else
     {
+        // If next tile in path is traversable, move
         isMoving = true;
-        destX = tempTile->GetX();
+        destX = tempTile->GetX(); // set enemy's destination to the new tile
         destY = tempTile->GetY();
-        xDir = destX - xPos;
+        xDir = destX - xPos; // specify enemy's direction for animations
         yDir = destY - yPos;
+
         // once we've found our next tile, move enemy into it and set types accordingly.
         Grid::grid->GetTile(xPos, yPos)->RevertType();
     }
@@ -147,14 +150,17 @@ void Enemy::Move()
 
 void Enemy::MoveToDestination()
 {
+    // Move the enemy to the destination tile
     xPos += xDir * DeltaTime::GetDeltaTime() * moveSpeed;
     yPos += yDir * DeltaTime::GetDeltaTime() * moveSpeed;
 
-    if(xPos >= destX - 0.05 && xPos <= destX + 0.05 && yPos >= destY - 0.05 && yPos <= destY + 0.05)
+    if(xPos >= destX - 0.1 && xPos <= destX + 0.1 && yPos >= destY - 0.1 && yPos <= destY + 0.1)
     {
+        // If the enemy is within a certain distance of the center of the destination tile, snap them to it and end movement.
         xPos = destX;
         yPos = destY;
 
+        // If enemy lands on player, kill the player
         if(Grid::grid->GetTile(xPos, yPos)->IsPlayer())
             Player::player->Die();
 
@@ -163,6 +169,7 @@ void Enemy::MoveToDestination()
         isMoving = false;
         active = false;
 
+        // Tell GLScene it is next enemy's turn
         GLScene::activeEnemy++;
         if(GLScene::activeEnemy >= GLScene::enemies.size())
             TurnManager::turnManager->NextTurn();
@@ -173,16 +180,18 @@ void Enemy::MoveToDestination()
 
 void Enemy::Destroy()
 {
-    dyingSound->Play();
+    dyingSound->Play(); // Plays a dying sound
     auto finder = find(GLScene::enemies.begin(), GLScene::enemies.end(), this); // find the enemy in the scene
     GLScene::enemies.erase(finder); // remove the enemy from the vector
-    Grid::grid->GetTile(xPos, yPos)->RevertType();
+    Grid::grid->GetTile(xPos, yPos)->RevertType(); // Revert the enemy's tile back to it's normal type
     delete this; // free memory
 }
 
 
 void Enemy::InitAnimations()
 {
+    // Initialize all the animations for the enemy. Animations are stored in TextureBinder arrays
+    // Filenames use a numbering convention so we can iterate through them easily with a for loop
     for(int i = 0; i < 4; i++)
         moveUp[i].BindTexture("Images/Enemy/EnemyUp" + to_string(i) + ".png");
 
@@ -203,14 +212,16 @@ void Enemy::InitAnimations()
 
 void Enemy::Animate(string animation)
 {
+    // Animate the enemy depending on the direction they're moving.
     if(animation == "MoveRight")
     {
         glPushMatrix();
 
-        glTranslated(xPos, yPos, zoom);
+        glTranslated(xPos, yPos, zoom); // render enemy's new position
 
         if(frameTimer->GetTicks() > 60)
         {
+            // every 60 ms, update the frame
             moveFrame++;
             moveFrame %= 4;
             frameTimer->Reset();
@@ -323,6 +334,7 @@ void Enemy::Animate(string animation)
 
 void Enemy::DrawEnemy()
 {
+    // Create vertices and texture coordinates for the enemy. Used for OpenGL rendering
     glColor3f(1.0, 1.0, 1.0);
 
     glBegin(GL_QUADS);

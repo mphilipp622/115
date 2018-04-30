@@ -5,6 +5,7 @@
 
 #include<GLScene.h>
 
+// This class is used for illuminating the OpenGL scene
 class GLLight : public GLScene
 {
     public:
