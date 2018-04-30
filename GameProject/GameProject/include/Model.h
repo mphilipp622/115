@@ -60,9 +60,6 @@ class Model
         // Sets the x position of this model.
         void SetZoom(double newZoom);
 
-        // Changes UI Button elements. Only used if this model instance is intended to be a UI element
-        void ChangeImage(string filename);
-
         // Draws background images
         void DrawSquare(float newWidth, float newHeight);
 

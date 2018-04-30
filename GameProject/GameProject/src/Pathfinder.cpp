@@ -10,15 +10,17 @@ Pathfinder::~Pathfinder()
     //dtor
 }
 
-Tile* Pathfinder::GetNextTile(int x, int y)
+Tile* Pathfinder::GetNextTile(int startingX, int startingY)
 {
 
     // A* pathfinding implementation.
 
     priority_queue<Node, vector<Node>, greater<Node> > frontier; // ascending order priority queue for Nodes
-//    map<MapKey, Node> visitedNodes;
-    vector<Node> visitedNodes;
-    Node startNode = Node(Grid::grid->GetTile(x, y), 0, ManhattanDistance(Grid::grid->GetTile(x, y)));
+
+    vector<Node> visitedNodes; // list of visited nodes
+
+    Node startNode = Node(Grid::grid->GetTile(startingX, startingY), 0,
+                          ManhattanDistance(Grid::grid->GetTile(startingX, startingY)));
     frontier.push(startNode);
 
     while(!frontier.empty())
@@ -106,17 +108,6 @@ bool Pathfinder::IsGoal(Node node)
 {
     if(node.tile->GetX() == Player::player->GetX() && node.tile->GetY() == Player::player->GetY())
         return true;
-
-    return false;
-}
-
-bool Pathfinder::ContainsEnemy(Node node)
-{
-    for(auto& tile : node.path)
-    {
-        if(tile->IsEnemy())
-            return true;
-    }
 
     return false;
 }
