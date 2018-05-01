@@ -2,20 +2,6 @@ Mark Philipp
 Isaac Fielding
 CSCI 115 Project 2
 
-Introduction and How to Play
------------------------
-
-This project is a 2D, turn-based game where the user plays as a character who must navigate a maze and either destroy all the enemies or get the treasure. If either of the previously mentioned conditions are met, the player wins. If an enemy lands on the player, the player dies and the user loses.
-
-The user can MOVE the player by using WASD on the keyboard. They can shoot arrows using the arrow keys. Any movement or any shooting consumes the player's turn and initiates the enemy turn.
-
-W = Move Up			Up Arrow = Shoot Up
-S = Move Down		Down Arrow = Shoot Down
-A = Move Left		Left Arrow = Shoot Left
-D = Move Right		Right Arrow = Shoot Right
-
-The player starts with 1 arrow and can pick up more arrows off the ground by walking on top of tiles that have arrows on them. The number of arrows the player has is indicated by a UI element near the top of the window.
-
 Compiling the Project
 ---------------------
 
