@@ -53,6 +53,9 @@ class Pathfinder
             // Overloaded greater than operator. Needed for Priority Queue implementation
             bool operator>(const struct Node& other) const
             {
+                if(fCost == other.fCost)
+                    return hCost > other.hCost; // If the f costs are equal, we prioritize the one with the lower hcost
+
                 return fCost > other.fCost;
             }
 
