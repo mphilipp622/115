@@ -16,7 +16,7 @@ public:
 	// Gets a single tile. Useful for detecting collisions and pathfinding
 	Tile* GetTile(int xPos, int yPos);
 
-	// returns the vector of tiles. Used by GLScene to draw tile models
+	// returns the adjacency matrix of tiles. Used by GLScene to draw tile models
 	vector<vector<Tile*>> &GetTiles();
 
 	// Getters for x and y dimensions of the grid
