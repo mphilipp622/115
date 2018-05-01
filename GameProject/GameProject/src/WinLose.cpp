@@ -4,8 +4,12 @@ WinLose* WinLose::winLose;
 
 WinLose::WinLose()
 {
-    //ctor
+    if(winLose)
+        delete winLose; // if winLose already exists, remove it
+
     winLose = this;
+
+    // initialize states to false
     gameOver = false;
     hasWon = false;
     hasLost = false;
@@ -18,16 +22,16 @@ WinLose::~WinLose()
 
 void WinLose::Win()
 {
+    // Set states to gameOver and Win
     gameOver = true;
     hasWon = true;
-    return;
 }
 
 void WinLose::Lose()
 {
+    // Set States to gameOver and Lose
     gameOver = true;
     hasLost = true;
-    return;
 }
 
 bool WinLose::IsGameOver()
@@ -43,11 +47,4 @@ bool WinLose::HasWon()
 bool WinLose::HasLost()
 {
     return hasLost;
-}
-
-void WinLose::Reset()
-{
-    hasLost = false;
-    hasWon = false;
-    gameOver = false;
 }

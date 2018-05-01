@@ -18,8 +18,6 @@
 #include <WinLose.h>
 #include <SceneManager.h>
 #include <MainMenu.h>
-
-//#include "DeltaTime.h"
 #include <string>
 
 using namespace std;
@@ -36,15 +34,16 @@ bool	fullscreen=FALSE;	// Fullscreen Flag Set To Fullscreen Mode By Default
 
 LRESULT	CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);	// Declaration For WndProc
 
-//SceneManager *SM = new SceneManager();
-//string activeScene = "TestLevel"; // will keep track of active scene
 
+
+//////////////////////////////
+//    GAME VARIABLES
+//////////////////////////////
 SceneManager *SM = new SceneManager();
 string activeScene = "MainMenu"; // will keep track of active scene
 MainMenu* menu = new MainMenu();
-WinLose* winLose = new WinLose();
-TurnManager* tm = new TurnManager();
-//GLScene *Scene = new GLScene();
+
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 //										THE KILL GL WINDOW

@@ -2,6 +2,7 @@
 
 Timer::Timer()
 {
+    // initialize everything to 0
     startedAt = 0;
     pausedAt = 0;
     paused = false;
@@ -31,8 +32,9 @@ bool Timer::IsPaused()
 void Timer::Pause()
 {
     if(paused || !started)
-        return;
-    paused = true;
+        return; // if we're already paused or haven't been started, then return
+
+    paused = true; // pause the timer
     pausedAt = clock(); // set paused time
 }
 
@@ -40,6 +42,7 @@ void Timer::Resume()
 {
     if(!paused)
         return;
+
     paused = false;
     startedAt += clock() - pausedAt; // get current time
 }

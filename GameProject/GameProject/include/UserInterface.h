@@ -8,6 +8,7 @@
 
 using namespace std;
 
+// This class displays UI elements such as arrows at the top of the screen. It also handles displaying Win/Lose messages
 class UserInterface
 {
     public:
@@ -23,29 +24,29 @@ class UserInterface
         // CalledSelectButton(0); on by Player to remove an arrow from the HUD
         void RemoveArrow();
 
+        // Draws the Win message and associated graphics to the screen
         void YouWin();
 
+        // Draws the Lose message and associated graphics to screen
         void YouLose();
 
-        // Checks user input to see if user has clicked any buttons. Executes scene loads accordingly.
-        void CheckInput(int selection);
-
+        // Global, static accessor for the UI. Used by Player and GLScene
         static UserInterface* UI;
-
-        // sets ui back to normal
-        void Reset();
 
     protected:
 
     private:
+        // scales are used for placing arrow icons at the right place on screen in relation to the maze
         double scaleX, scaleY;
+
+        // Z position for UI elements
         double UIZoom;
+
+        // Origin positions for the UI. Determines where (0, 0) is for the UI
         double centerX, centerY;
 
+        // Container for the arrow icons
         vector<Model*> arrows;
-
-        // Will load scenes based on which buttons are clicked by user
-        void LoadScene();
 
         // different models for rendering win and loss messages to screen
         Model* youWin;
@@ -53,6 +54,7 @@ class UserInterface
         Model* playAgainButton;
         Model* mainMenuButton;
 
+        // Initializes textures to the UI Elements
         void InitElements();
 };
 

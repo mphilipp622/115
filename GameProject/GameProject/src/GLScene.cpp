@@ -48,6 +48,8 @@ GLScene::GLScene(string newSceneName, string newFilepath)
         BGM->PlayMusic();
     }
 
+    TurnManager::turnManager = new TurnManager(); // initialize global turn Manager
+    WinLose::winLose = new WinLose(); // initialize the global winlose class
 }
 
 
@@ -231,7 +233,6 @@ void GLScene::LoadScene(string name)
         GLScene* newGame = new GLScene(sceneName, mapFilePath); // create new scene
 
         SceneManager::scenes[sceneName] = newGame; // set the key value pair in hash table to the new instance
-        Reset(); // reset static data
 
         newGame->initGL(); // initialize new scene
 
@@ -239,7 +240,6 @@ void GLScene::LoadScene(string name)
     }
     else if(name == "MainMenu")
     {
-        Reset(); // reset static data
         BGM->Stop(); // stop music
 
         // find the scene in scene manager
@@ -257,13 +257,4 @@ void GLScene::LoadScene(string name)
 string GLScene::GetSceneName()
 {
     return sceneName; // return scene name
-}
-
-void GLScene::Reset()
-{
-    // reset static data
-    UserInterface::UI->Reset();
-    WinLose::winLose->Reset();
-    TurnManager::turnManager->SetTurn(0);
-    activeEnemy = 0;
 }

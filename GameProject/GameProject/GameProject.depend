@@ -980,7 +980,7 @@
 1524637971 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\winlose.cpp
 	"WinLose.h"
 
-1524859549 source:e:\college\115\gameproject\gameproject\main.cpp
+1525193821 source:e:\college\115\gameproject\gameproject\main.cpp
 	<windows.h>
 	<windows.h>
 	<GLScene.h>
@@ -992,7 +992,7 @@
 	<MainMenu.h>
 	<string>
 
-1524859549 e:\college\115\gameproject\gameproject\include\glscene.h
+1525194305 e:\college\115\gameproject\gameproject\include\glscene.h
 	<windows.h>
 	<glut.h>
 	<iostream>
@@ -1016,7 +1016,7 @@
 	<GL/gl.h>
 	<GL/glu.h>
 
-1524859549 e:\college\115\gameproject\gameproject\include\model.h
+1525189337 e:\college\115\gameproject\gameproject\include\model.h
 	<windows.h>
 	<glut.h>
 	<string>
@@ -1026,7 +1026,7 @@
 	<TurnManager.h>
 	<Timer.h>
 
-1524859549 e:\college\115\gameproject\gameproject\include\textureloader.h
+1525189337 e:\college\115\gameproject\gameproject\include\textureloader.h
 	<SOIL.h>
 	<GL\GL.h>
 	<iostream>
@@ -1034,7 +1034,7 @@
 
 1524859548 e:\college\115\gameproject\common\include\soil.h
 
-1524859549 e:\college\115\gameproject\gameproject\include\audiosource.h
+1525099245 e:\college\115\gameproject\gameproject\include\audiosource.h
 	<string>
 	"irrKlang.h"
 	<windows.h>
@@ -1137,39 +1137,38 @@
 	"ik_IRefCounted.h"
 	"ik_ISoundSource.h"
 
-1524859549 e:\college\115\gameproject\gameproject\include\audioengine.h
+1525099245 e:\college\115\gameproject\gameproject\include\audioengine.h
 	<irrKlang.h>
 	<windows.h>
 	<iostream>
 
-1524859549 e:\college\115\gameproject\gameproject\include\turnmanager.h
+1525192550 e:\college\115\gameproject\gameproject\include\turnmanager.h
 
-1524859549 e:\college\115\gameproject\gameproject\include\timer.h
+1525191986 e:\college\115\gameproject\gameproject\include\timer.h
 	<time.h>
 
-1524859549 e:\college\115\gameproject\gameproject\include\deltatime.h
+1525099245 e:\college\115\gameproject\gameproject\include\deltatime.h
 
-1524859549 e:\college\115\gameproject\gameproject\include\player.h
+1525189337 e:\college\115\gameproject\gameproject\include\player.h
 	<windows.h>
 	<Model.h>
 	<TextureLoader.h>
 	<Grid.h>
 	<Projectile.h>
-	<UserInterface.h>
 	<WinLose.h>
 
-1524859549 e:\college\115\gameproject\gameproject\include\grid.h
+1525189337 e:\college\115\gameproject\gameproject\include\grid.h
 	"Type.h"
 	"Tile.h"
 	<vector>
 
 1524859549 e:\college\115\gameproject\gameproject\include\type.h
 
-1524859549 e:\college\115\gameproject\gameproject\include\tile.h
+1525191586 e:\college\115\gameproject\gameproject\include\tile.h
 	"Type.h"
 	<Model.h>
 
-1524862652 e:\college\115\gameproject\gameproject\include\projectile.h
+1525189337 e:\college\115\gameproject\gameproject\include\projectile.h
 	<Model.h>
 	<DeltaTime.h>
 	<GLScene.h>
@@ -1177,22 +1176,22 @@
 	<Timer.h>
 	<Grid.h>
 
-1524859549 e:\college\115\gameproject\gameproject\include\userinterface.h
+1525193549 e:\college\115\gameproject\gameproject\include\userinterface.h
 	<Player.h>
 	<Model.h>
 	<Grid.h>
 	<vector>
 
-1524859549 e:\college\115\gameproject\gameproject\include\winlose.h
+1525194300 e:\college\115\gameproject\gameproject\include\winlose.h
 	<iostream>
 	<UserInterface.h>
 
-1524859549 e:\college\115\gameproject\gameproject\include\enemy.h
+1525099245 e:\college\115\gameproject\gameproject\include\enemy.h
 	<Pathfinder.h>
 	<Grid.h>
 	<Player.h>
 
-1524862206 e:\college\115\gameproject\gameproject\include\pathfinder.h
+1525189337 e:\college\115\gameproject\gameproject\include\pathfinder.h
 	<Tile.h>
 	<Grid.h>
 	<cmath>
@@ -1205,41 +1204,42 @@
 	<unordered_map>
 	<string>
 
-1524859549 e:\college\115\gameproject\gameproject\include\mainmenu.h
+1525189337 e:\college\115\gameproject\gameproject\include\mainmenu.h
 	<GLScene.h>
 	<GLLight.h>
 
-1524859549 e:\college\115\gameproject\gameproject\include\gllight.h
+1525189337 e:\college\115\gameproject\gameproject\include\gllight.h
 	<GLScene.h>
 
-1524859549 source:e:\college\115\gameproject\gameproject\src\audioengine.cpp
+1525099245 source:e:\college\115\gameproject\gameproject\src\audioengine.cpp
 	"AudioEngine.h"
 
-1524859549 source:e:\college\115\gameproject\gameproject\src\audiosource.cpp
+1525099245 source:e:\college\115\gameproject\gameproject\src\audiosource.cpp
 	"AudioSource.h"
 	<iostream>
 	<GLScene.h>
 
-1524859549 source:e:\college\115\gameproject\gameproject\src\deltatime.cpp
+1525099245 source:e:\college\115\gameproject\gameproject\src\deltatime.cpp
 	<DeltaTime.h>
 	<windows.h>
 	<glut.h>
 	<iostream>
 
-1524859549 source:e:\college\115\gameproject\gameproject\src\enemy.cpp
+1525192238 source:e:\college\115\gameproject\gameproject\src\enemy.cpp
 	"Enemy.h"
 
 1524859549 source:e:\college\115\gameproject\gameproject\src\gllight.cpp
 	<GLLight.h>
 
-1524860034 source:e:\college\115\gameproject\gameproject\src\glscene.cpp
+1525194241 source:e:\college\115\gameproject\gameproject\src\glscene.cpp
 	<GLScene.h>
 	<GLLight.h>
 	<DeltaTime.h>
 	<Timer.h>
 	<UserInterface.h>
+	<Projectile.h>
 
-1524859550 source:e:\college\115\gameproject\gameproject\src\grid.cpp
+1525189337 source:e:\college\115\gameproject\gameproject\src\grid.cpp
 	"Grid.h"
 
 1524859550 source:e:\college\115\gameproject\gameproject\src\inputs.cpp
@@ -1254,10 +1254,10 @@
 	<string>
 	<Player.h>
 
-1524859550 source:e:\college\115\gameproject\gameproject\src\mainmenu.cpp
+1525189337 source:e:\college\115\gameproject\gameproject\src\mainmenu.cpp
 	"MainMenu.h"
 
-1524859550 source:e:\college\115\gameproject\gameproject\src\model.cpp
+1525189337 source:e:\college\115\gameproject\gameproject\src\model.cpp
 	<Model.h>
 	<TextureLoader.h>
 	<DeltaTime.h>
@@ -1265,10 +1265,10 @@
 	<algorithm>
 	<string>
 
-1524862689 source:e:\college\115\gameproject\gameproject\src\player.cpp
+1525192241 source:e:\college\115\gameproject\gameproject\src\player.cpp
 	"Player.h"
 
-1524862649 source:e:\college\115\gameproject\gameproject\src\projectile.cpp
+1525189337 source:e:\college\115\gameproject\gameproject\src\projectile.cpp
 	"Projectile.h"
 	<cmath>
 
@@ -1281,30 +1281,30 @@
 
 1524859549 e:\college\115\gameproject\gameproject\include\texture.h
 
-1524859550 source:e:\college\115\gameproject\gameproject\src\textureloader.cpp
+1525189337 source:e:\college\115\gameproject\gameproject\src\textureloader.cpp
 	<TextureLoader.h>
 	<SOIL.h>
 	<GL\GL.h>
 	<iostream>
 
-1524859550 source:e:\college\115\gameproject\gameproject\src\tile.cpp
+1525191790 source:e:\college\115\gameproject\gameproject\src\tile.cpp
 	"Tile.h"
 	<iostream>
 
-1524859550 source:e:\college\115\gameproject\gameproject\src\timer.cpp
+1525192030 source:e:\college\115\gameproject\gameproject\src\timer.cpp
 	<Timer.h>
 
-1524859550 source:e:\college\115\gameproject\gameproject\src\turnmanager.cpp
+1525192554 source:e:\college\115\gameproject\gameproject\src\turnmanager.cpp
 	"TurnManager.h"
 
-1524859550 source:e:\college\115\gameproject\gameproject\src\userinterface.cpp
+1525193594 source:e:\college\115\gameproject\gameproject\src\userinterface.cpp
 	"UserInterface.h"
 	<cmath>
 
-1524859550 source:e:\college\115\gameproject\gameproject\src\winlose.cpp
+1525194318 source:e:\college\115\gameproject\gameproject\src\winlose.cpp
 	"WinLose.h"
 
-1524862347 source:e:\college\115\gameproject\gameproject\src\pathfinder.cpp
+1525189337 source:e:\college\115\gameproject\gameproject\src\pathfinder.cpp
 	"Pathfinder.h"
 
 1525126906 source:c:\users\seapanda\documents\college\115\gameproject\gameproject\src\pathfinder.cpp

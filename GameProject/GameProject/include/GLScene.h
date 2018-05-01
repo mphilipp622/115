@@ -82,9 +82,6 @@ class GLScene
         // Checks if a win/loss condition has been met. Called in Update()
         void CheckWinCondition();
 
-        // Resets static and global data.
-        void Reset();
-
 };
 
 #endif // GLSCENE_H

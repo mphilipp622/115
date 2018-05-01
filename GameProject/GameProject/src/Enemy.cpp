@@ -52,7 +52,7 @@ Enemy::Enemy(double newX, double newY, string newName)
     frameTimer->Start();
 
     moveFrame = 0;
-    moveSpeed = 10.0;
+    moveSpeed = 9.5;
 
     InitAnimations();
 

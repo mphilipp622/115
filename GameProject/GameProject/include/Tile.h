@@ -43,8 +43,9 @@ public:
 	bool IsPlayer();
 
 private:
+    // Tracks tile types using the Type::Type enum
 	Type tileType;
-	Type originalType;
+	Type originalType; // used for reverting tile back to original type when enemies or player move off it
 
 };
 

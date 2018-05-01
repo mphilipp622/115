@@ -3,14 +3,19 @@
 
 Tile::Tile(int newX, int newY, double newWidth, double newHeight, Type newType)
 {
+    // Initialize positions
 	xPos = newX;
 	yPos = newY;
+
+	// Initialize types and original types
 	tileType = newType;
 	originalType = newType;
 
+	// initialize dimensions
 	width = newWidth;
     height = newHeight;
 
+    // initialize rotations
     rotateX = 0;
     rotateY = 0;
     rotateZ = 0;
@@ -37,6 +42,7 @@ Tile::Tile(int newX, int newY, double newWidth, double newHeight, Type newType)
 
     texture = new TextureLoader();
 
+    // Figure out which image to load for the texture. This is based on the type of the tile.
 	string filepath;
 
 	if(newType == Type::traversable)
@@ -48,12 +54,10 @@ Tile::Tile(int newX, int newY, double newWidth, double newHeight, Type newType)
     else if(newType == Type::treasure)
         filepath = "Images/Tiles/TreasureTile.png";
     else
-        filepath = "Images/Tiles/StoneTile.png"; // default tile for players and enemies. Players and enemies will be layered on top of these tiles
-//    else if(newType == Type::player)
-//        filepath = "Images/Player/play.png";
-//    else if(newType == Type::enemy)
-//        filepath = "Images/Enemy/EnemyLeft.png";
+        // default tile for players and enemies. Players and enemies will be layered on top of these tiles
+        filepath = "Images/Tiles/StoneTile.png";
 
+    // Wrap the texture
     InitModel(filepath, true);
 }
 
@@ -75,7 +79,13 @@ void Tile::SetType(Type newType)
 
 bool Tile::IsTraversable()
 {
-	return tileType != wall; // user can traverse any tile that isn't a wall. They can even run into enemies if they want.
+    /*
+    user can traverse any tile that isn't a wall. They can even run into enemies if they want.
+    Therefore, we only need to know if the type is NOT a wall to know if the tile is traversable.
+    Enemies will have extra logic in their Enemy::Move() function to prevent them from moving onto other enemies.
+    */
+
+	return tileType != wall;
 }
 
 bool Tile::IsTreasure()
@@ -106,7 +116,8 @@ bool Tile::IsPlayer()
 void Tile::RevertType()
 {
     if(originalType == enemy || originalType == player)
-        tileType = traversable; // players and enemies are layered on top of traversable tiles. If either moves off the tile, we want to set traversable, not back to enemy or player
+        // players and enemies are layered on top of traversable tiles. If either moves off the tile, we want to set traversable, not back to enemy or player
+        tileType = traversable;
     else
         tileType = originalType;
 }
@@ -115,5 +126,5 @@ void Tile::RemoveArrows()
 {
     // convert original type back to traversable once arrows have been picked up.
     originalType = Type::traversable;
-    InitModel("Images/Tiles/StoneTile.png", true); // update image
+    InitModel("Images/Tiles/StoneTile.png", true); // update image to plain stone tile
 }
